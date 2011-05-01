@@ -1,0 +1,366 @@
+diff --git a/gcc/config/i386/mingw32.h b/gcc/config/i386/mingw32.h
+index 4f8a63a..3f4067d 100644
+--- a/gcc/config/i386/mingw32.h
++++ b/gcc/config/i386/mingw32.h
+@@ -234,7 +234,12 @@ __enable_execute_stack (void *addr)					\
+ #else
+ #define LIBGCC_EH_EXTN "_sjlj"
+ #endif
+-#define LIBGCC_SONAME "libgcc_s" LIBGCC_EH_EXTN "-1.dll"
++#if !defined (TARGET_BI_ARCH)
++#define LIBGCC_64_EXTN "_64"
++#else
++#define LIBGCC_64_EXTN
++#endif
++#define LIBGCC_SONAME "libgcc_s" LIBGCC_EH_EXTN LIBGCC_64_EXTN "-1.dll"
+ 
+ /* We should find a way to not have to update this manually.  */
+ #define LIBGCJ_SONAME "libgcj" /*LIBGCC_EH_EXTN*/ "-12.dll"
+diff --git a/gcc/config/i386/t-cygming b/gcc/config/i386/t-cygming
+index ccae237..370e830 100644
+--- a/gcc/config/i386/t-cygming
++++ b/gcc/config/i386/t-cygming
+@@ -67,7 +67,7 @@ STMP_FIXINC=stmp-fixinc
+ SHLIB_EXT = .dll
+ SHLIB_IMPLIB = @shlib_base_name@.a
+ SHLIB_SOVERSION = 1
+-SHLIB_SONAME = @shlib_base_name@_$(EH_MODEL)-$(SHLIB_SOVERSION)$(SHLIB_EXT)
++SHLIB_SONAME = @shlib_base_name@_$(EH_MODEL)@shlib_maybe64@-$(SHLIB_SOVERSION)$(SHLIB_EXT)
+ SHLIB_MAP = @shlib_map_file@
+ SHLIB_OBJS = @shlib_objs@
+ SHLIB_DIR = @multilib_dir@/shlib
+@@ -105,5 +105,5 @@ SHLIB_INSTALL = \
+ SHLIB_MKMAP = $(srcdir)/mkmap-flat.awk
+ # We'd like to use SHLIB_SONAME here too, but shlib_base_name
+ # does not get substituted before mkmap-flat.awk is run.
+-SHLIB_MKMAP_OPTS = -v pe_dll=libgcc_s_$(EH_MODEL)-$(SHLIB_SOVERSION)$(SHLIB_EXT)
++SHLIB_MKMAP_OPTS = -v pe_dll=libgcc_s_$(EH_MODEL)@shlib_maybe64@-$(SHLIB_SOVERSION)$(SHLIB_EXT)
+ SHLIB_MAPFILES = $(srcdir)/libgcc-std.ver
+diff --git a/libgcc/Makefile.in b/libgcc/Makefile.in
+index 7e2ab93..bbe56f9 100644
+--- a/libgcc/Makefile.in
++++ b/libgcc/Makefile.in
+@@ -72,6 +72,8 @@ LN_S = @LN_S@
+ 
+ PWD_COMMAND = $${PWDCMD-pwd}
+ 
++SHLIB_MAYBE64 = $(if $(findstring $(if $(findstring x86_64,$(host_noncanonical)),.,64),$(MULTIDIR)),_64)
++
+ # Flags to pass to a recursive make.
+ FLAGS_TO_PASS = \
+ 	"AR=$(AR)" \
+@@ -789,7 +791,7 @@ libgcc.map: $(SHLIB_MKMAP) $(SHLIB_MAPFILES) $(libgcc-s-objects)
+ 	    | sed -e '/^[ 	]*#/d' \
+ 		  -e 's/^%\(if\|else\|elif\|endif\|define\)/#\1/' \
+ 	    | $(gcc_compile_bare) -E -xassembler-with-cpp -; \
+-	} | $(AWK) -f $(SHLIB_MKMAP) $(SHLIB_MKMAP_OPTS) > tmp-$@
++	} | $(AWK) -f $(SHLIB_MKMAP) $(subst @shlib_maybe64@,$(SHLIB_MAYBE64),$(SHLIB_MKMAP_OPTS)) > tmp-$@
+ 	mv tmp-$@ $@
+ libgcc_s$(SHLIB_EXT): libgcc.map
+ mapfile = libgcc.map
+@@ -807,7 +809,8 @@ libgcc_s$(SHLIB_EXT): $(libgcc-s-objects) $(extra-parts)
+ 		@shlib_base_name@,libgcc_s,$(subst \
+ 		@shlib_map_file@,$(mapfile),$(subst \
+ 		@shlib_slibdir_qual@,$(MULTIOSSUBDIR),$(subst \
+-		@shlib_slibdir@,$(shlib_slibdir),$(SHLIB_LINK))))))))
++		@shlib_maybe64@,$(SHLIB_MAYBE64),$(subst \
++		@shlib_slibdir@,$(shlib_slibdir),$(SHLIB_LINK)))))))))
+ 
+ libunwind$(SHLIB_EXT): $(libunwind-s-objects) $(extra-parts)
+ 	# @multilib_flags@ is still needed because this may use
+@@ -956,7 +959,8 @@ install-shared:
+ 
+ 	$(subst @multilib_dir@,$(MULTIDIR),$(subst \
+ 		@shlib_base_name@,libgcc_s,$(subst \
+-		@shlib_slibdir_qual@,$(MULTIOSSUBDIR),$(SHLIB_INSTALL))))
++		@shlib_maybe64@,$(SHLIB_MAYBE64),$(subst \
++		@shlib_slibdir_qual@,$(MULTIOSSUBDIR),$(SHLIB_INSTALL)))))
+ 
+ install-leaf: $(install-shared) $(install-libunwind)
+ 	$(mkinstalldirs) $(DESTDIR)$(inst_libdir)
+diff --git a/libgfortran/Makefile.in b/libgfortran/Makefile.in
+index dac8bb8..8ee21dc 100644
+--- a/libgfortran/Makefile.in
++++ b/libgfortran/Makefile.in
+@@ -308,9 +308,11 @@ LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+ 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+ CCLD = $(CC)
++MAYBE64 = $(if $(findstring x86_64,$(host_triplet)),$(if $(MULTISUBDIR),,_64),$(if $(findstring /64,$(MULTISUBDIR)),_64))
++TARGET_MAYBE64 = $(patsubst %.la,%$(MAYBE64).la,$@)
+ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
++	$(LDFLAGS) -o $(TARGET_MAYBE64)
+ FCCOMPILE = $(FC) $(AM_FCFLAGS) $(FCFLAGS)
+ LTFCCOMPILE = $(LIBTOOL) --tag=FC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=compile $(FC) $(AM_FCFLAGS) $(FCFLAGS)
+@@ -1372,7 +1374,15 @@ clean-toolexeclibLTLIBRARIES:
+ 	  rm -f "$${dir}/so_locations"; \
+ 	done
+ libgfortran.la: $(libgfortran_la_OBJECTS) $(libgfortran_la_DEPENDENCIES) 
+-	$(libgfortran_la_LINK) -rpath $(toolexeclibdir) $(libgfortran_la_OBJECTS) $(libgfortran_la_LIBADD) $(LIBS)
++	$(libgfortran_la_LINK) -rpath $(toolexeclibdir) $(libgfortran_la_OBJECTS) $(libgfortran_la_LIBADD) $(LIBS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ libgfortranbegin.la: $(libgfortranbegin_la_OBJECTS) $(libgfortranbegin_la_DEPENDENCIES) 
+ 	$(libgfortranbegin_la_LINK) -rpath $(myexeclibdir) $(libgfortranbegin_la_OBJECTS) $(libgfortranbegin_la_LIBADD) $(LIBS)
+ 
+diff --git a/libgo/Makefile.in b/libgo/Makefile.in
+index 452c608..f7f364e 100644
+--- a/libgo/Makefile.in
++++ b/libgo/Makefile.in
+@@ -252,9 +252,11 @@ LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+ 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+ CCLD = $(CC)
++MAYBE64 = $(if $(findstring x86_64,$(host_triplet)),$(if $(MULTISUBDIR),,_64),$(if $(findstring /64,$(MULTISUBDIR)),_64))
++TARGET_MAYBE64 = $(patsubst %.la,%$(MAYBE64).la,$@)
+ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
++	$(LDFLAGS) -o $(TARGET_MAYBE64)
+ SOURCES = $(libgobegin_a_SOURCES) $(libgo_la_SOURCES)
+ DIST_SOURCES = $(libgobegin_a_SOURCES) $(am__libgo_la_SOURCES_DIST)
+ MULTISRCTOP = 
+@@ -2047,7 +2049,15 @@ clean-toolexeclibLTLIBRARIES:
+ 	  rm -f "$${dir}/so_locations"; \
+ 	done
+ libgo.la: $(libgo_la_OBJECTS) $(libgo_la_DEPENDENCIES) 
+-	$(LINK) -rpath $(toolexeclibdir) $(libgo_la_OBJECTS) $(libgo_la_LIBADD) $(LIBS)
++	$(LINK) -rpath $(toolexeclibdir) $(libgo_la_OBJECTS) $(libgo_la_LIBADD) $(LIBS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+diff --git a/libgomp/Makefile.in b/libgomp/Makefile.in
+index b81936a..3a3b023 100644
+--- a/libgomp/Makefile.in
++++ b/libgomp/Makefile.in
+@@ -321,8 +321,10 @@ nodist_noinst_HEADERS = libgomp_f.h
+ nodist_libsubinclude_HEADERS = omp.h
+ @USE_FORTRAN_TRUE@nodist_finclude_HEADERS = omp_lib.h omp_lib.f90 omp_lib.mod omp_lib_kinds.mod
+ LTLDFLAGS = $(shell $(SHELL) $(top_srcdir)/../libtool-ldflags $(LDFLAGS))
++MAYBE64 = $(if $(findstring x86_64,$(host_triplet)),$(if $(MULTISUBDIR),,_64),$(if $(findstring /64,$(MULTISUBDIR)),_64))
++TARGET_MAYBE64 = $(patsubst %.la,%$(MAYBE64).la,$@)
+ LINK = $(LIBTOOL) --tag CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link \
+-	$(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LTLDFLAGS) -o $@
++	$(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LTLDFLAGS) -o $(TARGET_MAYBE64)
+ 
+ 
+ # Automake Documentation:
+@@ -443,7 +445,15 @@ clean-toolexeclibLTLIBRARIES:
+ 	  rm -f "$${dir}/so_locations"; \
+ 	done
+ libgomp.la: $(libgomp_la_OBJECTS) $(libgomp_la_DEPENDENCIES) 
+-	$(libgomp_la_LINK) -rpath $(toolexeclibdir) $(libgomp_la_OBJECTS) $(libgomp_la_LIBADD) $(LIBS)
++	$(libgomp_la_LINK) -rpath $(toolexeclibdir) $(libgomp_la_OBJECTS) $(libgomp_la_LIBADD) $(LIBS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+diff --git a/libjava/Makefile.in b/libjava/Makefile.in
+index bf5ab9d..72b66ed 100644
+--- a/libjava/Makefile.in
++++ b/libjava/Makefile.in
+@@ -471,9 +471,11 @@ LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+ 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+ CCLD = $(CC)
++MAYBE64 = $(if $(findstring x86_64,$(host_triplet)),$(if $(MULTISUBDIR),,_64),$(if $(findstring /64,$(MULTISUBDIR)),_64))
++TARGET_MAYBE64 = $(patsubst %.la,%$(MAYBE64).la,$@)
+ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
++	$(LDFLAGS) -o $(TARGET_MAYBE64)
+ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+ 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+ LTCXXCOMPILE = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+@@ -9289,11 +9291,35 @@ sun/misc/natUnsafe.lo: sun/misc/$(am__dirstamp) \
+ java/lang/Object.lo: java/lang/$(am__dirstamp) \
+ 	java/lang/$(DEPDIR)/$(am__dirstamp)
+ libgcj.la: $(libgcj_la_OBJECTS) $(libgcj_la_DEPENDENCIES) 
+-	$(libgcj_la_LINK) -rpath $(toolexeclibdir) $(libgcj_la_OBJECTS) $(libgcj_la_LIBADD) $(LIBS)
++	$(libgcj_la_LINK) -rpath $(toolexeclibdir) $(libgcj_la_OBJECTS) $(libgcj_la_LIBADD) $(LIBS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ libgij.la: $(libgij_la_OBJECTS) $(libgij_la_DEPENDENCIES) 
+-	$(libgij_la_LINK) -rpath $(toolexeclibdir) $(libgij_la_OBJECTS) $(libgij_la_LIBADD) $(LIBS)
++	$(libgij_la_LINK) -rpath $(toolexeclibdir) $(libgij_la_OBJECTS) $(libgij_la_LIBADD) $(LIBS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ libjvm.la: $(libjvm_la_OBJECTS) $(libjvm_la_DEPENDENCIES) 
+-	$(libjvm_la_LINK) -rpath $(dbexecdir) $(libjvm_la_OBJECTS) $(libjvm_la_LIBADD) $(LIBS)
++	$(libjvm_la_LINK) -rpath $(dbexecdir) $(libjvm_la_OBJECTS) $(libjvm_la_LIBADD) $(LIBS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ install-binPROGRAMS: $(bin_PROGRAMS)
+ 	@$(NORMAL_INSTALL)
+ 	test -z "$(bindir)" || $(MKDIR_P) "$(DESTDIR)$(bindir)"
+diff --git a/libobjc/Makefile.in b/libobjc/Makefile.in
+index b33c989..5f3435c 100644
+--- a/libobjc/Makefile.in
++++ b/libobjc/Makefile.in
+@@ -323,11 +323,21 @@ install-info:
+ 
+ LTLDFLAGS = $(shell $(SHELL) $(top_srcdir)/../libtool-ldflags $(LDFLAGS))
+ 
++MAYBE64 = $(if $(findstring x86_64,$(target_noncanonical)),$(if $(MULTISUBDIR),,_64),$(if $(findstring /64,$(MULTISUBDIR)),_64))
++TARGET_MAYBE64 = $(patsubst %.la,%$(MAYBE64).la,$@)
+ libobjc$(libsuffix).la: $(OBJS)
+ 	$(LIBTOOL_LINK) $(CC) -o $@ $(OBJS) \
+ 		-Wc,-shared-libgcc -rpath $(toolexeclibdir) \
+ 		-version-info $(LIBOBJC_VERSION) $(extra_ldflags_libobjc) \
+-		$(LTLDFLAGS)
++		$(LTLDFLAGS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ 
+ libobjc_gc$(libsuffix).la: $(OBJS_GC)
+ 	$(LIBTOOL_LINK) $(CC) -o $@ $(OBJS_GC) $(OBJC_BOEHM_GC_LIBS) \
+diff --git a/libquadmath/Makefile.in b/libquadmath/Makefile.in
+index 6bf7c11..6c89cdb 100644
+--- a/libquadmath/Makefile.in
++++ b/libquadmath/Makefile.in
+@@ -154,9 +154,11 @@ LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+ 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+ CCLD = $(CC)
++MAYBE64 = $(if $(findstring x86_64,$(host_triplet)),$(if $(MULTISUBDIR),,_64),$(if $(findstring /64,$(MULTISUBDIR)),_64))
++TARGET_MAYBE64 = $(patsubst %.la,%$(MAYBE64).la,$@)
+ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
++	$(LDFLAGS) -o $(TARGET_MAYBE64)
+ SOURCES = $(libquadmath_la_SOURCES)
+ MULTISRCTOP = 
+ MULTIBUILDTOP = 
+@@ -634,7 +636,15 @@ strtod/mpn2flt128.lo: strtod/$(am__dirstamp) \
+ strtod/tens_in_limb.lo: strtod/$(am__dirstamp) \
+ 	strtod/$(DEPDIR)/$(am__dirstamp)
+ libquadmath.la: $(libquadmath_la_OBJECTS) $(libquadmath_la_DEPENDENCIES) 
+-	$(libquadmath_la_LINK) $(am_libquadmath_la_rpath) $(libquadmath_la_OBJECTS) $(libquadmath_la_LIBADD) $(LIBS)
++	$(libquadmath_la_LINK) $(am_libquadmath_la_rpath) $(libquadmath_la_OBJECTS) $(libquadmath_la_LIBADD) $(LIBS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
+diff --git a/libssp/Makefile.in b/libssp/Makefile.in
+index a7db7a9..b9a93b2 100644
+--- a/libssp/Makefile.in
++++ b/libssp/Makefile.in
+@@ -109,9 +109,11 @@ LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+ 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+ CCLD = $(CC)
++MAYBE64 = $(if $(findstring x86_64,$(host_triplet)),$(if $(MULTISUBDIR),,_64),$(if $(findstring /64,$(MULTISUBDIR)),_64))
++TARGET_MAYBE64 = $(patsubst %.la,%$(MAYBE64).la,$@)
+ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+-	$(LDFLAGS) -o $@
++	$(LDFLAGS) -o $(TARGET_MAYBE64)
+ SOURCES = $(libssp_la_SOURCES) $(libssp_nonshared_la_SOURCES)
+ MULTISRCTOP = 
+ MULTIBUILDTOP = 
+@@ -414,7 +416,15 @@ clean-toolexeclibLTLIBRARIES:
+ 	  rm -f "$${dir}/so_locations"; \
+ 	done
+ libssp.la: $(libssp_la_OBJECTS) $(libssp_la_DEPENDENCIES) 
+-	$(libssp_la_LINK) -rpath $(toolexeclibdir) $(libssp_la_OBJECTS) $(libssp_la_LIBADD) $(LIBS)
++	$(libssp_la_LINK) -rpath $(toolexeclibdir) $(libssp_la_OBJECTS) $(libssp_la_LIBADD) $(LIBS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ libssp_nonshared.la: $(libssp_nonshared_la_OBJECTS) $(libssp_nonshared_la_DEPENDENCIES) 
+ 	$(libssp_nonshared_la_LINK) -rpath $(toolexeclibdir) $(libssp_nonshared_la_OBJECTS) $(libssp_nonshared_la_LIBADD) $(LIBS)
+ 
+diff --git a/libstdc++-v3/src/Makefile.in b/libstdc++-v3/src/Makefile.in
+index b454f66..23d968b 100644
+--- a/libstdc++-v3/src/Makefile.in
++++ b/libstdc++-v3/src/Makefile.in
+@@ -520,8 +520,10 @@ LTLDFLAGS = $(shell $(SHELL) $(top_srcdir)/../libtool-ldflags $(LDFLAGS))
+ # course is problematic at this point.  So, we get the top-level
+ # directory to configure libstdc++-v3 to use gcc as the C++
+ # compilation driver.
++MAYBE64 = $(if $(findstring x86_64,$(host_triplet)),$(if $(MULTISUBDIR),,_64),$(if $(findstring /64,$(MULTISUBDIR)),_64))
++TARGET_MAYBE64 = $(patsubst %.la,%$(MAYBE64).la,$@)
+ CXXLINK = $(LIBTOOL) --tag CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link \
+-	  $(CXX) $(OPT_LDFLAGS) $(SECTION_LDFLAGS) $(AM_CXXFLAGS) $(LTLDFLAGS) -o $@
++	  $(CXX) $(OPT_LDFLAGS) $(SECTION_LDFLAGS) $(AM_CXXFLAGS) $(LTLDFLAGS) -o $(TARGET_MAYBE64)
+ 
+ debugdir = debug
+ all: all-am
+@@ -590,7 +592,16 @@ clean-toolexeclibLTLIBRARIES:
+ 	  rm -f "$${dir}/so_locations"; \
+ 	done
+ libstdc++.la: $(libstdc___la_OBJECTS) $(libstdc___la_DEPENDENCIES) 
+-	$(libstdc___la_LINK) -rpath $(toolexeclibdir) $(libstdc___la_OBJECTS) $(libstdc___la_LIBADD) $(LIBS)
++	$(libstdc___la_LINK) -rpath $(toolexeclibdir) $(libstdc___la_OBJECTS) $(libstdc___la_LIBADD) $(LIBS) \
++	$(libstdc___la_LINK) -rpath $(toolexeclibdir) $(libstdc___la_OBJECTS) $(libstdc___la_LIBADD) $(libstdc___la_LIBADD_SHARED) $(LIBS) \
++	&& rm -f "$@" \
++	&& cat ".libs/$(TARGET_MAYBE64)" | sed 's/\(.*\)_64\(\.dll\)\?\.a/\1\2\.a/' >"$@" \
++	&& cp -p "$@" ".libs/$@" \
++	&& cp -p "$@" ".libs/$@i" \
++	&& mv -f "$(patsubst %.la,%.dll.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.dll.a,.libs/$@)" \
++	&& mv -f "$(patsubst %.la,%.a,.libs/$(TARGET_MAYBE64))" tmp \
++	&& mv -f tmp "$(patsubst %.la,%.a,.libs/$@)"
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)
