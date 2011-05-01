@@ -13,7 +13,7 @@ export GCC_LANGUAGES="c,c++,lto"
 export BUILD_CORES=2 #used as argument for "make -j#"
 export SHARED='--enable-shared'
 export MULTILIB='--disable-lib32 --enable-lib64'
-export GCC_WIN32_OPTIONS='--disable-win32-registry --enable-version-specific-runtime-libs'
+export GCC_WIN32_OPTIONS='--disable-win32-registry'
 # directories: SRC_DIR contains full source package.
 export TOP_DIR=`pwd`
 export SRC_DIR=$TOP_DIR/src
