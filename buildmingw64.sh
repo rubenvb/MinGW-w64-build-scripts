@@ -7,6 +7,7 @@ export TARGET=x86_64-w64-mingw32
 export BUILD=x86_64-gnu-linux
 export EXESUFFIX=".exe"
 export BUILD_BOOTSTRAP= #profiledbootstrap
+export SHORTNAME=mingw64
 # options
 export GCC_LANGUAGES="c,c++,lto"
 export BUILD_CORES=2 #used as argument for "make -j#"
@@ -20,7 +21,7 @@ export BUILD_DIR=$TOP_DIR/x64
 export LOG_DIR=$BUILD_DIR/logs
 export SCRIPTS=$TOP_DIR/scripts
 export MARKER_DIR=$BUILD_DIR/markers
-export PREFIX=$TOP_DIR/x64/mingw64
+export PREFIX=$TOP_DIR/x64/$SHORTNAME
 export GCC_LIBS=$BUILD_DIR/libs
 DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR $PREFIX $GCC_LIBS $MARKER_DIR
               $PREFIX/mingw/include $PREFIX/$TARGET/include"
@@ -58,9 +59,9 @@ echo "Building prerequisites"
 for project in $PROJECTS
 do
     cd $BUILD_DIR/$project
-	echo "-> $project"
-	. $SCRIPTS/$project.sh || exit 1
-	cd $TOP_DIR
+    echo "-> $project"
+    . $SCRIPTS/$project.sh || exit 1
+    cd $TOP_DIR
 done
 		  
 		  

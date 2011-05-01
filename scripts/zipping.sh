@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-FILE = $TOPDIR/$HOST-gcc-${GCC_VERSION}_rubenvb.zip
+FILE=$TOP_DIR/$HOST-gcc-${GCC_VERSION}_rubenvb.zip
 
 if [ -f $FILE ]
 then
@@ -9,4 +9,6 @@ then
 fi
 
 echo "--> Zipping up"
-zip -9 $FILE /mingw64
+cd $PREFIX/..
+zip -D -r -9 $FILE $SHORTNAME > $LOG_DIR/zipping.log
+

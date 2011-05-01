@@ -7,6 +7,7 @@ export TARGET=x86_64-w64-mingw32
 export BUILD=x86_64-linux-gnu
 export EXESUFFIX=
 export BUILD_BOOTSTRAP=
+export SHORTNAME=mingw64
 # options
 export GCC_LANGUAGES="c,c++,lto"
 export BUILD_CORES=2 #used as argument for "make -jn"
