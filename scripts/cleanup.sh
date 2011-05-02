@@ -7,7 +7,8 @@ then
 else
     echo "--> Cleaning up"
     rm -rf $PREFIX/mingw || exit 1
-    if [[ "$TARGET" == "$HOST" ]]    
+    if [[ "$TARGET" == "$HOST" ]]
+    then 
         echo "--> Copying DLL's"
         cp $GCC_LIBS/bin/*.dll $PREFIX/bin
     fi

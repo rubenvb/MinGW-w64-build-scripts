@@ -21,7 +21,7 @@ export BUILD_DIR=$TOP_DIR/x64
 export LOG_DIR=$BUILD_DIR/logs
 export SCRIPTS=$TOP_DIR/scripts
 export MARKER_DIR=$BUILD_DIR/markers
-export PREFIX=$TOP_DIR/x64/$SHORTNAME
+export PREFIX=$BUILD_DIR/$SHORTNAME
 export GCC_LIBS=$BUILD_DIR/libs
 DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR $PREFIX $GCC_LIBS $MARKER_DIR
               $PREFIX/mingw/include $PREFIX/$TARGET/include"

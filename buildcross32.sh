@@ -3,21 +3,21 @@ set -e
 
 # platform information
 export HOST=x86_64-linux-gnu
-export TARGET=x86_86-w64-mingw32
+export TARGET=i686-w64-mingw32
 export BUILD=x86_64-linux-gnu
 export EXESUFFIX=
 export BUILD_BOOTSTRAP=
-export SHORTNAME=mingw64
+export SHORTNAME=mingw32
 # options
 export GCC_LANGUAGES="c,c++,fortran,objc,obj-c++"
 export BUILD_CORES=2 #used as argument for "make -jn"
 export SHARED='--enable-static --enable-shared'
-export MULTILIB='--disable-lib32 --enable-lib64'
+export MULTILIB='--enable-lib32 --disable-lib64'
 export GCC_WIN32_OPTIONS=
 # directories: SRC_DIR contains full source package.
 export TOP_DIR=`pwd`
 export SRC_DIR=$TOP_DIR/src
-export BUILD_DIR=$TOP_DIR/cross64
+export BUILD_DIR=$TOP_DIR/cross32
 export LOG_DIR=$BUILD_DIR/logs
 export SCRIPTS=$TOP_DIR/scripts
 export MARKER_DIR=$BUILD_DIR/markers
