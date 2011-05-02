@@ -9,7 +9,7 @@ export EXESUFFIX=".exe"
 export BUILD_BOOTSTRAP= #profiledbootstrap
 export SHORTNAME=mingw64
 # options
-export GCC_LANGUAGES="c,c++,lto"
+export GCC_LANGUAGES="c,c++,fortran,objc,obj-c++"
 export BUILD_CORES=2 #used as argument for "make -j#"
 export SHARED='--enable-shared'
 export MULTILIB='--disable-lib32 --enable-lib64'

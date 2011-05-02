@@ -7,8 +7,10 @@ then
 else
     echo "--> Cleaning up"
     rm -rf $PREFIX/mingw || exit 1
-    echo "--> Copying DLL's"
-    cp $GCC_LIBS/bin/*.dll $PREFIX/bin
+    if [[ "$TARGET" == "$HOST" ]]    
+        echo "--> Copying DLL's"
+        cp $GCC_LIBS/bin/*.dll $PREFIX/bin
+    fi
     echo "--> Stripping Executables"
     strip $PREFIX/$TARGET/bin/*$EXESUFFIX
     strip $PREFIX/libexec/gcc/$TARGET/$GCC_VERSION/*$EXESUFFIX

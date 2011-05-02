@@ -9,7 +9,7 @@ else
     echo "--> Configuring"
     sh $SRC_DIR/gcc/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
                               --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
-                              --enable-stage1-languages=c,lto --enable-languages=c,c++,lto --enable-lto --enable-libgomp --enable-checking=release \
+                              --enable-languages=c --enable-lto --enable-libgomp --enable-checking=release \
                               --enable-fully-dynamic-string --enable-nls \
                               --disable-multilib --enable-shared \
                               $GCC_WIN32_OPTIONS \

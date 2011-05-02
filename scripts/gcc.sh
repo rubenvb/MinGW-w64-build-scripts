@@ -9,9 +9,9 @@ else
     echo "--> Configuring"
     sh $SRC_DIR/gcc/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
                               --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
-                              --enable-languages=c,c++,lto --enable-lto --enable-libgomp --enable-checking=release \
+                              --enable-languages=$GCC_LANGUAGES --enable-lto --enable-libgomp --enable-checking=release \
                               --enable-fully-dynamic-string --disable-nls \
-                              --disable-multilib --enable-shared \
+                              --disable-multilib --enable-shared --enable-sjlj-exceptions \
                               $GCC_WIN32_OPTIONS \
                               CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                               > $LOG_DIR/gcc_configure.log 2>&1 || exit 1
