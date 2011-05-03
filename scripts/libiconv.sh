@@ -6,7 +6,7 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh $SRC_DIR/libiconv-$LIBICONV_VERSION/configure --host=$HOST --prefix=$GCC_LIBS \
+    sh $SRC_DIR/libiconv-$LIBICONV_VERSION/configure --host=$HOST --build=$BUILD --prefix=$GCC_LIBS \
                                                      $SHARED \
                                                      CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                                                      > $LOG_DIR/libiconv_configure.log 2>&1 || exit 1

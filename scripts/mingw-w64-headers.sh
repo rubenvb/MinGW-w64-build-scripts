@@ -7,9 +7,9 @@ then
 else
     echo "--> Configuring"
     sh $SRC_DIR/mingw-w64/mingw-w64-headers/configure --host=$TARGET --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                                                      $MULTILIB \
+                                                      $CRT_MULTILIB \
                                                       --enable-sdk=all --enable-secure-api \
-			                              CFLAGS="$BUILD_CFLAGS_LTO" LFLAGS="$BUILD_LFLAGS_LTO" \
+                                                      CFLAGS="$BUILD_CFLAGS_LTO" LFLAGS="$BUILD_LFLAGS_LTO" \
                                                       > $LOG_DIR/mingw-w64_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi

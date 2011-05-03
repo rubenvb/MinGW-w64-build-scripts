@@ -2,7 +2,7 @@
 set -e
 
 # platform information
-export HOST=x86_64-linux-gnu
+export HOST=i686-linux-gnu
 export TARGET=i686-w64-mingw32
 export BUILD=x86_64-linux-gnu
 export EXESUFFIX=
@@ -31,7 +31,7 @@ export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-poi
 export BUILD_LFLAGS=
 export BUILD_CFLAGS_LTO=$BUILD_CFLAGS #' -flto'
 export BUILD_LFLAGS_LTO=$BUILD_LFLAGS #' -flto='$BUILD_CORES
-export MAKE_OPTS="-s -j"$BUILD_CORES
+export MAKE_OPTS="-j"$BUILD_CORES
 
 #get version info
 . ./versions.sh

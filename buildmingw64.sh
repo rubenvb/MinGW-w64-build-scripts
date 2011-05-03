@@ -12,8 +12,9 @@ export SHORTNAME=mingw64
 export GCC_LANGUAGES="c,c++,fortran,objc,obj-c++"
 export BUILD_CORES=2 #used as argument for "make -j#"
 export SHARED='--enable-shared'
-export MULTILIB='--disable-lib32 --enable-lib64'
-export GCC_WIN32_OPTIONS='--disable-win32-registry'
+export CRT_MULTILIB='--disable-lib32 --enable-lib64'
+export GNU_MULTILIB='--enable-targets=i686-w64-mingw32,x86_64-w64-mingw32'
+export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
 # directories: SRC_DIR contains full source package.
 export TOP_DIR=`pwd`
 export SRC_DIR=$TOP_DIR/src
@@ -29,10 +30,10 @@ mkdir -p $DIRS_TO_MAKE
 
 # optimized for my system.
 export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer'
-export BUILD_LDFLAGS='-L"/home/ruben/Development/cross64/mingw64/lib/gcc/x86_64-w64-mingw32/4.6.1/"'
+export BUILD_LDFLAGS=
 export BUILD_CFLAGS_LTO=$BUILD_CFLAGS #' -flto'
 export BUILD_LDFLAGS_LTO=$BUILD_LDFLAGS #' -flto='$BUILD_CORES
-export MAKE_OPTS="-s -j"$BUILD_CORES
+export MAKE_OPTS="-j"$BUILD_CORES
 
 #get version info
 . ./versions.sh

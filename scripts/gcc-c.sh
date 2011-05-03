@@ -11,8 +11,8 @@ else
                               --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
                               --enable-languages=c --enable-lto --enable-libgomp --enable-checking=release \
                               --enable-fully-dynamic-string --enable-nls \
-                              --disable-multilib --enable-shared \
-                              $GCC_WIN32_OPTIONS \
+                              $GNU_MULTILIB $SHARED \
+                              $GNU_WIN32_OPTIONS \
                               CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                               > $LOG_DIR/gcc-c_configure.log 2>&1 || exit 1
     echo "--> Configured"

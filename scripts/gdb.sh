@@ -7,10 +7,10 @@ then
 else
     echo "--> Configuring"
     sh $SRC_DIR/gdb/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-		              --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
-			     --disable-nls \
-                              --disable-multilib \
-			      --disable-rpath --disable-win32-registry \
+                              --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
+                              --disable-nls \
+                              $GNU_MULTILIB \
+                              $GNU_WIN32_OPTIONS \
                               CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                               > $LOG_DIR/gdb_configure.log 2>&1 || exit 1
     echo "--> Configured"

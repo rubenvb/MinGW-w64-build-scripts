@@ -32,7 +32,7 @@ export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-poi
 export BUILD_LDFLAGS='-L"/home/ruben/Development/cross64/mingw64/lib/gcc/x86_64-w64-mingw32/4.6.1/"'
 export BUILD_CFLAGS_LTO=$BUILD_CFLAGS #' -flto'
 export BUILD_LDFLAGS_LTO=$BUILD_LDFLAGS #' -flto='$BUILD_CORES
-export MAKE_OPTS="-s -j"$BUILD_CORES
+export MAKE_OPTS="-j"$BUILD_CORES
 
 #get version info
 . ./versions.sh

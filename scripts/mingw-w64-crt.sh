@@ -10,10 +10,10 @@ then
 else
     echo "--> Configuring"
     sh $SRC_DIR/mingw-w64/mingw-w64-crt/configure --host=$TARGET --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                                                  $MULTILIB \
+                                                  $CRT_MULTILIB \
                                                   --enable-sdk=all --enable-secure-api \
-			                          CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
-				                  > $LOG_DIR/mingw-w64_configure.log 2>&1 || exit 1
+                                                  CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
+                                                  > $LOG_DIR/mingw-w64_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
 touch $MARKER_DIR/mingw-w64-crt_configure.marker
