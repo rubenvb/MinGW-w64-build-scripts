@@ -12,6 +12,7 @@ else
                               --enable-languages=$GCC_LANGUAGES --enable-lto --enable-libgomp --enable-checking=release \
                               --enable-fully-dynamic-string --disable-nls \
                               --disable-multilib --enable-shared --enable-sjlj-exceptions \
+                              --enable-libstdcxx-debug \
                               $GCC_WIN32_OPTIONS \
                               CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                               > $LOG_DIR/gcc_configure.log 2>&1 || exit 1
