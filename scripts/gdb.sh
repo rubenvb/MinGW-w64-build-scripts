@@ -8,7 +8,7 @@ else
     echo "--> Configuring"
     sh $SRC_DIR/gdb/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
                               --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
-                              --disable-nls \
+                              $GNU_EXTRA_OPTIONS \
                               $GNU_MULTILIB \
                               $GNU_WIN32_OPTIONS \
                               CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \

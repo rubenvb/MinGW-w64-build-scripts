@@ -10,7 +10,7 @@ else
     find . -name "*.la" -exec rm -f {} \;
 
     echo "--> Stripping Executables"
-    find $PREFIX -name "*.exe" -exec rm -f {} \;
+    find $PREFIX -name "*.exe" -exec strip {} \;
 
     if [[ "$TARGET" == "$HOST" ]]
     then 

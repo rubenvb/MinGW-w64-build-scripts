@@ -7,7 +7,7 @@ then
 else
     echo "--> Configuring"
     sh ../../src/gmp-$GMP_VERSION/configure --host=$HOST --build=$BUILD --prefix=$GCC_LIBS \
-                                            $SHARED --disable-static --enable-cxx --with-gmp-libraries=/home/ruben/Development/cross64/mingw64/lib/gcc/x86_64-w64-mingw32/4.6.1 \
+                                            $SHARED --disable-static --enable-cxx \
                                             CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                                             > $LOG_DIR/gmp_configure.log 2>&1 || exit 1
     echo "--> Configured"
