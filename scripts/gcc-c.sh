@@ -9,7 +9,8 @@ else
     echo "--> Configuring"
     sh $SRC_DIR/gcc/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
                               --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
-                              --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS --with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS \
+                              --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
+                              $GRAPHITE_LIBS \
                               --enable-languages=c --enable-libgomp --enable-checking=release --enable-cloog-backend=isl \
                               --enable-fully-dynamic-string \
                               $GNU_EXTRA_OPTIONS \
