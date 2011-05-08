@@ -6,11 +6,12 @@ then
     echo "--> Already cleaned up"
 else
     echo "--> Cleaning up"
-    rm -rf $PREFIX/mingw || exit 1
-    find . -name "*.la" -exec rm -f {} \;
+    cd $PREFIX
+    rm -rf mingw || exit 1
+    find . -name \*.la -exec rm -f {} \;
 
     echo "--> Stripping Executables"
-    find $PREFIX -name "*.exe" -exec strip {} \;
+    find . -name \*.exe -exec strip {} \;
 
     if [[ "$TARGET" == "$HOST" ]]
     then 

@@ -17,7 +17,7 @@ export LOG_DIR=$BUILD_DIR/logs
 export GCC_LIBS=$BUILD_DIR/libs
 if [[ $HOST == $TARGET ]]
 then
-    GRAPHITE_LIBS='--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS'
+    GRAPHITE_LIBS="--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS"
 else
     GRAPHITE_LIBS=
 fi
