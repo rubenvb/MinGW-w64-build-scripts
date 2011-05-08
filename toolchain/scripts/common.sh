@@ -21,6 +21,7 @@ export SCRIPTS=$TOP_DIR/scripts
 if [ $HOST == $TARGET ]
 then
     export GCC_SRC=$SRC_DIR/gcc
+    GRAPHITE_LIBS="--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS"
 else
     export GCC_SRC=$SRC_DIR/gcc-intree
 fi
