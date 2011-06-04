@@ -7,7 +7,7 @@ export TARGET=x86_64-w64-mingw32
 export BUILD=x86_64-gnu-linux
 export EXESUFFIX=".exe"
 export SHORT_NAME=mingw64
-export CRT_MULTILIB='--enable-lib64 --disable-lib32'
+export CRT_MULTILIB='--enable-lib64 --ls disable-lib32'
 export GDB_PYTHON_WIN64_WORKAROUND='-DMS_WIN64'
 
 # Projects to be built, in the right order
@@ -19,6 +19,7 @@ PROJECTS="expat libiconv
           gcc-c
           mingw-w64-crt
           gcc
+          python
           gdb
           make
           cleanup

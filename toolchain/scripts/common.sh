@@ -17,6 +17,13 @@ export LOG_DIR=$BUILD_DIR/logs
 export GCC_LIBS=$BUILD_DIR/libs
 export GRAPHITE_LIBS="--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS --enable-cloog-backend=isl"
 export SCRIPTS=$TOP_DIR/scripts
+
+if [ $HOST == $TARGET ]
+then
+    export GCC_SRC=$SRC_DIR/gcc
+else
+    export GCC_SRC=$SRC_DIR/gcc-intree
+fi
 export PREFIX=$BUILD_DIR/$SHORT_NAME
 DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
               $PREFIX $PREFIX/mingw/include $PREFIX/$TARGET/include

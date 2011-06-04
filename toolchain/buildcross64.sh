@@ -10,12 +10,14 @@ export SHORT_NAME=cross64
 export CRT_MULTILIB='--enable-lib64 --disable-lib32'
 
 # Projects to be built, in the right order
-export PROJECTS="mingw-w64-headers
+export PROJECTS="create-gcc-symlinks
+                 mingw-w64-headers
                  pthreads
                  binutils
                  gcc-c
                  mingw-w64-crt
                  gcc
+                 remove-gcc-symlinks
                  cleanup"
 
 # common build steps
