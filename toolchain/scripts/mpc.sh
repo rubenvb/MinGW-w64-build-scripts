@@ -7,7 +7,7 @@ then
 else
     echo "--> Configuring"
     sh $SRC_DIR/mpc-$MPC_VERSION/configure --host=$HOST --build=$BUILD --prefix=$GCC_LIBS \
-                                           $SHARED --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS \
+                                           $STATIC --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS \
                                            CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                                            > $LOG_DIR/mpc_configure.log 2>&1 || exit 1
     echo "--> Configured"

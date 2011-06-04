@@ -2,7 +2,7 @@
 set -e
 
 # platform information
-export HOST=x86_64-linux-gnu
+export HOST=x86_64-linux
 export TARGET=x86_64-w64-mingw32
 export BUILD=x86_64-linux-gnu
 export EXESUFFIX=

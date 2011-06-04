@@ -15,7 +15,6 @@ PROJECTS="expat libiconv
           mingw-w64-headers
           pthreads
           binutils
-          gcc-c
           mingw-w64-crt
           gcc
           python

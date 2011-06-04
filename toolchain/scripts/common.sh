@@ -4,7 +4,7 @@ set -e
 # options
 export GCC_LANGUAGES="c,c++,fortran,objc,obj-c++" #java,ada
 export BUILD_CORES=2 #used as argument for "make -jn"
-export SHARED='--enable-static --enable-shared'
+export SHARED='--disable-static --enable-shared'
 export STATIC='--enable-static --disable-shared'
 export GNU_MULTILIB='--disable-multilib' #'--enable-multilib --enable-targets=i686-w64-mingw32,x86_64-w64-mingw32'
 export GNU_EXTRA_OPTIONS='--disable-nls --disable-werror --enable-lto' #--enable-libgcj
@@ -17,13 +17,20 @@ export LOG_DIR=$BUILD_DIR/logs
 export GCC_LIBS=$BUILD_DIR/libs
 export GRAPHITE_LIBS="--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS --enable-cloog-backend=isl"
 export SCRIPTS=$TOP_DIR/scripts
-<<<<<<< HEAD
+# Cross compiling options
 if [ $HOST == $TARGET ]
 then
     export GCC_SRC=$SRC_DIR/gcc
-    GRAPHITE_LIBS="--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS"
+    export GCC_CXX_HOST_LIBS='-lstdc++ -lsupc++'
+    export GCC_PREREQUISITES="--with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
+                              --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
+                              $GRAPHITE_LIBS \
+                              --with-host-libstdcxx=-lstdc++"
 else
     export GCC_SRC=$SRC_DIR/gcc-intree
+    export GCC_PREREQUISITES="--with-libiconv --with-libexpat \
+                              --with-gmp --with-mpfr --with-mpc \
+                              --with-ppl --with-cloog --with-cloog-backend=isl"
 fi
 export PREFIX=$BUILD_DIR/$SHORT_NAME
 DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR

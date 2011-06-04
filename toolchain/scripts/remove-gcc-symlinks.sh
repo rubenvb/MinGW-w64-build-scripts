@@ -5,8 +5,10 @@ if [ -f remove_gcc_symlinks.marker ]
 then
     echo "--> Symlinked source directory already present"
 else
-    echo "--> Creating symlinks to build a cross-toolchain with static dependencies"
+    echo "--> Removing symlinks to build a cross-toolchain with static dependencies"
     # remove symlinks
+    rm $GCC_SRC/libiconv
+    rm $GCC_SRC/expat
     rm $GCC_SRC/gmp
     rm $GCC_SRC/mpfr
     rm $GCC_SRC/mpc

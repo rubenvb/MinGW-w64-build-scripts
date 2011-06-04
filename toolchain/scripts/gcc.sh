@@ -8,9 +8,7 @@ then
 else
     echo "--> Configuring"
     sh $GCC_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                          --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
-                          --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
-                          $GRAPHITE_LIBS \
+                          $GCC_PREREQUISITES \
                           --enable-languages=$GCC_LANGUAGES --enable-libgomp --enable-checking=release --enable-cloog-backend=isl \
                           --enable-fully-dynamic-string --enable-sjlj-exceptions --enable-libstdcxx-debug \
                           $GNU_EXTRA_OPTIONS \

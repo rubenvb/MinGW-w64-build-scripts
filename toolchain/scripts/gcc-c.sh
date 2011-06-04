@@ -8,16 +8,14 @@ then
 else
     echo "--> Configuring"
     sh $GCC_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                                       --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
-                                       --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
-                                       $GRAPHITE_LIBS \
-                                       --enable-languages=c --enable-libgomp --enable-checking=release --enable-cloog-backend=isl \
-                                       --enable-fully-dynamic-string \
-                                       $GNU_EXTRA_OPTIONS \
-                                       $GNU_MULTILIB $SHARED \
-                                       $GNU_WIN32_OPTIONS \
-                                       CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
-                                       > $LOG_DIR/gcc-c_configure.log 2>&1 || exit 1
+                          $GCC_PREREQUISITES \
+                          --enable-languages=c --enable-libgomp --enable-checking=release \
+                          --enable-fully-dynamic-string \
+                          $GNU_EXTRA_OPTIONS \
+                          $GNU_MULTILIB $SHARED \
+                          $GNU_WIN32_OPTIONS \
+                          CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
+                          > $LOG_DIR/gcc-c_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
 touch gcc-c_configure.marker
