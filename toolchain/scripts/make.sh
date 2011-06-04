@@ -19,13 +19,13 @@ then
     echo "--> Already built"
 else
     echo "--> Building"
-	/usr/bin/make $MAKE_OPTS > $LOG_DIR/make_build.log 2>&1 || exit 1
+    /usr/bin/make $MAKE_OPTS > $LOG_DIR/make_build.log 2>&1 || exit 1
 fi
 touch make_build.marker
 if [ -f make_install.marker ]
 then
     echo "--> Already installed"
 else
-	/usr/bin/make $MAKE_OPTS install > $LOG_DIR/make_install.log 2>&1 || exit 1
+    /usr/bin/make $MAKE_OPTS install > $LOG_DIR/make_install.log 2>&1 || exit 1
 fi
 touch make_install.marker

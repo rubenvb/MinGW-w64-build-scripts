@@ -30,7 +30,7 @@ else
     export GCC_SRC=$SRC_DIR/gcc-intree
     export GCC_PREREQUISITES="--with-libiconv --with-libexpat \
                               --with-gmp --with-mpfr --with-mpc \
-                              --with-ppl --with-cloog --with-cloog-backend=isl"
+                              --with-ppl --with-cloog --enable-cloog-backend=isl"
 fi
 export PREFIX=$BUILD_DIR/$SHORT_NAME
 DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR

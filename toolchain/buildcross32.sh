@@ -12,10 +12,10 @@ export CRT_MULTILIB='--disable-lib64 --enable-lib32'
 # Projects to be built, in the right order
 export PROJECTS="create-gcc-symlinks
                  mingw-w64-headers
-                 pthreads
                  binutils
                  gcc-c
                  mingw-w64-crt
+                 winpthreads
                  gcc
                  remove-gcc-symlinks
                  cleanup"

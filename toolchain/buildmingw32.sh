@@ -13,7 +13,7 @@ export CRT_MULTILIB='--disable-lib64 --enable-lib32'
 PROJECTS="expat libiconv
           gmp mpfr mpc ppl cloog
           mingw-w64-headers
-          pthreads
+          winpthreads
           binutils
           mingw-w64-crt
           gcc
@@ -24,7 +24,8 @@ PROJECTS="expat libiconv
           zipping"
 
 # native compiler options
-export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
+export GNU_WIN32_OPTIONS='--enable-threads=posix --disable-win32-registry \
+                          --disable-rpath --disable-werror'
 
 # common build steps
 . ./scripts/common.sh
