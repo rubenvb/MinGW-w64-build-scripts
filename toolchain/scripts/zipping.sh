@@ -8,7 +8,7 @@ then
     BIN_FILE=$TOP_DIR/$HOST-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.zip
 else
     BIN_COMPRESS="tar --lzma -cf"
-    BIN_FILE=$TOP_DIR/$HOST-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.lzma
+    BIN_FILE=$TOP_DIR/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}-linux_rubenvb.lzma
 fi
 
 if [ -f $BIN_FILE ]

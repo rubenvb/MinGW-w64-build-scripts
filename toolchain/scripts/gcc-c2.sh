@@ -4,6 +4,10 @@ set -e
 # use freshly built tools
 export PATH=$PREFIX/bin:$PATH
 
+if [ -f gcc-c2_complete.marker ]
+then
+    echo "--> Bootstrapping crt+winpthreads already completed"
+else
 ##
 # work around cyclic winpthreads<->libgcc dependency
 # 1. use present gcc (win32 threads) and crt to build libgcc
@@ -85,5 +89,9 @@ make $MAKE_OPTS all-target-libgcc > $LOG_DIR/gcc-c2-libgcc_build2.log 2>&1 || ex
 make $MAKE_OPTS install-target-libgcc > $LOG_DIR/gcc-c2-libgcc_install2.log 2>&1 || exit 1
 
 echo "-> Done jumping through hoops!"
+cd $BUILD_DIR/gcc-c2
+
+fi
+touch gcc-c2_complete.marker
 
 
