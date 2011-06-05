@@ -2,7 +2,14 @@
 set -e
 
 SRC_FILE=$TOP_DIR/gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.tar.lzma
-BIN_FILE=$TOP_DIR/$HOST-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.zip
+if [ "$HOST" == "$TARGET" ]
+then
+    BIN_COMPRESS="zip -D -r -9"
+    BIN_FILE=$TOP_DIR/$HOST-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.zip
+else
+    BIN_COMPRESS="tar --lzma -cf"
+    BIN_FILE=$TOP_DIR/$HOST-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.lzma
+fi
 
 if [ -f $BIN_FILE ]
 then
@@ -10,7 +17,7 @@ then
 else
     echo "--> Zipping binaries"
     cd $PREFIX/..
-    zip -D -r -9 $BIN_FILE $SHORT_NAME > $LOG_DIR/zipping.log
+    $BIN_COMPRESS $BIN_FILE $SHORT_NAME
 fi
 
 

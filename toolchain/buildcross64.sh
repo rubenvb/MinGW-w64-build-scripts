@@ -18,7 +18,8 @@ export PROJECTS="libiconv expat
                  mingw-w64-crt
                  gcc-c2
                  gcc
-                 cleanup"
+                 cleanup
+                 zipping"
 
 # common build steps
 . ./scripts/common.sh

@@ -10,15 +10,16 @@ export SHORT_NAME=cross32
 export CRT_MULTILIB='--disable-lib64 --enable-lib32'
 
 # Projects to be built, in the right order
-export PROJECTS="create-gcc-symlinks
+export PROJECTS="libiconv expat
+                 gmp mpfr mpc ppl cloog
                  mingw-w64-headers
                  binutils
                  gcc-c
                  mingw-w64-crt
-                 winpthreads
+                 gcc-c2
                  gcc
-                 remove-gcc-symlinks
-                 cleanup"
+                 cleanup
+                 zipping"
 
 # common build steps
 . ./scripts/common.sh  
