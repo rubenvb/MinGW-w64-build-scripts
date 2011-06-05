@@ -4,12 +4,11 @@ set -e
 export PATH=$PREFIX/bin:$PATH
 if [ -f gcc-c_configure.marker ]
 then
-    echo "--> Already configured stage 1"
+    echo "--> Already configured"
 else
     echo "--> Configuring"
     sh $GCC_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                          $GCC_PREREQUISITES \
-                          --enable-threads=win32 \
+                          $GCC_PREREQUISITES --enable-threads=posix \
                           --enable-languages=c --enable-libgomp --enable-checking=release \
                           --enable-fully-dynamic-string \
                           $GNU_EXTRA_OPTIONS \

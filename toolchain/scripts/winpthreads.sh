@@ -9,7 +9,7 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh $SRC_DIR/winpthreads/configure --host=$TARGET --build=$BUILD --prefix=$PREFIX \
+    sh $SRC_DIR/winpthreads/configure --host=$TARGET --build=$BUILD --prefix=$PREFIX/$TARGET \
                                       CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                                       > $LOG_DIR/winpthreads_configure.log 2>&1 || exit 1
     echo "--> Configured"

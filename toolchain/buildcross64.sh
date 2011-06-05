@@ -16,7 +16,7 @@ export PROJECTS="libiconv expat
                  binutils
                  gcc-c
                  mingw-w64-crt
-                 winpthreads
+                 gcc-c2
                  gcc
                  cleanup"
 
