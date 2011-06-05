@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
+# build winpthreads with the new tools
+export PATH=$PREFIX/bin:$PATH
+
 if [ -f winpthreads_configure.marker ]
 then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh $SRC_DIR/winpthreads/configure --host=$HOST --build=$BUILD --prefix=$PREFIX \
+    sh $SRC_DIR/winpthreads/configure --host=$TARGET --build=$BUILD --prefix=$PREFIX \
                                       CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                                       > $LOG_DIR/winpthreads_configure.log 2>&1 || exit 1
     echo "--> Configured"

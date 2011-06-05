@@ -24,8 +24,7 @@ PROJECTS="expat libiconv
           zipping"
 
 # native compiler options
-export GNU_WIN32_OPTIONS='--enable-threads=posix --disable-win32-registry \
-                          --disable-rpath --disable-werror'
+export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
 
 # common build steps
 . ./scripts/common.sh
