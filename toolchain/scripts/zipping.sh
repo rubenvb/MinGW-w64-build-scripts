@@ -4,7 +4,7 @@ set -e
 SRC_FILE=$TOP_DIR/gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.tar.lzma
 if [ "$HOST" == "$TARGET" ]
 then
-    BIN_COMPRESS="zip -D -r -9"
+    BIN_COMPRESS="zip -D -r -q -9"
     BIN_FILE=$TOP_DIR/$HOST-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.zip
 else
     BIN_COMPRESS="tar --lzma -cf"
