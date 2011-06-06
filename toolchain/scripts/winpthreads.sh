@@ -4,24 +4,12 @@ set -e
 # build winpthreads with the new tools
 export PATH=$PREFIX/bin:$PATH
 
-if [ -f winpthreads_configure.marker ]
-then
-    echo "--> Already configured"
-else
-    echo "--> Configuring"
-    sh $SRC_DIR/winpthreads/configure --host=$TARGET --build=$BUILD --prefix=$PREFIX/$TARGET \
-                                      CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
-                                      > $LOG_DIR/winpthreads_configure.log 2>&1 || exit 1
-    echo "--> Configured"
-fi
-touch winpthreads_configure.marker
-    
 if [ -f winpthreads_build.marker ]
 then
     echo "--> Already built"
 else
     echo "--> Building"
-    make $MAKE_OPTS > $LOG_DIR/winpthreads_build.log 2>&1 || exit 1
+    make $MAKE_OPTS -fGNUMakefile clean-GC CROSS=$TARGET- > $LOG_DIR/winpthreads_build.log 2>&1 || exit 1
 fi
 touch winpthreads_build.marker
 

@@ -13,13 +13,13 @@ export CRT_MULTILIB='--disable-lib64 --enable-lib32'
 PROJECTS="expat libiconv
           gmp mpfr mpc ppl cloog
           mingw-w64-headers
+          python
+          gdb
+          make
           winpthreads
           binutils
           mingw-w64-crt
           gcc
-          python
-          gdb
-          make
           cleanup
           zipping"
 
