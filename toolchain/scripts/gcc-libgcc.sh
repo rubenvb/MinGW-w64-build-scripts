@@ -21,4 +21,4 @@ else
     echo "--> Installing"
     make $MAKE_OPTS install-target-libgcc > $LOG_DIR/gcc-c_install.log 2>&1 || exit 1
 fi
-touch gcc-c_install.marker
+touch gcc-libgcc_install.marker

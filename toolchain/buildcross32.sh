@@ -17,6 +17,7 @@ export PROJECTS="libiconv expat
                  gcc-c
                  mingw-w64-crt
                  gcc-libgcc
+                 winpthreads
                  gcc
                  cleanup
                  zipping"
