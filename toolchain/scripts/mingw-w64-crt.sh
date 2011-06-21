@@ -23,15 +23,15 @@ then
     echo "--> Already built"
 else
     echo "--> Building"
-	make $MAKE_OPTS > $LOG_DIR/mingw-w64-crt_build.log 2>&1 || exit 1
+    make $MAKE_OPTS > $LOG_DIR/mingw-w64-crt_build.log 2>&1 || exit 1
 fi
 touch mingw-w64-crt_build.marker
 if [ -f mingw-w64-crt_install.marker ]
 then
     echo "--> Already installed"
 else
-	echo "--> Installing"
-	make $MAKE_OPTS install > $LOG_DIR/mingw-w64-crt_install.log 2>&1 || exit 1
+    echo "--> Installing"
+    make $MAKE_OPTS install > $LOG_DIR/mingw-w64-crt_install.log 2>&1 || exit 1
 
     if [[ ! $GNU_MULTILIB == "--disable-multilib" ]]
     then

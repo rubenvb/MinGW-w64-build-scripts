@@ -20,7 +20,7 @@ if [ -f mingw-w64-headers_install.marker ]
 then
     echo "--> Already installed"
 else
-	echo "--> Installing"
-	make $MAKE_OPTS install > $LOG_DIR/mingw-w64-headers_install.log 2>&1 || exit 1
+    echo "--> Installing"
+    make $MAKE_OPTS install > $LOG_DIR/mingw-w64-headers_install.log 2>&1 || exit 1
 fi
 touch mingw-w64-headers_install.marker

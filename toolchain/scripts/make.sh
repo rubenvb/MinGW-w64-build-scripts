@@ -26,6 +26,7 @@ if [ -f make_install.marker ]
 then
     echo "--> Already installed"
 else
+    echo "--> Installing"
     /usr/bin/make $MAKE_OPTS install > $LOG_DIR/make_install.log 2>&1 || exit 1
 fi
 touch make_install.marker

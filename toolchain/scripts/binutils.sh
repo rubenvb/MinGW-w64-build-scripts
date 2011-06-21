@@ -22,7 +22,7 @@ then
     echo "--> Already built"
 else
     echo "--> Building"
-	make $MAKE_OPTS > $LOG_DIR/binutils_build.log 2>&1 || 
+    make $MAKE_OPTS > $LOG_DIR/binutils_build.log 2>&1 || 
 exit 1
 fi
 touch binutils_build.marker
@@ -31,6 +31,6 @@ then
     echo "--> Already installed"
 else
     echo "--> Installing"
-	make $MAKE_OPTS install-strip > $LOG_DIR/binutils_install.log 2>&1 || exit 1
+    make $MAKE_OPTS install-strip > $LOG_DIR/binutils_install.log 2>&1 || exit 1
 fi
 touch binutils_install.marker

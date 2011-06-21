@@ -19,14 +19,14 @@ then
     echo "--> Already built"
 else
     echo "--> Building"
-	make $MAKE_OPTS > $LOG_DIR/mpfr_build.log 2>&1 || exit 1
+    make $MAKE_OPTS > $LOG_DIR/mpfr_build.log 2>&1 || exit 1
 fi
 touch mpfr_build.marker
 if [ -f mpfr_install.marker ]
 then
     echo "--> Already installed"
 else
-	echo "--> Installing"
-	make $MAKE_OPTS install > $LOG_DIR/mpfr_install.log 2>&1 || exit 1
+    echo "--> Installing"
+    make $MAKE_OPTS install > $LOG_DIR/mpfr_install.log 2>&1 || exit 1
 fi
 touch mpfr_install.marker
