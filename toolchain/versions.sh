@@ -10,9 +10,10 @@ export MPC_VERSION="0.9"
 export PPL_VERSION="0.11.2"
 export CLOOG_VERSION="0.16.2"
 export BINUTILS_VERSION="2.21"
-export GCC_VERSION="4.6.1"
+export GCC_VERSION="4.6.2"
 export GDB_VERSION="7.2"
 export MAKE_VERSION="3.82"
+export CLANG_VERSION="3.0"
 
 # my revision number
-export MY_REVISION="-4"
+export MY_REVISION=

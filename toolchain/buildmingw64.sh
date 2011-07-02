@@ -21,6 +21,7 @@ PROJECTS="expat libiconv
           python
           gdb
           make
+          llvm-clang
           cleanup
           zipping"
 
