@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f cloog_configure.marker ]
+if [ -f configure.marker ]
 then
     echo "--> Already configured"
 else
@@ -12,21 +12,22 @@ else
                                                > $LOG_DIR/cloog_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
-touch cloog_configure.marker
+touch configure.marker
 
-if [ -f cloog_build.marker ]
+if [ -f build.marker ]
 then
     echo "--> Already built"
 else
     echo "--> Building"
     make $MAKE_OPTS > $LOG_DIR/cloog_build.log 2>&1 || exit 1
 fi
-touch cloog_build.marker
-if [ -f cloog_install.marker ]
+touch build.marker
+
+if [ -f install.marker ]
 then
     echo "--> Already installed"
 else
     echo "--> Installing"
     make $MAKE_OPTS install > $LOG_DIR/cloog_install.log 2>&1 || exit 1
 fi
-touch cloog_install.marker
+touch install.marker

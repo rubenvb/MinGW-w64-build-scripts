@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f gdb_configure.marker ]
+if [ -f configure.marker ]
 then
     echo "--> Already configured"
 else
@@ -15,18 +15,18 @@ else
                               > $LOG_DIR/gdb_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
-touch gdb_configure.marker
+touch configure.marker
 
-if [ -f gdb_build.marker ]
+if [ -f build.marker ]
 then
     echo "--> Already built"
 else
     echo "--> Building"
-    make $MAKE_OPTS > $LOG_DIR/gdb_build.log 2>&1 || 
-exit 1
+    make $MAKE_OPTS > $LOG_DIR/gdb_build.log 2>&1 || exit 1
 fi
-touch gdb_build.marker
-if [ -f gdb_install.marker ]
+touch build.marker
+
+if [ -f install.marker ]
 then
     echo "--> Already installed"
 else
@@ -34,4 +34,4 @@ else
     make $MAKE_OPTS install > $LOG_DIR/gdb_install.log 2>&1 || 
 exit 1
 fi
-touch gdb_install.marker
+touch install.marker

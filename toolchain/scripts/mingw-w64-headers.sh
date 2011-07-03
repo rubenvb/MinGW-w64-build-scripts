@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f mingw-w64-headers_configure.marker ]
+if [ -f configure.marker ]
 then
     echo "--> Already configured"
 else
@@ -14,13 +14,13 @@ else
                                                       > $LOG_DIR/mingw-w64_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
-touch mingw-w64-headers_configure.marker
+touch configure.marker
 
-if [ -f mingw-w64-headers_install.marker ]
+if [ -f install.marker ]
 then
     echo "--> Already installed"
 else
     echo "--> Installing"
     make $MAKE_OPTS install > $LOG_DIR/mingw-w64-headers_install.log 2>&1 || exit 1
 fi
-touch mingw-w64-headers_install.marker
+touch install.marker

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f binutils_configure.marker ]
+if [ -f configure.marker ]
 then
     echo "--> Already configured"
 else
@@ -15,9 +15,9 @@ else
                                    > $LOG_DIR/binutils_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
-touch binutils_configure.marker
+touch configure.marker
 
-if [ -f binutils_build.marker ]
+if [ -f build.marker ]
 then
     echo "--> Already built"
 else
@@ -25,12 +25,13 @@ else
     make $MAKE_OPTS > $LOG_DIR/binutils_build.log 2>&1 || 
 exit 1
 fi
-touch binutils_build.marker
-if [ -f binutils_install.marker ]
+touch build.marker
+
+if [ -f install.marker ]
 then
     echo "--> Already installed"
 else
     echo "--> Installing"
     make $MAKE_OPTS install-strip > $LOG_DIR/binutils_install.log 2>&1 || exit 1
 fi
-touch binutils_install.marker
+touch install.marker

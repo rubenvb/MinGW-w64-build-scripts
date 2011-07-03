@@ -76,6 +76,13 @@ else
     mkdir -p python
     cp $BUILD_DIR/python/LICENSE.txt python/LICENSE.txt
 
+    echo "---> LLVM/Clang"
+    mkdir -p LLVM
+    cp $SRC_DIR/CREDITS.TXT LLVM/CREDITS.TXT
+    cp $SRC_DIR/LICENSE.TXT LLVM/LICENSE.TXT
+    mkdir -p clang
+    cp $SRC_DIR/LLVM/tools/clang/LICENSE.TXT clang/LICENSE.TXT
+
     mkdir -p $PREFIX/licenses
     cp -r . $PREFIX/licenses
     echo "---> Done!"

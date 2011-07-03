@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f llvm-clang_configure.marker ]
+if [ -f configure.marker ]
 then
     echo "--> Already configured"
 else
@@ -12,9 +12,9 @@ else
                                > $LOG_DIR/llvm-clang_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
-touch llvm-clang_configure.marker
+touch configure.marker
 
-if [ -f llvm-clang_build.marker ]
+if [ -f build.marker ]
 then
     echo "--> Already built"
 else
@@ -22,12 +22,13 @@ else
     make $MAKE_OPTS > $LOG_DIR/llvm-clang_build.log 2>&1 || 
 exit 1
 fi
-touch llvm-clang_build.marker
-if [ -f llvm-clang_install.marker ]
+touch build.marker
+
+if [ -f install.marker ]
 then
     echo "--> Already installed"
 else
     echo "--> Installing"
     make $MAKE_OPTS install > $LOG_DIR/llvm-clang_install.log 2>&1 || exit 1
 fi
-touch llvm-clang_install.marker
+touch install.marker

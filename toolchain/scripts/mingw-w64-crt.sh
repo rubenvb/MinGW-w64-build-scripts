@@ -4,7 +4,7 @@ set -e
 # build the crt with the new tools
 export PATH=$PREFIX/bin:$PATH
 
-if [ -f mingw-w64-crt_configure.marker ]
+if [ -f configure.marker ]
 then
     echo "--> Already configured"
 else
@@ -16,17 +16,18 @@ else
                                                   > $LOG_DIR/mingw-w64_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
-touch mingw-w64-crt_configure.marker
+touch configure.marker
 
-if [ -f mingw-w64-crt_build.marker ]
+if [ -f build.marker ]
 then
     echo "--> Already built"
 else
     echo "--> Building"
     make $MAKE_OPTS > $LOG_DIR/mingw-w64-crt_build.log 2>&1 || exit 1
 fi
-touch mingw-w64-crt_build.marker
-if [ -f mingw-w64-crt_install.marker ]
+touch build.marker
+
+if [ -f install.marker ]
 then
     echo "--> Already installed"
 else
@@ -44,4 +45,4 @@ else
         fi
     fi
 fi
-touch mingw-w64-crt_install.marker
+touch install.marker
