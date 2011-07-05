@@ -12,6 +12,7 @@ export CLOOG_VERSION="0.16.2"
 export BINUTILS_VERSION="2.21"
 export GCC_VERSION="4.6.2"
 export GDB_VERSION="7.3"
+export PYTHON_VERSION="2.7.1"
 export MAKE_VERSION="3.82"
 export CLANG_VERSION="3.0"
 
