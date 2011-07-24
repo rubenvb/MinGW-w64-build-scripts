@@ -9,7 +9,7 @@ else
     echo "--> Configuring"
     sh $GCC_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
                           $GCC_PREREQUISITES \
-                          --enable-shared --enable-static --enable-threads=win32 \
+                          --enable-shared --enable-static --enable-threads=posix \
                           --enable-languages=$GCC_LANGUAGES --enable-libgomp --enable-checking=release \
                           --enable-fully-dynamic-string --enable-sjlj-exceptions --enable-libstdcxx-debug \
                           $GNU_EXTRA_OPTIONS \

@@ -43,7 +43,7 @@ else
     else
         echo "--> Configuring"
         sh $GCC_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                              $GCC_PREREQUISITES --enable-threads=posix \
+                              "$GCC_PREREQUISITES" --enable-threads=posix \
                               --enable-languages=c --enable-libgomp --enable-checking=release \
                               --enable-fully-dynamic-string \
                               $GNU_EXTRA_OPTIONS \
