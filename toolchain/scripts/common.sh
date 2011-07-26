@@ -31,8 +31,8 @@ mkdir -p $DIRS_TO_MAKE
 # optimized for my system.
 export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
 export BUILD_LDFLAGS=
-export BUILD_CFLAGS_LTO=$BUILD_CFLAGS #' -flto'
-export BUILD_LDFLAGS_LTO=$BUILD_LDFLAGS #' -flto='$BUILD_CORES
+export BUILD_CFLAGS_LTO='-O2 -mtune=core2 -flto -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
+export BUILD_LDFLAGS_LTO='-flto='$BUILD_CORES
 export MAKE_OPTS="-j"$BUILD_CORES
 
 # get version info
