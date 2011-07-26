@@ -15,13 +15,13 @@ export SRC_DIR=$TOP_DIR/src
 export BUILD_DIR=$TOP_DIR/$SHORT_NAME
 export LOG_DIR=$BUILD_DIR/logs
 export GCC_LIBS=$BUILD_DIR/libs
-export GRAPHITE_LIBS="--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS --enable-cloog-backend=isl --with-host-libstdcxx="'-lstdc++ -lsupc++'
+export GRAPHITE_LIBS="--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS --enable-cloog-backend=isl"
 export SCRIPTS=$TOP_DIR/scripts
 
     export GCC_SRC=$SRC_DIR/gcc
     export GCC_PREREQUISITES="--with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
                               --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
-                              $GRAPHITE_LIBS"
+                              $GRAPHITE_LIBS --with-host-libstdcxx=-lstdc++"
 export PREFIX=$BUILD_DIR/$SHORT_NAME
 DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
               $PREFIX $PREFIX/mingw/include $PREFIX/$TARGET/include
@@ -29,10 +29,10 @@ DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
 mkdir -p $DIRS_TO_MAKE
 
 # optimized for my system.
-export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all '
+export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
 export BUILD_LDFLAGS=
-export BUILD_CFLAGS_LTO=$BUILD_CFLAGS'-flto'
-export BUILD_LDFLAGS_LTO=$BUILD_LDFLAGS'-flto='$BUILD_CORES
+export BUILD_CFLAGS_LTO=$BUILD_CFLAGS #' -flto'
+export BUILD_LDFLAGS_LTO=$BUILD_LDFLAGS #' -flto='$BUILD_CORES
 export MAKE_OPTS="-j"$BUILD_CORES
 
 # get version info
