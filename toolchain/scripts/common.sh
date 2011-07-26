@@ -2,7 +2,7 @@
 set -e
 
 # options
-export GCC_LANGUAGES="c,c++,fortran,objc,obj-c++" #java,ada
+export GCC_LANGUAGES="c,c++,lto,fortran,objc,obj-c++" #java,ada
 export BUILD_CORES=2 #used as argument for "make -jn"
 export SHARED='--disable-static --enable-shared'
 export STATIC='--enable-static --disable-shared'
