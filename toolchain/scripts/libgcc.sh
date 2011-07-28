@@ -2,6 +2,7 @@
 set -e
 
 export PATH=$PREFIX/bin:$PATH
+cd $SRC_DIR/gcc-c
 if [ -f build-libgcc.marker ]
 then
     echo "--> Already built"
