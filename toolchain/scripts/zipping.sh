@@ -4,12 +4,13 @@ set -e
 SRC_FILE=$TOP_DIR/gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.tar.lzma
 if [ "$HOST" == "$TARGET" ]
 then
-    BIN_COMPRESS="7za -bd -mx9 a"
+    BIN_COMPRESS="7za -l -bd -mx9 a"
     BIN_FILE=$TOP_DIR/$HOST-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.7z
     BIN_FILE_CLANG=$TOP_DIR/$HOST-clang-${CLANG_VERSION}${MY_CLANG_REVISION}_rubenvb.7z
 else
     BIN_COMPRESS="tar --lzma -cf"
     BIN_FILE=$TOP_DIR/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}-linux_rubenvb.tar.lzma
+    #BIN_FILE_CLANG=$TOP_DIR/$HOST-clang-${CLANG_VERSION}${MY_CLANG_REVISION}-linux_rubenvb.7z
 fi
 
 if [ -f $BIN_FILE ]
