@@ -2,7 +2,7 @@
 set -e
 
 # options
-export GCC_LANGUAGES="c,c++,lto,fortran,objc,obj-c++,ada" #java
+export GCC_LANGUAGES="c,c++,lto,fortran,objc,obj-c++" #java
 export BUILD_CORES=2 #used as argument for "make -jn"
 export SHARED='--disable-static --enable-shared'
 export STATIC='--enable-static --disable-shared'
@@ -29,7 +29,7 @@ DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
 mkdir -p $DIRS_TO_MAKE
 
 # optimized for my system.
-#export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
+export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
 export BUILD_LDFLAGS=
 export BUILD_CFLAGS_LTO=$BUILD_CFLAGS #'-O2 -mtune=core2 -flto -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
 export BUILD_LDFLAGS_LTO= #'-flto='$BUILD_CORES
