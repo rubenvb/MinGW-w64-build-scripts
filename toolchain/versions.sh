@@ -17,5 +17,5 @@ export MAKE_VERSION="3.82"
 export CLANG_VERSION="3.0"
 
 # my revision number
-export MY_REVISION=-1
-export MY_CLANG_REVISION=-1
+export MY_REVISION=-2
+export MY_CLANG_REVISION=-2
