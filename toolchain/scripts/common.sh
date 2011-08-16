@@ -12,7 +12,7 @@ export GNU_EXTRA_OPTIONS='--disable-nls --disable-werror --enable-lto' #--enable
 # directories: SRC_DIR contains full source package.
 export TOP_DIR=`pwd`
 export SRC_DIR=$TOP_DIR/src
-export BUILD_DIR=$TOP_DIR/$SHORT_NAME
+export BUILD_DIR=$TOP_DIR/$LONG_NAME
 export LOG_DIR=$BUILD_DIR/logs
 export GCC_LIBS=$BUILD_DIR/libs
 export GRAPHITE_LIBS="--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS --enable-cloog-backend=isl"

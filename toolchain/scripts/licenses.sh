@@ -53,6 +53,9 @@ else
     cp $SRC_DIR/mingw-w64/COPYING mingw-w64/COPYING
     cp $SRC_DIR/mingw-w64/DISCLAIMER mingw-w64/DISCLAIMER
     cp $SRC_DIR/mingw-w64/DISCLAIMER.PD mingw-w64/DISCLAIMER.PD
+    cp $SRC_DIR/mingw-w64/mingw-w64-headers/ddk/readme.txt mingw-w64/ddk-readme.txt
+    cp $SRC_DIR/mingw-w64/mingw-w64-headers/direct-x/COPYING.LIB mingw-w64/direct-x-COPYING.lib
+    cp $SRC_DIR/mingw-w64/mingw-w64-headers/direct-x/readme.txt mingw-w64/direct-x-readme.txt
 
     echo "---> MPC"
     mkdir -p mpc

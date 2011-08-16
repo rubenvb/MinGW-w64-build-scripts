@@ -2,13 +2,13 @@
 set -e
 
 #platforms
-export HOST=x86_64-w64-mingw32
-export TARGET=x86_64-w64-mingw32
+export HOST=i686-w64-mingw32
+export TARGET=i686-w64-mingw32
 export BUILD=x86_64-gnu-linux
 export EXESUFFIX=".exe"
-export SHORT_NAME=mingw64mingw64
-export CRT_MULTILIB='--enable-lib64 --disable-lib32'
-export GDB_PYTHON_WIN64_WORKAROUND='-DMS_WIN64'
+export SHORT_NAME=mingw32
+export LONG_NAME=mingw32mingw32
+export CRT_MULTILIB='--disable-lib64 --enable-lib32'
 
 # Projects to be built, in the right order
 PROJECTS="expat libiconv
@@ -28,5 +28,6 @@ PROJECTS="expat libiconv
 # native compiler options
 export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
 
-# common options
+# common build steps
 . ./scripts/common.sh
+
