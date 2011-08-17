@@ -3,7 +3,7 @@ set -e
 
 # options
 export GCC_LANGUAGES="c,c++,lto,fortran,objc,obj-c++" #java
-export BUILD_CORES=2 #used as argument for "make -jn"
+export BUILD_CORES=3 #used as argument for "make -jn"
 export SHARED='--disable-static --enable-shared'
 export STATIC='--enable-static --disable-shared'
 export GNU_MULTILIB='--disable-multilib' #'--enable-multilib --enable-targets=i686-w64-mingw32,x86_64-w64-mingw32'
@@ -29,7 +29,12 @@ DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
 mkdir -p $DIRS_TO_MAKE
 
 # optimized for my system.
-export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
+if [ "$HOST" == "i686-apple-darwin9" ] || [ "$HOST" = "x86_64-apple-darwin9" ]
+then
+    export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer'
+else
+    export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
+fi
 export BUILD_LDFLAGS=
 export BUILD_CFLAGS_LTO=$BUILD_CFLAGS #'-O2 -mtune=core2 -flto -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
 export BUILD_LDFLAGS_LTO= #'-flto='$BUILD_CORES

@@ -15,9 +15,9 @@ export GDB_PYTHON_WIN64_WORKAROUND='-DMS_WIN64'
 PROJECTS="expat libiconv
           gmp mpfr mpc ppl cloog
           mingw-w64-headers
-          winpthreads
           binutils
           mingw-w64-crt
+          winpthreads
           gcc
           python
           gdb
@@ -28,6 +28,9 @@ PROJECTS="expat libiconv
 
 # native compiler options
 export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
+
+# add cross toolchains to PATH
+. ./crosstoolchainpaths.sh
 
 # common options
 . ./scripts/common.sh
