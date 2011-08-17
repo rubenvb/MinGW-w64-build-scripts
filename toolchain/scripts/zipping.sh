@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
-SRC_FILE=$TOP_DIR/gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.tar.lzma
-if [ "$HOST" == "$TARGET" ]
+SRC_FILE=$ZIP_DIR/gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.tar.lzma
+if [ "$HOST" == "x86_64-w64-mingw32" ] || [ "$HOST" == "i686-w64-mingw32" ]
 then
     BIN_COMPRESS="7za -l -bd -mx9 a"
-    BIN_FILE=$TOP_DIR/$HOST-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.7z
-    BIN_FILE_CLANG=$TOP_DIR/$HOST-clang-${CLANG_VERSION}${MY_CLANG_REVISION}_rubenvb.7z
+    BIN_FILE=$ZIP_DIR/$HOST/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.7z
+    BIN_FILE_CLANG=$ZIP_DIR/$HOST/$TARGET-clang-${CLANG_VERSION}${MY_CLANG_REVISION}_rubenvb.7z
 else
     BIN_COMPRESS="tar --lzma -cf"
-    BIN_FILE=$TOP_DIR/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}-linux_rubenvb.tar.lzma
+    BIN_FILE=$ZIP_DIR/$HOST/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}-linux_rubenvb.tar.lzma
     #BIN_FILE_CLANG=$TOP_DIR/$HOST-clang-${CLANG_VERSION}${MY_CLANG_REVISION}-linux_rubenvb.7z
 fi
 
@@ -23,7 +23,7 @@ else
     echo "---> Base package"
     $BIN_COMPRESS $BIN_FILE $SHORT_NAME
 
-    if [ "$HOST" == "$TARGET" ]
+    if [ "$HOST" == "x86_64-w64-mingw32" ] || [ "$HOST" == "i686-w64-mingw32" ]
     then
         # Clang addon package
         echo "---> Clang addon package"

@@ -7,7 +7,7 @@ export TARGET=x86_64-w64-mingw32
 export BUILD=x86_64-gnu-linux
 export EXESUFFIX=".exe"
 export SHORT_NAME=mingw32
-export LONG_NAME=mingw32mingw32
+export LONG_NAME=mingw32mingw64
 export CRT_MULTILIB='--enable-lib64 --disable-lib32'
 
 # Projects to be built, in the right order

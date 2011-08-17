@@ -13,19 +13,19 @@ export GNU_EXTRA_OPTIONS='--disable-nls --disable-werror --enable-lto' #--enable
 export TOP_DIR=`pwd`
 export SRC_DIR=$TOP_DIR/src
 export BUILD_DIR=$TOP_DIR/$LONG_NAME
+export ZIP_DIR=$TOP_DIR/packages
 export LOG_DIR=$BUILD_DIR/logs
 export GCC_LIBS=$BUILD_DIR/libs
 export GRAPHITE_LIBS="--with-ppl=$GCC_LIBS --with-cloog=$GCC_LIBS --enable-cloog-backend=isl"
 export SCRIPTS=$TOP_DIR/scripts
-
-    export GCC_SRC=$SRC_DIR/gcc
-    export GCC_PREREQUISITES="--with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
-                              --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
-                              $GRAPHITE_LIBS --with-host-libstdcxx=-lstdc++"
+export GCC_SRC=$SRC_DIR/gcc
+export GCC_PREREQUISITES="--with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
+                          --with-gmp=$GCC_LIBS --with-mpfr=$GCC_LIBS --with-mpc=$GCC_LIBS \
+                          $GRAPHITE_LIBS --with-host-libstdcxx=-lstdc++"
 export PREFIX=$BUILD_DIR/$SHORT_NAME
 DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
               $PREFIX $PREFIX/mingw/include $PREFIX/$TARGET/include
-              $GCC_LIBS $GCC_LIBS/include $GCC_LIBS/lib"
+              $GCC_LIBS $GCC_LIBS/include $GCC_LIBS/lib $ZIP_DIR $ZIP_DIR/$HOST"
 mkdir -p $DIRS_TO_MAKE
 
 # optimized for my system.
