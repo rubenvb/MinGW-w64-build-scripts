@@ -5,6 +5,7 @@ set -e
 export EXPAT_VERSION="2.0.1"
 export LIBICONV_VERSION="1.13.1"
 export GMP_VERSION="5.0.2"
+export MPIR_VERSION="2.4.0"
 export MPFR_VERSION="3.0.1"
 export MPC_VERSION="0.9"
 export PPL_VERSION="0.11.2"

@@ -13,7 +13,7 @@ export GDB_PYTHON_WIN64_WORKAROUND='-DMS_WIN64'
 
 # Projects to be built, in the right order
 PROJECTS="expat libiconv
-          gmp mpfr mpc ppl cloog
+          mpir mpfr mpc ppl cloog
           mingw-w64-headers
           binutils
           mingw-w64-crt

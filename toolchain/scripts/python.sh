@@ -6,7 +6,7 @@ then
     echo "--> Already installed"
 else
     echo "--> Unzipping"
-    unzip -o $SRC_DIR/python-$TARGET.zip -d . > $LOG_DIR/python.log 2>&1 || exit 1
+    unzip -o $SRC_DIR/python-$HOST.zip -d . > $LOG_DIR/python.log 2>&1 || exit 1
     
     echo "--> Copying files"
     cp bin/python27.dll $PREFIX/bin/python27.dll
