@@ -28,13 +28,26 @@ DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
               $GCC_LIBS $GCC_LIBS/include $GCC_LIBS/lib $ZIP_DIR $ZIP_DIR/$HOST"
 mkdir -p $DIRS_TO_MAKE
 
-# optimized for my system.
-if [ "$HOST" == "i686-apple-darwin9" ] || [ "$HOST" = "x86_64-apple-darwin9" ]
+# workaround for linux cross-compilation
+if [ "$HOST" == "i686-linux" ] && [ "$BUILD" == "x86_64-linux" ]
 then
-    export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer'
+    BUILD_CFLAGS='-m32'
+elif [ "$BUILD" == "i686-linux-gnu" ] && [ "$HOST" == "x86_64-linux-gnu" ] 
+then
+    CROSS_CC='gcc -m64'
+    CROSS_CXX='g++ -m64'
 else
-    export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
+    CC_GMP=
+    CXX_GMP=
 fi
+
+# optimized for my system.
+# if [ "$HOST" == "i686-apple-darwin10" ] || [ "$HOST" = "x86_64-apple-darwin10" ]
+# then
+#     export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer'
+# else
+#     export BUILD_CFLAGS='-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
+# fi
 export BUILD_LDFLAGS=
 export BUILD_CFLAGS_LTO=$BUILD_CFLAGS #'-O2 -mtune=core2 -flto -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all'
 export BUILD_LDFLAGS_LTO= #'-flto='$BUILD_CORES

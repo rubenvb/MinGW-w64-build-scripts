@@ -1,21 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-#workaround for linux cross-compilation
-if [ "$HOST" == "i686-linux-gnu" ] && [ "$BUILD" == "x86_64-linux-gnu" ]
-then
-    echo "--> Using GMP configure workaround"
-    CROSS_CC='gcc -m32'
-    CROSS_CXX='g++ -m32'
-elif [ "$BUILD" == "i686-linux-gnu" ] && [ "$HOST" == "x86_64-linux-gnu" ] 
-then
-    CROSS_CC='gcc -m64'
-    CROSS_CXX='g++ -m64'
-else
-    CC_GMP=
-    CXX_GMP=
-fi
-
 if [ -f configure.marker ]
 then
     echo "--> Already configured"
