@@ -9,11 +9,11 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh $SRC_DIR/winpthreads/configure --host=$TARGET --build=$BUILD \
-                                      --prefix=$PREFIX/$TARGET \
-                                      --enable-shared --enable-static \
-                                      CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
-                                      > $LOG_DIR/winpthreads_configure.log 2>&1 || exit 1
+    sh $SRC_DIR/mingw-w64/experimental/winpthreads/configure --host=$TARGET --build=$BUILD \
+                                                             --prefix=$PREFIX/$TARGET \
+                                                             --enable-shared --enable-static \
+                                                             CFLAGS="$BUILD_CFLAGS" LDFLAGS="$BUILD_LDFLAGS" \
+                                                             > $LOG_DIR/winpthreads_configure.log 2>&1 || exit 1
 fi
 touch configure.marker
 
