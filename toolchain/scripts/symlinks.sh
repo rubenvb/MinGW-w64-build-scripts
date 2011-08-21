@@ -24,7 +24,7 @@ then
     echo "--> Binutils+libiconv combined tree already in place"
 else
     echo "--> Creating binutils+libiconv combined tree symlinks"
-    ln -s $SRC_DIR/gdb/* $BINUTILS_SRC/
+    ln -s $SRC_DIR/binutils/* $BINUTILS_SRC/
     ln -s $SRC_DIR/libiconv-$LIBICONV_VERSION/* $BINUTILS_SRC/libiconv/
     echo "--> Done"
 fi

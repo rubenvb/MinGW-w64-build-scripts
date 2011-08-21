@@ -4,7 +4,7 @@ set -e
 # platform information
 export HOST=x86_64-linux-gnu
 export TARGET=i686-w64-mingw32
-# export BUILD=x86_64-linux-gnu
+export BUILD=x86_64-linux-gnu
 export EXESUFFIX=
 export SHORT_NAME=mingw32
 export LONG_NAME=linux64mingw32
