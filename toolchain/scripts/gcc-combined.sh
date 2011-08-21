@@ -2,7 +2,11 @@
 set -e
 
 # add C compiler+binutils to PATH
-export PATH=$PREFIX/bin:$PATH
+# build the crt with the new tools
+if [ "$HOST" == "i686-gnu-linux" ] && [ "$HOST" == "x86_64-gnu-linux" ]
+then
+    export PATH=$PREFIX/bin:$PATH
+fi
 
 if [ -f configure.marker ]
 then

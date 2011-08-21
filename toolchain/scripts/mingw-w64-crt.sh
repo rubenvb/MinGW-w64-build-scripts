@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-# build the crt with the new tools
-export PATH=$PREFIX/bin:$PATH
-
 if [ -f configure.marker ]
 then
     echo "--> Already configured"
