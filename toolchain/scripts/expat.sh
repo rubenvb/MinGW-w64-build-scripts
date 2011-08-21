@@ -7,8 +7,8 @@ then
 else
     echo "--> Configuring"
     sh $SRC_DIR/expat-$EXPAT_VERSION/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
-                                               $STATIC \
-                                               CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
+                                               --disable-shared --enable-static \
+                                               CFLAGS="$BUILD_CFLAGS" LDFLAGS="$BUILD_LDFLAGS" \
                                                > $LOG_DIR/expat_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi

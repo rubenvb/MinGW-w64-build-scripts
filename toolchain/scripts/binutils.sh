@@ -6,13 +6,11 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh $SRC_DIR/binutils/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                                   --with-libiconv-prefix=$GCC_LIBS --with-libexpat-prefix=$GCC_LIBS \
-                                   $GNU_EXTRA_OPTIONS \
-                                   $GNU_MULTILIB \
-                                   $GNU_WIN32_OPTIONS \
-                                   CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
-                                   > $LOG_DIR/binutils_configure.log 2>&1 || exit 1
+    sh $BINUTILS_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
+                               --with-libexpat-prefix=$PREREQ_INSTALL \
+                               $GNU_WIN32_OPTIONS \
+                               CFLAGS="$BUILD_CFLAGS" LDFLAGS="$BUILD_LDFLAGS" \
+                               > $LOG_DIR/binutils_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
 touch configure.marker
