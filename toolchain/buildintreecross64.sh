@@ -2,12 +2,12 @@
 set -e
 
 # platform information
-export HOST=x86_64-w64-mingw32
+export HOST=x86_64-gnu-linux
 export TARGET=x86_64-w64-mingw32
-export BUILD=x86_64-redhat-linux
+export BUILD=x86_64-gnu-linux
 export EXESUFFIX=".exe"
 export SHORT_NAME=mingw64
-export LONG_NAME=mingw64mingw64
+export LONG_NAME=linux64mingw64
 export CRT_MULTILIB='--enable-lib64 --disable-lib32'
 export GDB_PYTHON_WIN64_WORKAROUND='-DMS_WIN64'
 
@@ -23,7 +23,6 @@ export LOG_DIR=$BUILD_DIR/logs
 export PREREQ_INSTALL=$BUILD_DIR/prereq_install
 export SCRIPTS=$TOP_DIR/scripts
 export GCC_SRC=$BUILD_DIR/gcc-src
-export GDB_SRC
 export MINGW_W64_SRC=$SRC_DIR/mingw-w64/$MINGW_W64_VERSION
 export PREFIX=$BUILD_DIR/$SHORT_NAME
 DIRS_TO_MAKE="$BUILD_DIR $BUILD_DIR/gcc $LOG_DIR
@@ -38,8 +37,7 @@ if [ -f $GCC_SRC/symlinks.marker ]
 then
     echo "-> GCC combined tree already in place"
 else
-    echo "-> Creating GCC/GDB combined tree symlinks"
-    ln -s $SRC_DIR/gdb/* $GCC_SRC/
+    echo "-> Creating GCC combined tree symlinks"
     ln -s $SRC_DIR/gcc/* $GCC_SRC/
     ln -s $SRC_DIR/libiconv-$LIBICONV_VERSION/* $GCC_SRC/libiconv/
     ln -s $SRC_DIR/gmp-$GMP_VERSION/* $GCC_SRC/gmp/
@@ -53,18 +51,13 @@ touch $GCC_SRC/symlinks.marker
 
 # Projects to be built, in the right order
 PREGCC_STEPS="mingw-w64-headers
-              binutils
-              mingw-w64-crt
-              winpthreads"
-POSTGCC_STEPS="expat
-               python
-               gdb
-               make
-               llvm-clang
-               cleanup
+              binutils"           
+POSTGCC_STEPS="cleanup
                zipping"
 cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS
+mkdir -p mingw-w64-crt
+mkdir -p winpthreads
 mkdir -p $POSTGCC_STEPS
 cd $TOP_DIR
 
@@ -81,7 +74,26 @@ do
     . $SCRIPTS/$step.sh || exit 1
     cd $TOP_DIR
 done
-# build GCC
+# build GCC C compiler
+cd $BUILD_DIR/gcc
+echo "-> GCC combined tree C compiler"
+. $SCRIPTS/gcc-combined-c.sh || exit 1
+cd $TOP_DIR
+# build mingw-w64 crt
+cd $BUILD_DIR/mingw-w64-crt
+. $SCRIPTS/mingw-w64-crt.sh || exit 1
+cd $TOP_DIR
+# build libgcc
+cd $BUILD_DIR/gcc
+echo "-> GCC combined tree libgcc"
+. $SCRIPTS/libgcc.sh || exit 1
+cd $TOP_DIR
+# build winpthreads
+cd $BUILD_DIR/winpthreads
+echo "-> Winpthreads"
+. $SCRIPTS/winpthreads.sh || exit 1
+cd $TOP_DIR
+# build the rest of GCC, reconfiguring
 cd $BUILD_DIR/gcc
 echo "-> GCC combined tree"
 . $SCRIPTS/gcc-combined.sh || exit 1

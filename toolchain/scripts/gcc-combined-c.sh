@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-# add C compiler+binutils to PATH
-export PATH=$PREFIX/bin:$PATH
-
+#--with-libiconv --with-gmp --with-mpfr --with-mpc --with-ppl --with-cloog --enable-cloog-backend=isl
+#export PATH=$PREFIX/bin:$PATH
 if [ -f configure.marker ]
 then
     echo "--> Already configured"
@@ -21,20 +20,20 @@ else
 fi
 touch configure.marker
 
-if [ -f build.marker ]
+if [ -f build-c.marker ]
 then
     echo "--> Already built"
 else
     echo "--> Building"
-    make $MAKE_OPTS > $LOG_DIR/gcc_build.log 2>&1 || exit 1
+    make $MAKE_OPTS all-gcc > $LOG_DIR/gcc-c_build.log 2>&1 || exit 1
 fi
-touch build.marker
+touch build-c.marker
 
-if [ -f install.marker ]
+if [ -f install-c.marker ]
 then
     echo "--> Already installed"
 else
     echo "--> Installing"
-    make $MAKE_OPTS install-strip > $LOG_DIR/gcc_install.log 2>&1 || exit 1
+    make $MAKE_OPTS install-gcc > $LOG_DIR/gcc-c_install.log 2>&1 || exit 1
 fi
-touch install.marker
+touch install-c.marker

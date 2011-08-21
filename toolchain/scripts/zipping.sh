@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
-SRC_FILE=$ZIP_DIR/gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.tar.lzma
+SRC_FILE=$PACKAGE_DIR/gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.tar.lzma
 if [ "$HOST" == "x86_64-w64-mingw32" ] || [ "$HOST" == "i686-w64-mingw32" ]
 then
     BIN_COMPRESS="7za -l -bd -mx9 a"
-    BIN_FILE=$ZIP_DIR/$HOST/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.7z
-    BIN_FILE_CLANG=$ZIP_DIR/$HOST/$TARGET-clang-${CLANG_VERSION}${MY_CLANG_REVISION}_rubenvb.7z
+    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}_rubenvb.7z
+    BIN_FILE_CLANG=$PACKAGE_DIR/$HOST/$TARGET-clang-${CLANG_VERSION}${MY_CLANG_REVISION}_rubenvb.7z
 else
     BIN_COMPRESS="tar --lzma -cf"
-    BIN_FILE=$ZIP_DIR/$HOST/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}-linux_rubenvb.tar.lzma
+    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}-linux_rubenvb.tar.lzma
     #BIN_FILE_CLANG=$TOP_DIR/$HOST-clang-${CLANG_VERSION}${MY_CLANG_REVISION}-linux_rubenvb.7z
 fi
 
@@ -41,6 +41,6 @@ then
 else
     echo "--> Zipping sources"
     cd $TOP_DIR
-    tar --lzma -cf $SRC_FILE --exclude='*.git' --exclude='*.svn' src scripts *.sh
+    tar --lzma -cf $SRC_FILE --exclude='*.git' --exclude='*.svn' src scripts patches *.sh
 fi
 
