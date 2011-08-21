@@ -8,7 +8,7 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh $GCC_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --prefix=$PREFIX \
+    sh $GCC_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
                           --enable-cloog-backend=isl --with-host-libstdcxx='-lsupc++ -lstdc++' \
                           --enable-shared --enable-static --enable-threads=win32 \
                           --enable-languages=all,obj-c++ --enable-libgomp --enable-checking=release \

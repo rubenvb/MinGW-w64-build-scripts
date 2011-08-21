@@ -70,6 +70,7 @@ cd $TOP_DIR
 export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
 
 ## Build steps
+MAKE_OPTS='-j2'
 # prepare for GCC
 for step in $PREGCC_STEPS
 do

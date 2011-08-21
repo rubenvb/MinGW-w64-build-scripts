@@ -1,0 +1,41 @@
+diff --git a/Makefile.def b/Makefile.def
+index f68b737..91376d7 100644
+--- a/Makefile.def
++++ b/Makefile.def
+@@ -61,7 +61,7 @@ host_modules= { module= gcc; bootstrap=true;
+ host_modules= { module= gawk; };
+ host_modules= { module= gettext; };
+ host_modules= { module= gmp; lib_path=.libs; bootstrap=true;
+-		extra_configure_flags='--disable-shared';
++		extra_configure_flags='--disable-shared @extra_gmp_configure_flags@';
+ 		no_install= true;
+ 		// none-*-* disables asm optimizations, bootstrap-testing
+ 		// the compiler more thoroughly.
+@@ -76,12 +76,12 @@ host_modules= { module= mpc; lib_path=.libs; bootstrap=true;
+ 		extra_configure_flags='--disable-shared @extra_mpc_gmp_configure_flags@ @extra_mpc_mpfr_configure_flags@';
+ 		no_install= true; };
+ host_modules= { module= ppl; lib_path=src/.libs; bootstrap=true;
+-		extra_configure_flags='--disable-shared --with-libgmp-prefix=$$r/$(HOST_SUBDIR)/gmp/ --with-libgmpxx-prefix=$$r/$(HOST_SUBDIR)/gmp/';
++		extra_configure_flags='--disable-shared --with-gmp-build=$$r/$(HOST_SUBDIR)/gmp/ CPPFLAGS="-I$$r/$(HOST_SUBDIR)/gmp -I$${topdir}/gmp/"';
+ 		no_install= true; };
+ host_modules= { module= cloog; lib_path=.libs; bootstrap=true;
+ 		extra_configure_flags='--disable-shared --with-gmp-library=$$r/$(HOST_SUBDIR)/gmp/.libs --with-gmp-include=$$r/$(HOST_SUBDIR)/gmp --with-bits=gmp --with-ppl';
+-		extra_exports='CPPFLAGS="${CPPFLAGS} ${HOST_PPLINC}"; export CPPFLAGS; LDFLAGS="$$LDFLAGS ${HOST_PPLLIBS}"; export LDFLAGS; ';
+-		extra_make_flags='CPPFLAGS="${CPPFLAGS} ${HOST_PPLINC}" LDFLAGS="$$LDFLAGS"';
++		extra_exports='CPPFLAGS="${CPPFLAGS} -I$$r/$(HOST_SUBDIR)/gmp ${HOST_PPLINC}"; export CPPFLAGS; LDFLAGS="$$LDFLAGS -L$$r/$(HOST_SUBDIR)/gmp/.libs ${HOST_PPLLIBS}"; export LDFLAGS; ';
++		extra_make_flags='CPPFLAGS="${CPPFLAGS} -I$$r/$(HOST_SUBDIR)/gmp ${HOST_PPLINC}" LDFLAGS="$$LDFLAGS -L$$r/$(HOST_SUBDIR)/gmp/.libs"';
+ 		no_install= true; };
+ host_modules= { module= libelf; lib_path=.libs; bootstrap=true;
+ 		extra_configure_flags='--disable-shared';
+diff --git a/configure.ac b/configure.ac
+index 77b10be..53433e7 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1541,6 +1541,7 @@ if test "x$with_ppl$with_ppl_include$with_ppl_lib" = x && test -d ${srcdir}/ppl;
+   ppllibs='-L$$r/$(HOST_SUBDIR)/ppl/interfaces/C/'"$lt_cv_objdir"' -L$$r/$(HOST_SUBDIR)/ppl/src/'"$lt_cv_objdir"' -lppl_c -lppl -lgmpxx '
+   pplinc='-I$$r/$(HOST_SUBDIR)/ppl/src -I$$r/$(HOST_SUBDIR)/ppl/interfaces/C '
+   enable_ppl_version_check=no
++  extra_gmp_configure_flags='--enable-cxx'
+ fi
+ 
+ AC_ARG_ENABLE(ppl-version-check,
