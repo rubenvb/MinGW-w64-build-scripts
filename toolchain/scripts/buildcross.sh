@@ -2,7 +2,8 @@
 set -e
 
 # common settings
-. ./scripts/common.sh
+echo "Executing preliminary common steps"
+. ./scripts/common.sh || exit 1
 
 # Projects to be built, in the right order
 PREGCC_STEPS="expat
@@ -26,6 +27,8 @@ do
     cd $BUILD_DIR/$step
     . $SCRIPTS/$step.sh || exit 1
 done
+# point PATH to new tools
+export PATH=$PREFIX/bin:$PATH
 # build GCC C compiler
 echo "-> GCC: C compiler"
 cd $BUILD_DIR/gcc

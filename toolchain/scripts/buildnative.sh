@@ -3,6 +3,10 @@ set -e
 
 # native compiler options
 export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
+if [ "$HOST" == "i686-w64-mingw32" ]
+then
+    export BUILD_LDFLAGS="$BUILD_LDFLAGS --large-address-aware"
+fi
 
 # common settings
 echo "Executing preliminary common steps"
@@ -35,7 +39,7 @@ do
 done
 # build GCC
 cd $BUILD_DIR/gcc
-echo "-> GCC combined tree"
+echo "-> GCC: Full compiler suite"
 . $SCRIPTS/gcc-combined.sh || exit 1
 cd $TOP_DIR
 # build the rest

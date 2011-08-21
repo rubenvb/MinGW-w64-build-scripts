@@ -42,5 +42,5 @@ then
         ln -s $SRC_DIR/libiconv-$LIBICONV_VERSION/* $GDB_SRC/libiconv/
         echo "--> Done"
     fi
+    touch $GDB_SRC/symlinks.marker
 fi
-touch $GDB_SRC/symlinks.marker
