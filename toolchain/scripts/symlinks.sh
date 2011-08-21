@@ -4,9 +4,9 @@ set -e
 # combined gcc tree symlinks
 if [ -f $GCC_SRC/symlinks.marker ]
 then
-    echo "-> GCC combined tree already in place"
+    echo "--> GCC combined tree already in place"
 else
-    echo "-> Creating GCC combined tree symlinks"
+    echo "--> Creating GCC combined tree symlinks"
     ln -s $SRC_DIR/gcc/* $GCC_SRC/
     ln -s $SRC_DIR/libiconv-$LIBICONV_VERSION/* $GCC_SRC/libiconv/
     ln -s $SRC_DIR/gmp-$GMP_VERSION/* $GCC_SRC/gmp/
@@ -14,19 +14,19 @@ else
     ln -s $SRC_DIR/mpc-$MPC_VERSION/* $GCC_SRC/mpc/
     ln -s $SRC_DIR/ppl-$PPL_VERSION/* $GCC_SRC/ppl/
     ln -s $SRC_DIR/cloog-$CLOOG_VERSION/* $GCC_SRC/cloog/
-    echo "-> Done"
+    echo "--> Done"
 fi
 touch $GCC_SRC/symlinks.marker
 
 # combined binutils tree symlinks
 if [ -f $BINUTILS_SRC/symlinks.marker ]
 then
-    echo "-> Binutils+libiconv combined tree already in place"
+    echo "--> Binutils+libiconv combined tree already in place"
 else
-    echo "-> Creating binutils+libiconv combined tree symlinks"
+    echo "--> Creating binutils+libiconv combined tree symlinks"
     ln -s $SRC_DIR/gdb/* $BINUTILS_SRC/
-    ln -s $SRC_DIR/libiconv-$LIBICONV_VERSION/* $GDB_SRC/libiconv/
-    echo "-> Done"
+    ln -s $SRC_DIR/libiconv-$LIBICONV_VERSION/* $BINUTILS_SRC/libiconv/
+    echo "--> Done"
 fi
 touch $BINUTILS_SRC/symlinks.marker
 
@@ -35,11 +35,12 @@ if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "x86_64-w64-mingw32" ]
 then
     if [ -f $GDB_SRC/symlinks.marker ]
     then
-        echo "-> GDB+libiconv tree already in place"
+        echo "--> GDB+libiconv tree already in place"
     else
-        echo "-> Creating GDB+libiconv tree symlinks"
+        echo "--> Creating GDB+libiconv tree symlinks"
         ln -s $SRC_DIR/gdb/* $GDB_SRC/
         ln -s $SRC_DIR/libiconv-$LIBICONV_VERSION/* $GDB_SRC/libiconv/
+        echo "--> Done"
     fi
 fi
 touch $GDB_SRC/symlinks.marker

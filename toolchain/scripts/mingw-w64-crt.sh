@@ -33,16 +33,5 @@ then
 else
     echo "--> Installing"
     make $MAKE_OPTS install > $LOG_DIR/mingw-w64-crt_install.log 2>&1 || exit 1
-
-    if [[ ! $GNU_MULTILIB == "--disable-multilib" ]]
-    then
-        echo "--> Ugly hack to allow multilib GCC to be built"
-        if [[ $TARGET == "x86_64-64W-ming32" ]]
-        then
-            ln -s $PREFIX/$TARGET/lib32 $PREFIX/mingw/lib
-        else
-            ln -s $PREFIX/$TARGET/lib64 $PREFIX/mingw/lib
-        fi
-    fi
 fi
 touch install.marker

@@ -5,15 +5,16 @@ set -e
 export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
 
 # common settings
-. ./scripts/common.sh
+echo "Executing preliminary common steps"
+. ./scripts/common.sh || exit 1
 
 # Projects to be built, in the right order
-PREGCC_STEPS="mingw-w64-headers
+PREGCC_STEPS="expat
+              mingw-w64-headers
               binutils
               mingw-w64-crt
               winpthreads"
-POSTGCC_STEPS="expat
-               python
+POSTGCC_STEPS="python
                gdb
                make
                llvm-clang

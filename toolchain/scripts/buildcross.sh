@@ -5,7 +5,8 @@ set -e
 . ./scripts/common.sh
 
 # Projects to be built, in the right order
-PREGCC_STEPS="mingw-w64-headers
+PREGCC_STEPS="expat
+              mingw-w64-headers
               binutils"           
 POSTGCC_STEPS="cleanup
                zipping"
