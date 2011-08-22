@@ -2,12 +2,12 @@
 set -e
 
 # platform information
-export HOST=x86_64-apple-darwin10
+export HOST=i686-pc-cygwin
 export TARGET=i686-w64-mingw32
 export EXESUFFIX=
-export SHORT_NAME=mingw64
-export LONG_NAME=mac64mingw64
-export CRT_MULTILIB='--enable-lib64 --disable-lib32'
+export SHORT_NAME=mingw32
+export LONG_NAME=cygwin32mingw32
+export CRT_MULTILIB='--disable-lib64 --enable-lib32'
 
 # call main build script
 . ./scripts/buildfromcross.sh
