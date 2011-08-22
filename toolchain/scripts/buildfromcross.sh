@@ -5,7 +5,7 @@ set -e
 export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
 if [ "$HOST" == "i686-w64-mingw32" ]
 then
-    export BUILD_LDFLAGS="$BUILD_LDFLAGS --large-address-aware"
+    export BUILD_LDFLAGS="$BUILD_LDFLAGS -Wl,--large-address-aware"
 fi
 
 # common settings
@@ -18,10 +18,14 @@ PREGCC_STEPS="expat
               binutils
               mingw-w64-crt
               winpthreads"
-POSTGCC_STEPS="python
-               gdb
-               make
-               llvm-clang
+if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "x86_64-w64-mingw32" ]
+then
+    POSTGCC_STEPS="python
+                   gdb
+                   make
+                   llvm-clang"
+fi
+POSTGCC_STEPS="$POSTGCC_STEPS
                cleanup
                zipping"
 cd $BUILD_DIR
@@ -50,4 +54,3 @@ do
     . $SCRIPTS/$step.sh || exit 1
     cd $TOP_DIR
 done
-

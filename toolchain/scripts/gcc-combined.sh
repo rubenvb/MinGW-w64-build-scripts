@@ -21,7 +21,6 @@ else
                           --enable-fully-dynamic-string --enable-sjlj-exceptions \
                           --disable-nls --disable-werror --enable-checking=release \
                           $GNU_WIN32_OPTIONS \
-                          CFLAGS="$BUILD_CFLAGS" LDFLAGS="$BUILD_LDFLAGS" \
                           > $LOG_DIR/gcc_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
