@@ -12,4 +12,4 @@ export CRT_MULTILIB='--disable-lib64 --enable-lib32'
 export GDB_PYTHON_WIN64_WORKAROUND='-DMS_WIN64'
 
 # call main build script
-. ./scripts/buildnative.sh
+. ./scripts/buildfromcross.sh

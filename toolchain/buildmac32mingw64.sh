@@ -11,4 +11,4 @@ export LONG_NAME=mac32mingw64
 export CRT_MULTILIB='--enable-lib64 --disable-lib32'
 
 # call main build script
-. ./scripts/buildnative.sh
+. ./scripts/buildfromcross.sh
