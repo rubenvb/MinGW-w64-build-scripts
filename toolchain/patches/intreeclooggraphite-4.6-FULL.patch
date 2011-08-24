@@ -80,21 +80,22 @@ index 132f9df..62e533b 100644
  @endif cloog
  
 diff --git a/configure b/configure
-index b3cc9ad..d0488c5 100755
+index b3cc9ad..51444ba 100755
 --- a/configure
 +++ b/configure
-@@ -5708,9 +5708,7 @@ if test "x$with_ppl_lib" != x; then
+@@ -5708,16 +5708,15 @@ if test "x$with_ppl_lib" != x; then
  fi
  
  if test x"$with_ppl$with_ppl_include$with_ppl_lib" = x && test -d ${srcdir}/ppl; then
 -  if test x"$enable_watchdog" = xyes; then
 -    pwllib="-lpwl"
 -  fi
+-  ppllibs='-L$$r/$(HOST_SUBDIR)/ppl/interfaces/C/'"$lt_cv_objdir"' -L$$r/$(HOST_SUBDIR)/ppl/src/'"$lt_cv_objdir"
 +  pwllib="-lpwl"
-   ppllibs='-L$$r/$(HOST_SUBDIR)/ppl/interfaces/C/'"$lt_cv_objdir"' -L$$r/$(HOST_SUBDIR)/ppl/src/'"$lt_cv_objdir"
++  ppllibs='-L$$r/$(HOST_SUBDIR)/ppl/interfaces/C/'"$lt_cv_objdir"' -L$$r/$(HOST_SUBDIR)/ppl/src/'"$lt_cv_objdir"' -L$$r/$(HOST_SUBDIR)/ppl/Watchdog/src/'"$lt_cv_objdir"
    pplinc='-I$$r/$(HOST_SUBDIR)/ppl/src -I$$r/$(HOST_SUBDIR)/ppl/interfaces/C '
    enable_ppl_version_check=no
-@@ -5718,6 +5716,7 @@ if test x"$with_ppl$with_ppl_include$with_ppl_lib" = x && test -d ${srcdir}/ppl;
+   with_ppl=yes
  fi
  
  if test "x$with_ppl" != xno; then
