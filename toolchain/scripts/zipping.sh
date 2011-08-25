@@ -14,7 +14,7 @@ else
     elif [ "$HOST" == "x86_64-apple-darwin10" ] || [ "$HOST" == "i686-apple-darwin10" ]
     then
         PLATFORM_SUFFIX="mac"
-    elif [ "$HOST" == "x86_64-w64-mingw32" ] || [ "$HOST" == "i686-w64-mingw32" ]
+    elif [ "$HOST" == "i686-pc-cygwin" ]
     then
         PLATFORM_SUFFIX="cygwin"
     else
