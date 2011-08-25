@@ -14,7 +14,7 @@ then
 else
     echo "--> Configuring"
     sh $GCC_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                          --with-libexpat-prefix=$PREREQ_INSTALL --enable-cloog-backend=isl --with-host-libstdcxx='-lstdc++ -lsupc++ -lm' \
+                          --with-libexpat-prefix=$PREREQ_INSTALL --enable-cloog-backend=isl --with-host-libstdcxx='-lstdc++ -lm -lgcc_eh' \
                           --enable-shared --enable-static --enable-threads=win32 \
                           --disable-multilib \
                           --enable-languages=all,obj-c++ --enable-libgomp --enable-libgjc \
