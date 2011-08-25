@@ -15,7 +15,7 @@ export GDB_VERSION="7.3"
 export PYTHON_VERSION="2.7.1"
 export MAKE_VERSION="3.82"
 export CLANG_VERSION="3.0"
-export MINGW_W64_VERSION="tags/v2.0.rc1"
+export MINGW_W64_VERSION="stable/v2.x"
 
 # my revision number
 export MY_REVISION=-2

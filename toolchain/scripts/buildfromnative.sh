@@ -6,8 +6,7 @@ echo "Executing preliminary common steps"
 . ./scripts/common.sh || exit 1
 
 # Projects to be built, in the right order
-PREGCC_STEPS="expat
-              mingw-w64-headers
+PREGCC_STEPS="mingw-w64-headers
               binutils"           
 POSTGCC_STEPS="cleanup
                zipping"

@@ -48,14 +48,14 @@ else
 
     echo "---> mingw-w64"
     mkdir -p mingw-w64
-    cp $SRC_DIR/mingw-w64/COPYING.MinGW-w64/COPYING.MinGW-w64.txt mingw-w64/COPYING.MinGW-w64.txt
-    cp $SRC_DIR/mingw-w64/COPYING.MinGW-w64-runtime/COPYING.MinGW-w64-runtime.txt mingw-w64/COPYING.MinGW-w64-runtime.txt
-    cp $SRC_DIR/mingw-w64/COPYING mingw-w64/COPYING
-    cp $SRC_DIR/mingw-w64/DISCLAIMER mingw-w64/DISCLAIMER
-    cp $SRC_DIR/mingw-w64/DISCLAIMER.PD mingw-w64/DISCLAIMER.PD
-    cp $SRC_DIR/mingw-w64/mingw-w64-headers/ddk/readme.txt mingw-w64/ddk-readme.txt
-    cp $SRC_DIR/mingw-w64/mingw-w64-headers/direct-x/COPYING.LIB mingw-w64/direct-x-COPYING.lib
-    cp $SRC_DIR/mingw-w64/mingw-w64-headers/direct-x/readme.txt mingw-w64/direct-x-readme.txt
+    cp $MINGW_W64_SRC/COPYING.MinGW-w64/COPYING.MinGW-w64.txt mingw-w64/COPYING.MinGW-w64.txt
+    cp $MINGW_W64_SRC/COPYING.MinGW-w64-runtime/COPYING.MinGW-w64-runtime.txt mingw-w64/COPYING.MinGW-w64-runtime.txt
+    cp $MINGW_W64_SRC/COPYING mingw-w64/COPYING
+    cp $MINGW_W64_SRC/DISCLAIMER mingw-w64/DISCLAIMER
+    cp $MINGW_W64_SRC/DISCLAIMER.PD mingw-w64/DISCLAIMER.PD
+    cp $MINGW_W64_SRC/mingw-w64-headers/ddk/readme.txt mingw-w64/ddk-readme.txt
+    cp $MINGW_W64_SRC/mingw-w64-headers/direct-x/COPYING.LIB mingw-w64/direct-x-COPYING.lib
+    cp $MINGW_W64_SRC/mingw-w64-headers/direct-x/readme.txt mingw-w64/direct-x-readme.txt
 
     echo "---> MPC"
     mkdir -p mpc
@@ -70,10 +70,9 @@ else
     mkdir -p ppl
     cp $SRC_DIR/ppl-$PPL_VERSION/COPYING ppl/COPYING
 
-    echo "---> Pthreads-Win32"
-    mkdir -p pthreads
-    cp $BUILD_DIR/pthreads/COPYING pthreads/COPYING
-    cp $BUILD_DIR/pthreads/COPYING.LIB pthreads/COPYING.LIB
+    echo "---> Winpthreads"
+    mkdir -p winpthreads
+    cp $MINGW_W64_SRC/experimental/winpthreads/COPYING winpthreads/COPYING
 
     echo "---> Python"
     mkdir -p python

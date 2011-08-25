@@ -13,14 +13,14 @@ echo "Executing preliminary common steps"
 . ./scripts/common.sh || exit 1
 
 # Projects to be built, in the right order
-PREGCC_STEPS="expat
-              mingw-w64-headers
+PREGCC_STEPS="mingw-w64-headers
               binutils
               mingw-w64-crt
               winpthreads"
 if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "x86_64-w64-mingw32" ]
 then
-    POSTGCC_STEPS="python
+    POSTGCC_STEPS="expat
+                   python
                    gdb
                    make
                    llvm-clang"
@@ -31,7 +31,6 @@ POSTGCC_STEPS="$POSTGCC_STEPS
 cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS
 mkdir -p $POSTGCC_STEPS
-cd $TOP_DIR
 
 # Build
 for step in $PREGCC_STEPS
@@ -39,18 +38,15 @@ do
     cd $BUILD_DIR/$step
     echo "-> $step"
     . $SCRIPTS/$step.sh || exit 1
-    cd $TOP_DIR
 done
 # build GCC
 cd $BUILD_DIR/gcc
 echo "-> GCC: Full compiler suite"
 . $SCRIPTS/gcc-combined.sh || exit 1
-cd $TOP_DIR
 # build the rest
 for step in $POSTGCC_STEPS
 do
     cd $BUILD_DIR/$step
     echo "-> $step"
     . $SCRIPTS/$step.sh || exit 1
-    cd $TOP_DIR
 done
