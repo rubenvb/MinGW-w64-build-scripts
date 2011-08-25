@@ -10,7 +10,7 @@ else
                           --with-libiconv-prefix=$BUILD_DIR --with-libexpat-prefix=$GCC_LIBS \
                           --with-python \
                           $GNU_WIN32_OPTIONS \
-                          CFLAGS="$BUILD_CFLAGS $GDB_PYTHON_WIN64_WORKAROUND -I$BUILD_DIR/python/include" LDFLAGS="$BUILD_LDFLAGS -L$BUILD_DIR/python" \
+                          CFLAGS="$HOST_CFLAGS $GDB_PYTHON_WIN64_WORKAROUND -I$BUILD_DIR/python/include" LDFLAGS="$HOST_LDFLAGS -L$BUILD_DIR/python" \
                           > $LOG_DIR/gdb_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi

@@ -49,7 +49,6 @@ else
                               $GNU_EXTRA_OPTIONS \
                               $GNU_MULTILIB $SHARED \
                               $GNU_WIN32_OPTIONS \
-                              CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                               > $LOG_DIR/gcc-c2_configure.log 2>&1 || exit 1
         echo "--> Configured"
     fi

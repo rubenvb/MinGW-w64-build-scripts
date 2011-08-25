@@ -5,7 +5,7 @@ set -e
 export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
 if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "i686-pc-cygwin" ]
 then
-    export BUILD_LDFLAGS="$BUILD_LDFLAGS -Wl,--large-address-aware"
+    export HOST_LDFLAGS="$HOST_LDFLAGS -Wl,--large-address-aware"
 fi
 
 # common settings

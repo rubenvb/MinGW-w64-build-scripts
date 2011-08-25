@@ -8,7 +8,6 @@ else
     echo "--> Configuring"
     sh $SRC_DIR/LLVM/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX-clang \
                                --enable-optimized --disable-assertions --disable-pthreads \
-                               CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
                                > $LOG_DIR/llvm-clang_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
