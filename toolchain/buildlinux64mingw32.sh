@@ -9,4 +9,4 @@ export LONG_NAME=linux64mingw32
 export CRT_MULTILIB='--disable-lib64 --enable-lib32'
 
 # call main build script
-. ./scripts/buildfromnative.sh
+. ./scripts/buildcrossfromnative.sh
