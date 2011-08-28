@@ -9,6 +9,7 @@ echo "Executing preliminary common steps"
 PREGCC_STEPS="mingw-w64-headers
               binutils"           
 POSTGCC_STEPS="cleanup
+               licenses
                zipping"
 cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS

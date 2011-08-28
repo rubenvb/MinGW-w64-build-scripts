@@ -27,6 +27,7 @@ then
 fi
 POSTGCC_STEPS="$POSTGCC_STEPS
                cleanup
+               licenses
                zipping"
 cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS
