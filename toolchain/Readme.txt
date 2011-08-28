@@ -28,3 +28,13 @@ binutils (native)
 makeinfo
 7za (for windows hosted binary package creation)
 lzma (for source and other platform binary package creation)
+unzip (for Windows native builds and extraction of the python dll's)
+(maybe others I forgot to mention here)
+
+1.2. How to build
+-----------------
+In the toplevel directory there are a bunch of build*.sh scripts. These are the ones you'll need to call.
+If you're not on a 64-bit Linux build machine, you'll need to change the value of the BUILD variable in
+scripts/common.sh to whatever your host triplet should be. And hope the scripts will work for your particular combination :)
+
+Native Windows bootstraps are not supported yet, a GCC build system patch will need to land first for that to work.

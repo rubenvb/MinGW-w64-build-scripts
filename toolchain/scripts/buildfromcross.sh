@@ -43,7 +43,7 @@ done
 # build GCC
 cd $BUILD_DIR/gcc
 echo "-> GCC: Full compiler suite"
-. $SCRIPTS/gcc-combined.sh || exit 1
+. $SCRIPTS/gcc-combined-posix.sh || exit 1
 # build the rest
 for step in $POSTGCC_STEPS
 do

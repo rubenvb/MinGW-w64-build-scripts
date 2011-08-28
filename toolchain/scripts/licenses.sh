@@ -72,18 +72,23 @@ else
 
     echo "---> Winpthreads"
     mkdir -p winpthreads
-    cp $MINGW_W64_SRC/experimental/winpthreads/COPYING winpthreads/COPYING
+    cp $SRC_DIR/mingw-w64/experimental/winpthreads/COPYING winpthreads/COPYING
 
-    echo "---> Python"
-    mkdir -p python
-    cp $BUILD_DIR/python/LICENSE.txt python/LICENSE.txt
+    if [ "$BUILD_CROSS_FROM_NATIVE" == "true" ]
+    then
+        echo "---> Skipping Python and LLVM/Clang licenses"
+    else
+        echo "---> Python"
+        mkdir -p python
+        cp $BUILD_DIR/python/LICENSE.txt python/LICENSE.txt
 
-    echo "---> LLVM/Clang"
-    mkdir -p LLVM
-    cp $SRC_DIR/CREDITS.TXT LLVM/CREDITS.TXT
-    cp $SRC_DIR/LICENSE.TXT LLVM/LICENSE.TXT
-    mkdir -p clang
-    cp $SRC_DIR/LLVM/tools/clang/LICENSE.TXT clang/LICENSE.TXT
+        echo "---> LLVM/Clang"
+        mkdir -p LLVM
+        cp $SRC_DIR/CREDITS.TXT LLVM/CREDITS.TXT
+        cp $SRC_DIR/LICENSE.TXT LLVM/LICENSE.TXT
+        mkdir -p clang
+        cp $SRC_DIR/LLVM/tools/clang/LICENSE.TXT clang/LICENSE.TXT
+    fi
 
     mkdir -p $PREFIX/licenses
     cp -r . $PREFIX/licenses
