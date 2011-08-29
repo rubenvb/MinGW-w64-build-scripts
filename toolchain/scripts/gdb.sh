@@ -7,7 +7,7 @@ then
 else
     echo "--> Configuring"
     sh $GDB_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                          --with-libiconv-prefix=$BUILD_DIR --with-libexpat-prefix=$GCC_LIBS \
+                          --with-libexpat-prefix=$PREREQ_INSTALL \
                           --with-python \
                           $GNU_WIN32_OPTIONS \
                           CFLAGS="$HOST_CFLAGS $GDB_PYTHON_WIN64_WORKAROUND -I$BUILD_DIR/python/include" LDFLAGS="$HOST_LDFLAGS -L$BUILD_DIR/python" \

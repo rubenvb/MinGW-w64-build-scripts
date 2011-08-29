@@ -13,7 +13,10 @@ else
     for file in $LICENSES
     do
         cp $SRC_DIR/binutils/$file binutils/$file
-        cp $SRC_DIR/gdb/$file gdb/$file
+        if [ "$HOST" == "x86_64-w64-mingw32" ] || [ "$HOST" == "i686-w64-mingw32" ]
+        then
+            cp $SRC_DIR/gdb/$file gdb/$file
+        fi
     done
 
     echo "---> CLooG"
@@ -74,7 +77,7 @@ else
     mkdir -p winpthreads
     cp $SRC_DIR/mingw-w64/experimental/winpthreads/COPYING winpthreads/COPYING
 
-    if [ "$BUILD_CROSS_FROM_NATIVE" == "true" ]
+    if [ "$HOST" != "x86_64-w64-mingw32" ] && [ "$HOST" != "i686-w64-mingw32" ]
     then
         echo "---> Skipping Python and LLVM/Clang licenses"
     else
@@ -84,8 +87,8 @@ else
 
         echo "---> LLVM/Clang"
         mkdir -p LLVM
-        cp $SRC_DIR/CREDITS.TXT LLVM/CREDITS.TXT
-        cp $SRC_DIR/LICENSE.TXT LLVM/LICENSE.TXT
+        cp $SRC_DIR/LLVM/CREDITS.TXT LLVM/CREDITS.TXT
+        cp $SRC_DIR/LLVM/LICENSE.TXT LLVM/LICENSE.TXT
         mkdir -p clang
         cp $SRC_DIR/LLVM/tools/clang/LICENSE.TXT clang/LICENSE.TXT
     fi

@@ -10,6 +10,7 @@ fi
 
 # common settings
 echo "Executing preliminary common steps"
+export BUILD_CROSS_FROM_NATIVE="false"
 . ./scripts/common.sh || exit 1
 
 # Projects to be built, in the right order
