@@ -16,7 +16,7 @@ else
                           --with-libexpat-prefix=$PREREQ_INSTALL --enable-cloog-backend=isl --with-host-libstdcxx='-lstdc++ -lm -lgcc_eh' \
                           --enable-shared --enable-static --enable-threads=posix \
                           --disable-multilib \
-                          --enable-languages=c,lto,c++,fortran,objc,obj-c++ --enable-libgomp --enable-libgjc \
+                          --enable-languages=c,lto,c++,fortran,objc,obj-c++ --enable-libgomp \
                           --enable-fully-dynamic-string --enable-sjlj-exceptions \
                           --disable-nls --disable-werror --enable-checking=release \
                           $GNU_WIN32_OPTIONS \
