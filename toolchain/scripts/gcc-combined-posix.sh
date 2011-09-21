@@ -2,10 +2,10 @@
 set -e
 
 # add C compiler+binutils to PATH
-if [ "$BUILD_CROSS_FROM_NATIVE" == "true" ]
-then
-    export PATH=$PREFIX/bin:$PATH
-fi
+# if [ "$BUILD_CROSS_FROM_NATIVE" == "true" ]
+# then
+#     export PATH=$PREFIX/bin:$PATH
+# fi
 
 if [ -f configure.marker ]
 then
@@ -17,7 +17,7 @@ else
                           --enable-shared --enable-static --enable-threads=posix \
                           --disable-multilib \
                           --enable-languages=c,lto,c++,fortran,objc,obj-c++ --enable-libgomp \
-                          --enable-fully-dynamic-string --enable-sjlj-exceptions \
+                          --enable-sjlj-exceptions \
                           --disable-nls --disable-werror --enable-checking=release \
                           $GNU_WIN32_OPTIONS \
                           > $LOG_DIR/gcc_configure.log 2>&1 || exit 1

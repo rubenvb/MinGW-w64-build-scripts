@@ -11,7 +11,7 @@ else
                           --enable-shared --enable-static --enable-threads=posix \
                           --disable-multilib \
                           --enable-languages=c,lto,c++,fortran,objc,obj-c++ --enable-libgomp \
-                          --enable-fully-dynamic-string --enable-sjlj-exceptions \
+                          --enable-sjlj-exceptions \
                           --disable-nls --disable-werror --enable-checking=release \
                           $GNU_WIN32_OPTIONS \
                           > $LOG_DIR/gcc-posix_configure.log 2>&1 || exit 1
@@ -25,8 +25,6 @@ then
 else
     echo "--> Building gcc"
     make $MAKE_OPTS all-gcc > $LOG_DIR/gcc-posix-c_build.log 2>&1 || exit 1
-    echo "--> Building libgcc"
-    make $MAKE_OPTS all-target-libgcc > $LOG_DIR/gcc-posix-libgcc_build.log 2>&1 || exit 1
 fi
 touch build-c.marker
 
@@ -36,7 +34,5 @@ then
 else
     echo "--> Installing gcc"
     make $MAKE_OPTS install-gcc > $LOG_DIR/gcc-c_install.log 2>&1 || exit 1
-    echo "--> Installing libgcc"
-    make $MAKE_OPTS install-target-libgcc > $LOG_DIR/gcc-posix-libgcc_install.log 2>&1 || exit 1
 fi
 touch install-c.marker

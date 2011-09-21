@@ -11,7 +11,7 @@ else
                           --enable-shared --enable-static --enable-threads=win32 \
                           --disable-multilib \
                           --enable-languages=c,lto,c++,fortran,objc,obj-c++ --enable-libgomp \
-                          --enable-fully-dynamic-string --enable-sjlj-exceptions \
+                          --enable-sjlj-exceptions \
                           --disable-nls --disable-werror --enable-checking=release \
                           $GNU_WIN32_OPTIONS \
                           > $LOG_DIR/gcc_configure.log 2>&1 || exit 1
