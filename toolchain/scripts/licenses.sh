@@ -35,7 +35,7 @@ else
         cp $SRC_DIR/gcc/$file gcc/$file
     done
 
-    echo "---> GMP/libiconv"
+    echo "---> GMP"
     mkdir -p gmp
     cp $SRC_DIR/gmp-$GMP_VERSION/COPYING gmp/COPYING
     cp $SRC_DIR/gmp-$GMP_VERSION/COPYING.LIB gmp/COPYING.LIB
@@ -44,10 +44,6 @@ else
     mkdir -p libiconv
     cp $SRC_DIR/libiconv-$LIBICONV_VERSION/COPYING libiconv/COPYING
     cp $SRC_DIR/libiconv-$LIBICONV_VERSION/COPYING.LIB libiconv/COPYING.LIB
-
-    echo "---> Make"
-    mkdir -p make
-    cp $SRC_DIR/make-$MAKE_VERSION/COPYING make/COPYING
 
     echo "---> mingw-w64"
     mkdir -p mingw-w64
@@ -79,8 +75,12 @@ else
 
     if [ "$HOST" != "x86_64-w64-mingw32" ] && [ "$HOST" != "i686-w64-mingw32" ]
     then
-        echo "---> Skipping Python and LLVM/Clang licenses"
+        echo "---> Skipping Make, Python and LLVM/Clang licenses"
     else
+        echo "---> Make"
+        mkdir -p make
+        cp $SRC_DIR/make-$MAKE_VERSION/COPYING make/COPYING
+
         echo "---> Python"
         mkdir -p python
         cp $BUILD_DIR/python/LICENSE.txt python/LICENSE.txt

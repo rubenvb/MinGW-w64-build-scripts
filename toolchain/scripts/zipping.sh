@@ -56,3 +56,5 @@ else
     tar --lzma -cf $SRC_FILE --exclude='*.git' --exclude='*.svn' src scripts patches *.sh
 fi
 
+cd $TOP_DIR
+
