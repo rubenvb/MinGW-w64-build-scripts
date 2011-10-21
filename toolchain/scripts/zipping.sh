@@ -33,7 +33,7 @@ else
     cd $PREFIX/..
     # Base package
     echo "---> Base package"
-    $BIN_COMPRESS $BIN_FILE $SHORT_NAME
+    $BIN_COMPRESS $BIN_FILE $SHORT_NAME > $LOG_DIR/zipping.log
 
     if [ "$HOST" == "x86_64-w64-mingw32" ] || [ "$HOST" == "i686-w64-mingw32" ]
     then
@@ -41,7 +41,7 @@ else
         echo "---> Clang addon package"
         mv $PREFIX $PREFIX-base
         mv $PREFIX-clang $PREFIX
-        $BIN_COMPRESS $BIN_FILE_CLANG $SHORT_NAME
+        $BIN_COMPRESS $BIN_FILE_CLANG $SHORT_NAME > $LOG_DIR/zipping.log
         mv $PREFIX $PREFIX-clang
         mv $PREFIX-base $PREFIX
     fi
