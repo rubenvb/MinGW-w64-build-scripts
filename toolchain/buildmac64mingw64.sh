@@ -2,7 +2,10 @@
 set -e
 
 # platform information
-export HOST=x86_64-apple-darwin10
+export HOST_ARCH=x86_64
+export HOST_VENDOR=apple
+export HOST_OS=darwin10
+export HOST=$HOST_ARCH-$HOST_VENDOR-$HOST_OS
 export TARGET=i686-w64-mingw32
 export SHORT_NAME=mingw64
 export LONG_NAME=mac64mingw64

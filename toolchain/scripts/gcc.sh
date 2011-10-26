@@ -2,10 +2,10 @@
 set -e
 
 # add C compiler+binutils to PATH
-if [ "$BUILD_CROSS_FROM_NATIVE" == "true" ]
-then
-    export PATH=$PREFIX/bin:$PATH
-fi
+# if [ "$BUILD_CROSS_FROM_NATIVE" == "true" ]
+# then
+#     export PATH=$PREFIX/bin:$PATH
+# fi
 
 if [ -f configure.marker ]
 then
@@ -13,10 +13,12 @@ then
 else
     echo "--> Configuring"
     sh $GCC_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                          --with-libexpat-prefix=$PREREQ_INSTALL --enable-cloog-backend=isl --with-host-libstdcxx='-lstdc++ -lm -lgcc_eh' \
-                          --enable-shared --enable-static --enable-threads=win32 \
+                          --with-gmp=$PREREQ_INSTALL --with-mpfr=$PREREQ_INSTALL --with-mpc=$PREREQ_INSTALL \
+                          --with-ppl=$PREREQ_INSTALL --with-cloog=$PREREQ_INSTALL \
+                          --enable-cloog-backend=isl --with-host-libstdcxx='-lstdc++ -lm -lgcc_eh' \
+                          --enable-shared --enable-static --enable-threads=posix \
                           --disable-multilib \
-                          --enable-languages=c,lto,c++,fortran,objc,obj-c++ --enable-libgomp \
+                          --enable-languages=$GCC_LANGUAGES --enable-libgomp \
                           --enable-sjlj-exceptions --enable-fully-dynamic-string \
                           --disable-nls --disable-werror --enable-checking=release \
                           $GNU_WIN32_OPTIONS \

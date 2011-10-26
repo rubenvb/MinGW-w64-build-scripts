@@ -2,7 +2,10 @@
 set -e
 
 # platform information
-export HOST=x86_64-linux-gnu
+export HOST_ARCH=x86_64
+export HOST_VENDOR=linux
+export HOST_OS=gnu
+export HOST=$HOST_ARCH-$HOST_VENDOR-$HOST_OS
 export TARGET=x86_64-w64-mingw32
 export SHORT_NAME=mingw64
 export LONG_NAME=linux64mingw64

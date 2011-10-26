@@ -5,6 +5,9 @@ set -e
 export BUILD=x86_64-linux-gnu
 export MAKE_OPTS="-j2"
 
+# GCC languages to be built
+export GCC_LANGUAGES='c,lto,c++,fortran,objc,obj-c++,java,ada'
+
 # get version info
 echo "-> Loading version info"
 . ./scripts/versions.sh || exit 1

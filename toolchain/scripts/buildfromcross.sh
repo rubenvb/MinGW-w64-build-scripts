@@ -17,7 +17,9 @@ export BUILD_CROSS_FROM_NATIVE="false"
 PREGCC_STEPS="mingw-w64-headers
               binutils
               mingw-w64-crt
-              winpthreads"
+              winpthreads
+              gmp mpfr mpc
+              ppl cloog"
 if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "x86_64-w64-mingw32" ]
 then
     POSTGCC_STEPS="expat

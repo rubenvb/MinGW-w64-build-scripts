@@ -9,11 +9,6 @@ else
     echo "--> Creating GCC combined tree symlinks"
     ln -s $SRC_DIR/gcc/* $GCC_SRC/
     ln -s $SRC_DIR/libiconv-$LIBICONV_VERSION/* $GCC_SRC/libiconv/
-    ln -s $SRC_DIR/gmp-$GMP_VERSION/* $GCC_SRC/gmp/
-    ln -s $SRC_DIR/mpfr-$MPFR_VERSION/* $GCC_SRC/mpfr/
-    ln -s $SRC_DIR/mpc-$MPC_VERSION/* $GCC_SRC/mpc/
-    ln -s $SRC_DIR/ppl-$PPL_VERSION/* $GCC_SRC/ppl/
-    ln -s $SRC_DIR/cloog-$CLOOG_VERSION/* $GCC_SRC/cloog/
     echo "--> Done"
 fi
 touch $GCC_SRC/symlinks.marker

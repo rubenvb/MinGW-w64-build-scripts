@@ -8,7 +8,9 @@ export BUILD_CROSS_FROM_NATIVE="true"
 
 # Projects to be built, in the right order
 PREGCC_STEPS="mingw-w64-headers
-              binutils"           
+              binutils
+              gmp mpfr mpc
+              ppl cloog"
 POSTGCC_STEPS="cleanup
                licenses
                zipping"
