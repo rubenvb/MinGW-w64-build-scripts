@@ -10,6 +10,7 @@ else
                                            --disable-shared --enable-static \
                                            --with-gmp-prefix=$PREREQ_INSTALL \
                                            --disable-watchdog --disable-ppl_lcdd --disable-ppl_lpsol --disable-ppl_pips \
+                                           CPPFLAGS="$CPPFLAGS -I$PREREQ_INSTALL/include" LDFLAGS="$LDFLAGS -L$PREREQ_INSTALL/lib" \
                                            > $LOG_DIR/ppl_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
