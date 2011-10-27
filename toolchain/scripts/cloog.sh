@@ -8,6 +8,7 @@ else
     echo "--> Configuring"
     sh $SRC_DIR/cloog-$CLOOG_VERSION/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
                                                --disable-shared --enable-static \
+                                               --with-gmp-prefix=$PREREQ_INSTALL \
                                                > $LOG_DIR/cloog_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi

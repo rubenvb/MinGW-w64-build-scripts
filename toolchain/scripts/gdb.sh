@@ -6,12 +6,13 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh $GDB_SRC/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                          --with-libexpat-prefix=$PREREQ_INSTALL \
-                          --with-python \
-                          $GNU_WIN32_OPTIONS \
-                          CFLAGS="$HOST_CFLAGS $GDB_PYTHON_WIN64_WORKAROUND -I$BUILD_DIR/python/include" LDFLAGS="$HOST_LDFLAGS -L$BUILD_DIR/python" \
-                          > $LOG_DIR/gdb_configure.log 2>&1 || exit 1
+    sh $SRC_DIR/gdb/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
+                              --with-libiconv-prefix=$PREREQ_INSTALL \
+                              --with-libexpat-prefix=$PREREQ_INSTALL \
+                              --with-python \
+                              $GNU_WIN32_OPTIONS \
+                              CFLAGS="$HOST_CFLAGS $GDB_PYTHON_WIN64_WORKAROUND -I$BUILD_DIR/python/include" LDFLAGS="$HOST_LDFLAGS -L$BUILD_DIR/python" \
+                              > $LOG_DIR/gdb_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
 touch configure.marker

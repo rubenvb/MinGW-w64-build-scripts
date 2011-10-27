@@ -6,7 +6,7 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh ../../src/gmp-$GMP_VERSION/configure --host=none-$HOST_VENDOR-$HOST_OS --build=$BUILD --prefix=$PREREQ_INSTALL \
+    sh ../../src/gmp-$GMP_VERSION/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
                                             --disable-shared --enable-static \
                                             --enable-cxx \
                                             > $LOG_DIR/gmp_configure.log 2>&1 || exit 1

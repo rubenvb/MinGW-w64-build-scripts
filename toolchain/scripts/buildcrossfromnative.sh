@@ -8,6 +8,7 @@ export BUILD_CROSS_FROM_NATIVE="true"
 
 # Projects to be built, in the right order
 PREGCC_STEPS="mingw-w64-headers
+              libiconv
               binutils
               gmp mpfr mpc
               ppl cloog"
@@ -36,27 +37,19 @@ export PATH=$PREFIX/bin:$PATH
 # build GCC C compiler
 echo "-> GCC: C compiler"
 cd $BUILD_DIR/gcc
-. $SCRIPTS/gcc-combined-posix-c.sh || exit 1
+. $SCRIPTS/gcc-c.sh || exit 1
 # build mingw-w64 crt
 echo "-> MinGW-w64 CRT"
 cd $BUILD_DIR/mingw-w64-crt
 . $SCRIPTS/mingw-w64-crt.sh || exit 1
-# build libgcc
-#echo "-> GCC: libgcc, win32 threads"
-#cd $BUILD_DIR/gcc
-#. $SCRIPTS/libgcc.sh || exit 1
 # build winpthreads
 echo "-> Winpthreads"
 cd $BUILD_DIR/winpthreads
 . $SCRIPTS/winpthreads.sh || exit 1
-# rebuild gcc and libgcc with posix threads
-#echo "-> GCC and libgcc, posix threads"
-#cd $BUILD_DIR/gcc-posix
-#. $SCRIPTS/gcc-combined-posix-c.sh
 # build the rest of GCC
 echo "-> GCC: Full compiler suite"
 cd $BUILD_DIR/gcc
-. $SCRIPTS/gcc-combined-posix.sh || exit 1
+. $SCRIPTS/gcc.sh || exit 1
 # build the rest
 for step in $POSTGCC_STEPS
 do

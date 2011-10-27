@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+#no-op for libiconv (and maybe other) configure scripts
+# Otherwise, the wrong 'ar' is used. Go figure.
