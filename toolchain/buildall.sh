@@ -5,7 +5,7 @@ echo "Building linux 64-bit to Windows 32-bit cross-compiler"
 sh ./buildlinux64mingw32.sh || exit 1
 echo "Building linux 64-bit to Windows 64-bit cross-compiler"
 sh ./buildlinux64mingw64.sh || exit 1
-echo "Building linux 32-bit to Windows 64-bit cross-compiler"
+echo "Building linux 32-bit to Windows 32-bit cross-compiler"
 sh ./buildlinux32mingw32.sh || exit 1
 echo "Building linux 32-bit to Windows 64-bit cross-compiler"
 sh ./buildlinux32mingw64.sh || exit 1
