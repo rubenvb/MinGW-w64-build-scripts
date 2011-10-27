@@ -9,7 +9,7 @@ else
     sh $SRC_DIR/ppl-$PPL_VERSION/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
                                            --disable-shared --enable-static \
                                            --disable-watchdog --disable-ppl_lcdd --disable-ppl_lpsol --disable-ppl_pips \
-                                           CPPFLAGS="$CPPFLAGS -I$PREREQ_INSTALL/include" LDFLAGS="$LDFLAGS -L$PREREQ_INSTALL/lib" \
+                                           CPPFLAGS="$HOST_CPPFLAGS -I$PREREQ_INSTALL/include" LDFLAGS="$HOST_LDFLAGS -L$PREREQ_INSTALL/lib" \
                                            > $LOG_DIR/ppl_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi

@@ -9,6 +9,7 @@ else
     sh $SRC_DIR/mpc-$MPC_VERSION/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
                                            --disable-shared --enable-static \
                                            --with-gmp=$PREREQ_INSTALL --with-mpfr=$PREREQ_INSTALL \
+                                           CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                                            > $LOG_DIR/mpc_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi

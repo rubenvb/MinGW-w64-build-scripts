@@ -9,6 +9,7 @@ else
     sh ../../src/gmp-$GMP_VERSION/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
                                             --disable-shared --enable-static \
                                             --enable-cxx \
+                                            CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                                             > $LOG_DIR/gmp_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi

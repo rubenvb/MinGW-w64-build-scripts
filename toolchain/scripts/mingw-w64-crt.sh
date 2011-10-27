@@ -9,7 +9,7 @@ else
     sh $MINGW_W64_SRC/mingw-w64-crt/configure --host=$TARGET --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
                                               $CRT_MULTILIB \
                                               --enable-wildcard \
-                                              CFLAGS="$BUILD_CFLAGS_LTO" LDFLAGS="$BUILD_LDFLAGS_LTO" \
+                                              CFLAGS="$BUILD_CFLAGS" LDFLAGS="$BUILD_LDFLAGS" \
                                               > $LOG_DIR/mingw-w64_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi

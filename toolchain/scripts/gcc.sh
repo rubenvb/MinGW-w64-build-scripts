@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-# add C compiler+binutils to PATH
-# if [ "$BUILD_CROSS_FROM_NATIVE" == "true" ]
-# then
-#     export PATH=$PREFIX/bin:$PATH
-# fi
-
 if [ -f configure.marker ]
 then
     echo "--> Already configured"
@@ -23,6 +17,7 @@ else
                               --enable-sjlj-exceptions --enable-fully-dynamic-string \
                               --disable-nls --disable-werror --enable-checking=release \
                               $GNU_WIN32_OPTIONS \
+                              CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                               > $LOG_DIR/gcc_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
@@ -33,6 +28,9 @@ then
     echo "--> Already built"
 else
     echo "--> Building"
+    #libada and libgomp need libgcc installed first to work
+    make $MAKE_OPTS all-target-libgcc > $LOG_DIR/gcc-libgcc_build.log 2>&1 || exit 1
+    make $MAKE_OPTS install-target-libgcc > $LOG_DIR/gcc-libgcc_install.log 2>&1 || exit 1
     make $MAKE_OPTS > $LOG_DIR/gcc_build.log 2>&1 || exit 1
 fi
 touch build.marker
