@@ -14,9 +14,9 @@ export GCC_VERSION="4.6.2"
 export GDB_VERSION="7.3"
 export PYTHON_VERSION="2.7.1"
 export MAKE_VERSION="3.82"
-export CLANG_VERSION="3.0"
+export CLANG_VERSION="3.1"
 export MINGW_W64_VERSION="stable/v2.x" #"trunk"
 
 # my revision number
-export MY_REVISION=-stdthread
-export MY_CLANG_REVISION=-4
+export MY_REVISION=-3
+export MY_CLANG_REVISION=
