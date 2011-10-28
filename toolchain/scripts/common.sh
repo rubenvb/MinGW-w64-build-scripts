@@ -8,10 +8,6 @@ export HOST_CFLAGS="-O2 -mtune=core2 -fomit-frame-pointer -momit-leaf-frame-poin
 export HOST_LDFLAGS= #"-flto"
 # GCC languages to be built
 export GCC_LANGUAGES='c,lto,c++,fortran,objc,obj-c++,java'
-if [ "$HOST_OS" != "darwin10" ] && [ "$HOST_OS" != "cygwin" ]
-then
-    export GCC_LANGUAGES=$GCC_LANGUAGES',ada'
-fi
 
 # get version info
 echo "-> Loading version info"
