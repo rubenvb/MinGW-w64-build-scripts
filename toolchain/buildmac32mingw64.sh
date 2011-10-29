@@ -12,8 +12,5 @@ export LONG_NAME=mac32mingw64
 export CRT_MULTILIB='--enable-lib64 --disable-lib32'
 export GDB_PYTHON_WIN64_WORKAROUND=
 
-export CC='i686-apple-darwin10-gcc'
-export CXX='i686-apple-darwin10-g++'
-
 # call main build script
 . ./scripts/buildfromcross.sh
