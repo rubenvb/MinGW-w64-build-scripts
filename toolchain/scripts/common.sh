@@ -4,7 +4,7 @@ set -e
 # build options - for my system only
 export BUILD=x86_64-linux-gnu
 export MAKE_OPTS="-j2"
-export HOST_CFLAGS="-O2 -mtune=core2" #-flto
+export HOST_CFLAGS="-O2 -mtune=core2 -flto"
 export HOST_LDFLAGS= #"-flto"
 if [ "$HOST_VENDOR" != "apple" ]
 then
@@ -23,5 +23,5 @@ echo "-> Setting up directories"
 #echo "-> Setting up source tree symlinks"
 #. ./scripts/symlinks.sh || exit 1
 # multilib wrapper scripts
-echo "-> Setting up multilib wrapper scripts"
-. ./scripts/fakegcc.sh
+# echo "-> Setting up multilib wrapper scripts"
+# . ./scripts/fakegcc.sh
