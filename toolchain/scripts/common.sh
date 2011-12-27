@@ -9,7 +9,7 @@ export HOST_LDFLAGS= #"-flto"
 if [ "$HOST_VENDOR" != "apple" ]
 then
   export HOST_CFLAGS="$HOST_CFLAGS -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all"
-  if [ "$HOST_OS" != "mingw32" ]
+  if [ "$HOST_OS" != "mingw32" && "$HOST_OS" != "cygwin" ]
   then
     export HOST_CFLAGS="$HOST_CFLAGS -flto"
   fi
