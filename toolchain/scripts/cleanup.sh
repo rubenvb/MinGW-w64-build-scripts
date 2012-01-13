@@ -10,6 +10,12 @@ else
     rm -rf mingw || exit 1
     find . -name \*.la -exec rm -f {} \;
 
+    # move libgcc dll to $PREFIX/bin instead of
+    if [ -f $PREFIX/lib/libgcc_s_sjlj-1.dll ]
+    then
+        mv $PREFIX/lib/libgcc_s_sjlj-1.dll $PREFIX/bin/
+    fi
+
     echo "---> Stripping Executables"
     find . -name \*.exe -exec strip {} \;
 
