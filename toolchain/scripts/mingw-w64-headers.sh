@@ -7,10 +7,9 @@ then
 else
     echo "--> Configuring"
     sh $MINGW_W64_SRC/mingw-w64-headers/configure --host=$TARGET --build=$BUILD --target=$TARGET \
-                                                  --with-sysroot=$PREFIX --prefix=$PREFIX \
-                                                  $CRT_MULTILIB \
+                                                  --prefix=$PREFIX \
                                                   --enable-sdk=all --enable-secure-api \
-                                                  > $LOG_DIR/mingw-w64_configure.log 2>&1 || exit 1
+                                                  > $LOG_DIR/mingw-w64-headers_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
 touch configure.marker

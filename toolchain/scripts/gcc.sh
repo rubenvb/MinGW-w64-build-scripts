@@ -13,7 +13,7 @@ else
                               --enable-cloog-backend=isl --with-host-libstdcxx='-static -lstdc++ -lm -lgcc_eh' \
                               --enable-shared --enable-static --enable-threads=posix \
                               --disable-multilib \
-                              --enable-languages=$GCC_LANGUAGES --enable-libgomp \
+                              --enable-languages=$GCC_LANGUAGES --enable-libgomp --enable-libgcj \
                               --enable-sjlj-exceptions --enable-fully-dynamic-string \
                               --disable-nls --disable-werror --enable-checking=release \
                               $GNU_WIN32_OPTIONS \

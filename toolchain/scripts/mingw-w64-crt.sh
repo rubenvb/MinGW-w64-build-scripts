@@ -6,10 +6,11 @@ then
     echo "--> Already configured"
 else
     echo "--> Configuring"
-    sh $MINGW_W64_SRC/mingw-w64-crt/configure --host=$TARGET --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
+    sh $MINGW_W64_SRC/mingw-w64-crt/configure --host=$TARGET --build=$BUILD --target=$TARGET \
+                                              --with-sysroot=$PREFIX --prefix=$PREFIX \
                                               $CRT_MULTILIB \
                                               --enable-wildcard \
-                                              > $LOG_DIR/mingw-w64_configure.log 2>&1 || exit 1
+                                              > $LOG_DIR/mingw-w64-crt_configure.log 2>&1 || exit 1
     echo "--> Configured"
 fi
 touch configure.marker
