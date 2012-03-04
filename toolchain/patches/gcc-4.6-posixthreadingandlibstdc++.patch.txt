@@ -47,33 +47,6 @@ index 0fb325b..2d23523 100644
  Driver
 +
 +; Retain blank line above
-diff --git a/gcc/config/i386/mingw-pthread.h b/gcc/config/i386/mingw-pthread.h
-new file mode 100644
-index 0000000..7868b94
---- /dev/null
-+++ b/gcc/config/i386/mingw-pthread.h
-@@ -0,0 +1,21 @@
-+/* Defines that pthread library shall be enabled by default
-+   for target.
-+   Copyright (C) 2011 Free Software Foundation, Inc.
-+
-+This file is part of GCC.
-+
-+GCC is free software; you can redistribute it and/or modify
-+it under the terms of the GNU General Public License as published by
-+the Free Software Foundation; either version 3, or (at your option)
-+any later version.
-+
-+GCC is distributed in the hope that it will be useful,
-+but WITHOUT ANY WARRANTY; without even the implied warranty of
-+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+GNU General Public License for more details.
-+
-+You should have received a copy of the GNU General Public License
-+along with GCC; see the file COPYING3.  If not see
-+<http://www.gnu.org/licenses/>.  */
-+
-+#define TARGET_USE_PTHREAD_BY_DEFAULT 1
 diff --git a/gcc/config/i386/mingw-w64.h b/gcc/config/i386/mingw-w64.h
 index f84434a..62a72ef 100644
 --- a/gcc/config/i386/mingw-w64.h
@@ -153,7 +126,7 @@ index bd9a4b6..f7ae189 100644
 +
 +; Need to retain blank line above.
 diff --git a/gcc/config/i386/mingw32.h b/gcc/config/i386/mingw32.h
-index b560006..7b6e70a 100644
+index 27da92b..4e5665f 100644
 --- a/gcc/config/i386/mingw32.h
 +++ b/gcc/config/i386/mingw32.h
 @@ -47,6 +47,14 @@ along with GCC; see the file COPYING3.  If not see
@@ -222,16 +195,21 @@ index ccae237..c4807a0 100644
  	if [ -f $(SHLIB_DIR)/$(SHLIB_SONAME) ]; then \
  	  mv -f $(SHLIB_DIR)/$(SHLIB_SONAME) \
  		$(SHLIB_DIR)/$(SHLIB_SONAME).backup; \
-diff --git a/gcc/config/i386/t-mingw-pthread b/gcc/config/i386/t-mingw-pthread
-new file mode 100644
-index 0000000..622ef82
---- /dev/null
-+++ b/gcc/config/i386/t-mingw-pthread
-@@ -0,0 +1,2 @@
-+SHLIB_PTHREAD_CFLAG = -pthread
-+SHLIB_PTHREAD_LDFLAG = -Wl,-lpthread
+diff --git a/gcc/gthr-posix.h b/gcc/gthr-posix.h
+index ecb06e2..fa48ddc 100644
+--- a/gcc/gthr-posix.h
++++ b/gcc/gthr-posix.h
+@@ -65,7 +65,7 @@ typedef struct timespec __gthread_time_t;
+ #define __GTHREAD_COND_INIT PTHREAD_COND_INITIALIZER
+ #define __GTHREAD_TIME_INIT {0,0}
+ 
+-#if SUPPORTS_WEAK && GTHREAD_USE_WEAK
++#if SUPPORTS_WEAK && GTHREAD_USE_WEAK && !defined(__MINGW32__)
+ # ifndef __gthrw_pragma
+ #  define __gthrw_pragma(pragma)
+ # endif
 diff --git a/libstdc++-v3/acinclude.m4 b/libstdc++-v3/acinclude.m4
-index ed8b129..f209585 100644
+index d6735e9..222258a 100644
 --- a/libstdc++-v3/acinclude.m4
 +++ b/libstdc++-v3/acinclude.m4
 @@ -1697,7 +1697,9 @@ AC_DEFUN([GLIBCXX_CHECK_SYSTEM_ERROR], [
@@ -380,10 +358,10 @@ index f2a9116..da2d311 100644
  
  _GLIBCXX_END_NAMESPACE_VERSION
 diff --git a/libstdc++-v3/configure b/libstdc++-v3/configure
-index c321e76..b865eaf 100755
+index c6a0336..50a049d 100755
 --- a/libstdc++-v3/configure
 +++ b/libstdc++-v3/configure
-@@ -17628,6 +17628,171 @@ if test x"$glibcxx_cv_system_error14" = x"yes"; then
+@@ -17624,6 +17624,171 @@ if test x"$glibcxx_cv_system_error14" = x"yes"; then
  $as_echo "#define HAVE_ETXTBSY 1" >>confdefs.h
  
  fi
