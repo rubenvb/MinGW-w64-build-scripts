@@ -13,9 +13,9 @@ else
                               --enable-cloog-backend=isl --with-host-libstdcxx='-static -lstdc++ -lm -lgcc_eh' \
                               --enable-shared --enable-static --enable-threads=posix \
                               --disable-multilib \
-                              --enable-languages=$GCC_LANGUAGES --enable-libgomp --enable-libgcj \
+                              --enable-languages=$GCC_LANGUAGES --enable-libgomp \
                               --enable-sjlj-exceptions --enable-fully-dynamic-string \
-                              --disable-nls --disable-werror --enable-checking=release \
+                              --disable-nls --disable-werror --enable-checking=release  \
                               $GNU_WIN32_OPTIONS \
                               CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                               > $LOG_DIR/gcc_configure.log 2>&1 || exit 1

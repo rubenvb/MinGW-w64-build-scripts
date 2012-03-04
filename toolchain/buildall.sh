@@ -21,15 +21,15 @@ sh ./buildmingw32mingw32.sh || exit 1
 #echo "Building Windows 64-bit to Windows 32-bit native cross-compiler"
 #sh ./buildmingw64mingw32.sh || exit 1
 
-echo "Building Cygwin 32-bit to Windows 32-bit cross-compiler"
-sh ./buildcygwin32mingw32.sh || exit 1
-echo "Building Cygwin 32-bit to Windows 64-bit cross-compiler"
-sh ./buildcygwin32mingw64.sh || exit 1
+#echo "Building Cygwin 32-bit to Windows 32-bit cross-compiler"
+#sh ./buildcygwin32mingw32.sh || exit 1
+#echo "Building Cygwin 32-bit to Windows 64-bit cross-compiler"
+#sh ./buildcygwin32mingw64.sh || exit 1
 
-echo "Building Mac 32-bit to Windows 32-bit cross-compiler"
-sh ./buildmac32mingw32.sh || exit 1
-echo "Building Mac 32-bit to Windows 64-bit cross-compiler"
-sh ./buildmac32mingw64.sh || exit 1
+#echo "Building Mac 32-bit to Windows 32-bit cross-compiler"
+#sh ./buildmac32mingw32.sh || exit 1
+#echo "Building Mac 32-bit to Windows 64-bit cross-compiler"
+#sh ./buildmac32mingw64.sh || exit 1
 #echo "Building Mac 64-bit to Windows 32-bit cross-compiler"
 #sh ./buildmac64mingw32.sh || exit 1
 #echo "Building Mac 64-bit to Windows 64-bit cross-compiler"
