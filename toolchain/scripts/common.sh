@@ -16,7 +16,7 @@ then
   #fi
 fi
 # GCC languages to be built
-export GCC_LANGUAGES='c,lto,c++,objc,obj-c++,fortran' #java
+export GCC_LANGUAGES='c,lto,c++,objc,obj-c++,fortran,java,ada' #go
 
 # get version info
 echo "-> Loading version info"

@@ -10,7 +10,7 @@ else
                               --with-libiconv-prefix=$PREREQ_INSTALL \
                               --with-gmp=$PREREQ_INSTALL --with-mpfr=$PREREQ_INSTALL --with-mpc=$PREREQ_INSTALL \
                               --with-ppl=$PREREQ_INSTALL --with-cloog=$PREREQ_INSTALL \
-                              --enable-cloog-backend=isl --with-host-libstdcxx='-static -lstdc++' \
+                              --enable-cloog-backend=isl --with-host-libstdcxx='-static -lstdc++ -lm' \
                               --enable-shared --enable-static --enable-threads=posix \
                               --disable-multilib \
                               --enable-languages=$GCC_LANGUAGES --enable-libgomp \
