@@ -13,11 +13,12 @@ what directories need to be present in the src subdirectory.
 
 1.1 Prerequisites
 -----------------
-All scripts assume a Fedora 15 64-bit build box, with all relevant cross-compilers and tools installed. You can find
-the cross-compilers used here:
+All scripts assume a Linux x86_6 build box, with below tools installed. If you want to try building Cygwin and Mac
+hosted toolchains, you can use Fedora's cross-compilers that you can find here:
 Mac OS X: http://build1.openftd.org/fedora-cross-darwinx
 Cygwin:   ftp://ftp.cygwinports.org/pub/cygwinports
-The native and cross Windows compilers can be built from a native Linux toolchain Fedora provides.
+Just uncomment the relevant lines in buildall.sh. Note that there is no cygwin64, so those actually make littele sense
+for now. The native and cross Windows compilers can be built from a native Linux toolchain available in  provides.
 
 The tools you will need are:
 make
@@ -35,6 +36,7 @@ unzip (for Windows native builds and extraction of the python dll's)
 -----------------
 In the toplevel directory there are a bunch of build*.sh scripts. These are the ones you'll need to call.
 If you're not on a 64-bit Linux build machine, you'll need to change the value of the BUILD variable in
-scripts/common.sh to whatever your host triplet should be. And hope the scripts will work for your particular combination :)
+scripts/common.sh to whatever your machine's triplet is. And hope the scripts will work for your particular
+combination :)
 
-Native Windows bootstraps are not supported yet, a GCC build system patch will need to land first for that to work.
+Native Windows bootstraps are not tested, but might work. I keep having to fight MSYS too much to put effort into this.
