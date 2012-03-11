@@ -10,7 +10,7 @@ export MPC_VERSION="0.9"
 export PPL_VERSION="0.11.2"
 export CLOOG_VERSION="0.16.3"
 export BINUTILS_VERSION="2.22"
-export GCC_VERSION="4.6.4"
+export GCC_VERSION="4.7.0"
 export GDB_VERSION="7.4"
 export PYTHON_VERSION="2.7.1"
 export MAKE_VERSION="3.82"
@@ -18,5 +18,5 @@ export CLANG_VERSION="3.1"
 export MINGW_W64_VERSION="trunk" #"stable/v2.x"
 
 # my revision number
-export MY_REVISION=
-export MY_CLANG_REVISION=-3
+export MY_REVISION=-3
+export MY_CLANG_REVISION=-4
