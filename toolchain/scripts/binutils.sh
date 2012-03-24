@@ -7,7 +7,7 @@ then
 else
     echo "--> Configuring"
     sh $SRC_DIR/binutils/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                                   --disable-multilib \
+                                   --disable-multilib --enable-plugins \
                                    --with-libiconv-prefix=$PREREQ_INSTALL \
                                    $GNU_WIN32_OPTIONS \
                                    CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \

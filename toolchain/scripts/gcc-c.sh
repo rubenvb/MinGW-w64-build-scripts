@@ -12,7 +12,7 @@ else
                               --with-ppl=$PREREQ_INSTALL --with-cloog=$PREREQ_INSTALL \
                               --enable-cloog-backend=isl --with-host-libstdcxx='-static -lstdc++ -lm' \
                               --enable-shared --enable-static --enable-threads=posix \
-                              --disable-multilib \
+                              --disable-multilib --enable-plugins \
                               --enable-languages=$GCC_LANGUAGES --enable-libgomp --enable-libstdcxx-debug \
                               --enable-sjlj-exceptions --enable-fully-dynamic-string \
                               --disable-nls --disable-werror --enable-checking=release  \
