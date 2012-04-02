@@ -44,11 +44,19 @@ echo "-> Removing temporary downloads"
 rm -rf $DOWNLOADS_DIR
 
 # Version control downloads
+#
+# Examples:
+#   vc "LLVM" "svn" "http://llvm.org/svn/llvm-project/llvm/trunk" || exit 1
+#   vc "LLVM" "svn" "http://llvm.org/svn/llvm-project/llvm" "trunk" || exit 1
+#   vc "LLVM" "svn" "http://llvm.org/svn/llvm-project/llvm" "branches/fake-branch || exit 1
+#   vc "gcc"  "git" "git://gcc.gnu.org/git/gcc.git" "fake-branch" || exit 1
+#   vc "fake" "git" "git://example.com/git/fake.git" "someone/mods" || exit 1
 function vc()
 {
   NAME=$1
   VC=$2
   URL=$3
+  BRANCH=$4
   echo "-> $NAME, from version control"
   if [ ! -d $SOURCE_DIR/$NAME ]
   then
@@ -57,10 +65,20 @@ function vc()
     echo "--> Fetching $NAME sources from $VC"
     case $VC in
     "svn")
-      svn co $URL . > /dev/null 2>&1 || exit 1
+      if [ ! -z $BRANCH ]
+      then
+        svn co "$URL/$BRANCH" . > /dev/null 2>&1 || exit 1
+      else
+        svn co $URL . > /dev/null 2>&1 || exit 1
+      fi
       ;;
     "git")
-      git clone --depth=1 $URL . > /dev/null 2>&1 || exit 1
+      if [ ! -z $BRANCH ]
+      then
+        git clone --depth=1 -b $BRANCH $URL . > /dev/null 2>&1 || exit 1
+      else
+        git clone --depth=1 $URL . > /dev/null 2>&1 || exit 1
+      fi
       ;;
     esac
   else
@@ -68,9 +86,15 @@ function vc()
     echo "--> Updating from $VC"
     case $VC in
     "svn")
+      # XXX assumes repo is already on correct branch. Always `svn switch`?
       svn up > /dev/null 2>&1 || exit 1
       ;;
     "git")
+      if [ ! -z $BRANCH ]
+      then
+        # XXX --force throws away any local changes in repo
+        git checkout --force $BRANCH
+      fi
       git pull > /dev/null 2>&1 || exit 1
       ;;
     esac
