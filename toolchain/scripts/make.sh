@@ -7,6 +7,7 @@ then
 else
     echo "--> Configuring"
     sh $SRC_DIR/make-$MAKE_VERSION/configure --host=$HOST --build=$BUILD --prefix=$PREFIX \
+                                             --enable-job-server \
                                              --enable-case-insensitive-file-system --program-prefix='mingw32-' \
                                              CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                                              > $LOG_DIR/make_configure.log 2>&1 || exit 1

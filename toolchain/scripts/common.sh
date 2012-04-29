@@ -11,8 +11,8 @@ then
   export HOST_CFLAGS="$HOST_CFLAGS -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all"
   #if [ "$HOST_OS" != "mingw32" ] && [ "$HOST_OS" != "cygwin" ]
   #then
-    # Linux GCC is failing with this
-    #export HOST_CFLAGS="$HOST_CFLAGS -flto"
+    # Linux GCC was failing with this
+    export HOST_CFLAGS="$HOST_CFLAGS -flto"
   #fi
 fi
 # GCC languages to be built
