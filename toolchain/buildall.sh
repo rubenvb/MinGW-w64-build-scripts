@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Checking sources' availability and up-to-dateness"
-. ./scripts/updatesources.sh || exit 1
+#echo "Checking sources' availability and up-to-dateness"
+#. ./scripts/updatesources.sh || exit 1
 
 echo "Building linux 64-bit to Windows 32-bit cross-compiler"
 sh ./buildlinux64mingw32.sh || exit 1

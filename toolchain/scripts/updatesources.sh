@@ -44,11 +44,24 @@ echo "-> Removing temporary downloads"
 rm -rf $DOWNLOADS_DIR
 
 # Version control downloads
+# release revisions
+function gcc_svn_revision()
+{
+  case $1 in
+  "4.5.1") echo "162774" ;;
+  "4.5.2") echo "167946" ;;
+  "4.5.3") echo "173114" ;;
+  "4.6.0") echo "171513" ;;
+  "4.6.1") echo "175473" ;;
+  "4.6.2") echo "184738" ;;
+  "4.6.3") echo "184738" ;;
+  "4.7.0") echo "185675" ;;
+}
 function vc()
 {
-  NAME=$1
-  VC=$2
-  URL=$3
+  local NAME=$1
+  local VC=$2
+  local URL=$3
   echo "-> $NAME, from version control"
   if [ ! -d $SOURCE_DIR/$NAME ]
   then
@@ -77,7 +90,9 @@ function vc()
   fi
 }
 
+#always trunk
 vc "binutils"         "git" "git://sourceware.org/git/binutils.git" || exit 1
+
 vc "mingw-w64"        "svn" "https://mingw-w64.svn.sourceforge.net/svnroot/mingw-w64" || exit 1
 vc "gcc"              "git" "git://gcc.gnu.org/git/gcc.git" || exit 1
 vc "gdb"              "git" "git://sourceware.org/git/gdb.git" || exit 1
