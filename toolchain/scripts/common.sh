@@ -4,7 +4,7 @@ set -e
 # build options - for my system only
 export BUILD=x86_64-linux-gnu
 export MAKE_OPTS="-j4"
-export HOST_CFLAGS="-O2 -mtune=corei7"
+export HOST_CFLAGS="-O2 -march=nocona -mtune=core2"
 export HOST_LDFLAGS= #"-flto"
 if [ "$HOST_VENDOR" != "apple" ]
 then
@@ -12,7 +12,7 @@ then
   #if [ "$HOST_OS" != "mingw32" ] && [ "$HOST_OS" != "cygwin" ]
   #then
     # Linux GCC was failing with this
-    export HOST_CFLAGS="$HOST_CFLAGS -flto"
+  #  export HOST_CFLAGS="$HOST_CFLAGS -flto"
   #fi
 fi
 # GCC languages to be built
