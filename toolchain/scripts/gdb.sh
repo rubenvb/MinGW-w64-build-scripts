@@ -9,7 +9,7 @@ else
     sh $SRC_DIR/gdb/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
                               --with-libiconv-prefix=$PREREQ_INSTALL \
                               --with-libexpat-prefix=$PREREQ_INSTALL \
-                              --with-python --enable-plugins \
+                              --with-python \
                               $GNU_WIN32_OPTIONS \
                               CFLAGS="$HOST_CFLAGS $GDB_PYTHON_WIN64_WORKAROUND -I$BUILD_DIR/python/include" LDFLAGS="$HOST_LDFLAGS -L$BUILD_DIR/python" \
                               > $LOG_DIR/gdb_configure.log 2>&1 || exit 1

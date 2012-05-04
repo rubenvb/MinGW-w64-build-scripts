@@ -9,7 +9,6 @@ else
     sh $SRC_DIR/mingw-w64/experimental/winpthreads/configure --host=$TARGET --build=$BUILD \
                                                              --prefix=$PREFIX/$TARGET \
                                                              --enable-shared --enable-static \
-                                                             CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                                                              > $LOG_DIR/winpthreads_configure.log 2>&1 || exit 1
 fi
 touch configure.marker
