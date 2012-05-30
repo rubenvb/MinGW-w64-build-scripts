@@ -37,3 +37,8 @@ sh ./buildmingw32mingw32.sh || exit 1
 #sh ./buildmac64mingw32.sh || exit 1
 #echo "Building Mac 64-bit to Windows 64-bit cross-compiler"
 #sh ./buildmac64mingw64.sh || exit 1
+
+#echo "Building LLVM/Clang 32-bit"
+#sh ./buildllvmclang32.sh
+#echo "Building LLVM/Clang 64-bit"
+#sh ./buildllvmclang64.sh
