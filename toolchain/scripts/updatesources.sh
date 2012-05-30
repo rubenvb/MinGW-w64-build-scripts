@@ -56,6 +56,7 @@ function gcc_svn_revision()
   "4.6.2") echo "184738" ;;
   "4.6.3") echo "184738" ;;
   "4.7.0") echo "185675" ;;
+  esac
 }
 function vc()
 {
