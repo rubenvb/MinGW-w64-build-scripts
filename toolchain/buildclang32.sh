@@ -12,5 +12,7 @@ export LONG_NAME=clang32mingw32
 export CRT_MULTILIB='--disable-lib64 --enable-lib32'
 export GDB_PYTHON_WIN64_WORKAROUND=
 
-# 
-. ./scripts/buildcrossfromnative.sh
+# Build GCC
+. ./scripts/buildfromcross.sh
+# Build LLVM/Clang
+. ./scripts/buildclang.sh
