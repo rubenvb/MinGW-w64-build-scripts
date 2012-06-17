@@ -13,7 +13,7 @@ what directories need to be present in the src subdirectory.
 
 1.1 Prerequisites
 -----------------
-All scripts assume a Linux x86_6 build box, with below tools installed. If you want to try building Cygwin and Mac
+All scripts assume a Linux x86_64 build box, with below tools installed. If you want to try building Cygwin and Mac
 hosted toolchains, you can use Fedora's cross-compilers that you can find here:
 Mac OS X: http://build1.openftd.org/fedora-cross-darwinx
 Cygwin:   ftp://ftp.cygwinports.org/pub/cygwinports
