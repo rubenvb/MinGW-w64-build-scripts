@@ -8,7 +8,6 @@ export BUILD_CROSS_FROM_NATIVE="true"
 
 # Projects to be built, in the right order
 PREGCC_STEPS="mingw-w64-headers
-              libiconv
               binutils
               gmp mpfr mpc
               ppl cloog"

@@ -2,7 +2,6 @@
 set -e
 
 # native compiler options
-export GNU_WIN32_OPTIONS='--disable-win32-registry --disable-rpath --disable-werror'
 export MAKE_AR="AR=$HOST-ar" # necessary for libiconv+x86_64-apple-darwin10
 if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "i686-pc-cygwin" ]
 then
@@ -13,6 +12,8 @@ fi
 echo "Executing preliminary common steps"
 export BUILD_CROSS_FROM_NATIVE="false"
 . ./scripts/common.sh || exit 1
+
+export GNU_WIN32_OPTIONS="--disable-win32-registry --disable-rpath --disable-werror --with-libiconv-prefix=$PREREQ_INSTALL"
 
 # Projects to be built, in the right order
 PREGCC_STEPS="mingw-w64-headers

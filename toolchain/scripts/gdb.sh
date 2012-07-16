@@ -7,7 +7,6 @@ then
 else
     echo "--> Configuring"
     sh $SRC_DIR/gdb/configure --host=$HOST --build=$BUILD --target=$TARGET --prefix=$PREFIX \
-                              --with-libiconv-prefix=$PREREQ_INSTALL \
                               --with-libexpat-prefix=$PREREQ_INSTALL \
                               --with-python \
                               $GNU_WIN32_OPTIONS \
