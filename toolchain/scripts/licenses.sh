@@ -71,7 +71,7 @@ else
 
     echo "---> Winpthreads"
     mkdir -p winpthreads
-    cp $SRC_DIR/mingw-w64/experimental/winpthreads/COPYING winpthreads/COPYING
+    cp $SRC_DIR/winpthreads/COPYING winpthreads/COPYING
 
     if [ "$HOST" != "x86_64-w64-mingw32" ] && [ "$HOST" != "i686-w64-mingw32" ]
     then
