@@ -6,11 +6,11 @@ then
   echo "--> Already configured"
 else
   echo "--> Configuring"
-  sh $SRC_DIR/mpfr-$MPFR_VERSION/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
-                                           --disable-shared --enable-static \
-                                           --with-gmp=$PREREQ_INSTALL \
-                                           CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
-                                           > $LOG_DIR/mpfr_configure.log 2>&1 || exit 1
+  sh $SRC_DIR/mpfr/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
+                             --disable-shared --enable-static \
+                             --with-gmp=$PREREQ_INSTALL \
+                             CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
+                             > $LOG_DIR/mpfr_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi
 touch configure.marker

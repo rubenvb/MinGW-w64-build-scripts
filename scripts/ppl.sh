@@ -6,11 +6,11 @@ then
   echo "--> Already configured"
 else
   echo "--> Configuring"
-  sh $SRC_DIR/ppl-$PPL_VERSION/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
-                                         --disable-shared --enable-static \
-                                         --disable-watchdog --disable-ppl_lcdd --disable-ppl_lpsol --disable-ppl_pips \
-                                         CPPFLAGS="$HOST_CPPFLAGS -I$PREREQ_INSTALL/include" LDFLAGS="$HOST_LDFLAGS -L$PREREQ_INSTALL/lib" \
-                                         > $LOG_DIR/ppl_configure.log 2>&1 || exit 1
+  sh $SRC_DIR/ppl/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
+                            --disable-shared --enable-static \
+                            --disable-watchdog --disable-ppl_lcdd --disable-ppl_lpsol --disable-ppl_pips \
+                            CPPFLAGS="$HOST_CPPFLAGS -I$PREREQ_INSTALL/include" LDFLAGS="$HOST_LDFLAGS -L$PREREQ_INSTALL/lib" \
+                            > $LOG_DIR/ppl_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi
 touch configure.marker
