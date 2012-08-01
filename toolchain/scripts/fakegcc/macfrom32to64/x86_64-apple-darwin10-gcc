@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-/usr/bin/darwinx-gcc -m64 -arch x86_64 "$@"
