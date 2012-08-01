@@ -13,12 +13,11 @@ echo "-> Setting up directories"
 . ./scripts/directories.sh || exit 1
 
 # native compiler options
-export MAKE_AR="AR=$HOST-ar" # necessary for libiconv+x86_64-apple-darwin10
+#export MAKE_AR="AR=$HOST-ar" # necessary for libiconv+x86_64-apple-darwin10
 if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "i686-pc-cygwin" ]
 then
-    export HOST_LDFLAGS="-Wl,--large-address-aware"
+  export HOST_LDFLAGS_BINUTILS="$HOST_LDFLAGS -Wl,--large-address-aware"
 fi
-
 
 export GNU_WIN32_OPTIONS="--disable-win32-registry --disable-rpath --disable-werror --with-libiconv-prefix=$PREREQ_INSTALL"
 
@@ -32,10 +31,10 @@ PREGCC_STEPS="mingw-w64-headers
               ppl cloog"
 if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "x86_64-w64-mingw32" ]
 then
-    POSTGCC_STEPS="expat
-                   python
-                   gdb
-                   make"
+  POSTGCC_STEPS="expat
+                 python
+                 gdb
+                 make"
 fi
 POSTGCC_STEPS="$POSTGCC_STEPS
                cleanup
@@ -45,12 +44,21 @@ cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS
 mkdir -p $POSTGCC_STEPS
 
+#copy GCC environment setup
+if [ "$TARGET_ARCH" == "i686" ]
+then
+  cp $TOP_DIR/envsetup/mingw32env.cmd $PREFIX/
+elif [ "$TARGET_ARCH" == "x86_64" ]
+then
+  cp $TOP_DIR/envsetup/mingw64env.cmd $PREFIX/
+fi
+
 # Build
 for step in $PREGCC_STEPS
 do
-    cd $BUILD_DIR/$step
-    echo "-> $step"
-    . $SCRIPTS/$step.sh || exit 1
+  cd $BUILD_DIR/$step
+  echo "-> $step"
+  . $SCRIPTS/$step.sh || exit 1
 done
 # build GCC
 cd $BUILD_DIR/gcc
@@ -59,7 +67,7 @@ echo "-> GCC: Full compiler suite"
 # build the rest
 for step in $POSTGCC_STEPS
 do
-    cd $BUILD_DIR/$step
-    echo "-> $step"
-    . $SCRIPTS/$step.sh || exit 1
+  cd $BUILD_DIR/$step
+  echo "-> $step"
+  . $SCRIPTS/$step.sh || exit 1
 done

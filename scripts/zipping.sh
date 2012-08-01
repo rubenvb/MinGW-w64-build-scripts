@@ -34,6 +34,7 @@ if [ "$HOST_OS" == "mingw32" ]
 then
   BIN_COMPRESS="7za -l -bd -mx9 a"
   BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.7z
+  CLANG_SRC_FILE=$PACKAGE_DIR/clang-${CLANG_VERSION}_rubenvb.tar.xz
 else
   BIN_COMPRESS="tar -J -cf"
   BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.xz
@@ -59,9 +60,9 @@ else
   TAR_EXCLUDES="--exclude='*.git' --exclude='*.svn'"
   if [ "$SHORT_NAME" != "mingw32-dw2" ]
   then
-    TAR_EXCLUDES="$TAR_EXCLUDES --exclude=src/LLVM"
+    tar -J -h cf $CLANG_SRC_FILE buildclang32.sh scripts/buildclangfromcross.sh src/LLVM
   fi
-  tar -J -cf $SRC_FILE --exclude='*.git' --exclude='*.svn' src scripts patches *.sh
+  tar -J -h -cf $SRC_FILE $TAR_EXCLUDES --exclude='src/LLVM/' --exclude='buildclang32.sh' --exclude='scripts/buildclangfromcross.sh' src scripts patches *.sh
 fi
 
 cd $TOP_DIR

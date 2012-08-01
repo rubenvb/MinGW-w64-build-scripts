@@ -3,7 +3,7 @@ set -e
 
 # build options - for my system only, change if you want/need
 export BUILD=x86_64-linux-gnu
-export MAKE_OPTS="-j4"
+export MAKE_OPTS="-j1"
 export HOST_CFLAGS="-O2 -march=nocona -mtune=core2"
 #export HOST_CFLAGS="$HOST_CFLAGS -flto"
 #export HOST_LDFLAGS="$HOST_LDFLAGS -flto"

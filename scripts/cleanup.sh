@@ -25,15 +25,14 @@ else
 
   if [[ "$TARGET" == "$HOST" ]]
   then
-    $HOST-strip $PREFIX-clang/bin/*.exe || exit 1
-    $HOST-strip $PREFIX-clang/bin/*.dll || exit 1
     echo "---> Copying and stripping DLL's"
     $HOST-strip $PREFIX/bin/*.dll || exit 1
     # recopy python dll, stripping it breaks it
     cp $BUILD_DIR/python/bin/python27.dll $PREFIX/bin/python27.dll || exit 1
-    else
-        echo "---> No DLL's to copy for cross-compiler"
-    fi
-    cd $BUILD_DIR/cleanup
+  else
+    echo "---> No DLL's to copy for cross-compiler"
+  fi
+  
+  cd $BUILD_DIR/cleanup
 fi
 touch cleanup.marker

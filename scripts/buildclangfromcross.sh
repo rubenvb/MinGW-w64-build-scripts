@@ -36,6 +36,9 @@ cp $SRC_DIR/LLVM/LICENSE.TXT LLVM/LICENSE.TXT
 mkdir -p clang
 cp $SRC_DIR/LLVM/tools/clang/LICENSE.TXT clang/LICENSE.TXT
 
+#copy environment setup
+cp $TOP_DIR/envsetup/clang32env.cmd $PREFIX/
+
 #cleanup
 echo "-> Cleanup"
 cd $PREFIX
