@@ -22,7 +22,7 @@ else
                             --enable-languages=$GCC_LANGUAGES --enable-libgomp --enable-libstdcxx-debug \
                             $GCC_EXCEPTIONS --enable-fully-dynamic-string \
                             --disable-nls --disable-werror --enable-checking=release \
-                            --with-gnu-as --with-gnu-ld
+                            --with-gnu-as --with-gnu-ld \
                             $GNU_WIN32_OPTIONS \
                             CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                             > $LOG_DIR/gcc_configure.log 2>&1 || exit 1

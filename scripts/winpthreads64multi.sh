@@ -40,7 +40,7 @@ else
 fi
 touch install.marker
 
-cd $BUILD_DIR/winpthreads64
+cd $BUILD_DIR/winpthreads32
 
 if [ -f configure.marker ]
 then
@@ -70,7 +70,7 @@ else
   echo "--> Installing 32-bit winpthreads"
   make $MAKE_OPTS install > $LOG_DIR/winpthreads32_install.log 2>&1 || exit 1
 
-  cp -r $BUILD_DIR/winpthreads32/install/lib $PREFIX/$TARGET/lib32
-  cp $BUILD_DIR/winpthreads32/bin/libwinpthread-1.dll $PREFIX/$TARGET/lib32/libwinpthread-1.dll
+  cp -r $BUILD_DIR/winpthreads32/install/lib/* $PREFIX/$TARGET/lib32/
+  cp $BUILD_DIR/winpthreads32/install/bin/libwinpthread-1.dll $PREFIX/$TARGET/lib32/libwinpthread-1.dll
 fi
 touch install.marker

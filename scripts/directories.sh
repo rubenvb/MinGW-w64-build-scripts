@@ -14,7 +14,30 @@ export SCRIPTS=$TOP_DIR/scripts
 export PREFIX=$BUILD_DIR/$SHORT_NAME
 DIRS_TO_MAKE="$BUILD_DIR $BUILD_DIR/gcc $LOG_DIR
               $BUILD_DIR/mingw-w64-crt $BUILD_DIR/winpthreads-32 $BUILD_DIR/winpthreads-64
-              $PREFIX $PREFIX/mingw/include $PREFIX/$TARGET/include
+              $PREFIX $PREFIX/mingw $PREFIX/$TARGET/include $PREFIX/$TARGET/lib
               $PREREQ_INSTALL $PREREQ_INSTALL/lib $PREREQ_INSTALL/include
               $PACKAGE_DIR $PACKAGE_DIR/$HOST"
 mkdir -p $DIRS_TO_MAKE
+
+if [ "$TARGET_ARCH" == "i686" ]
+then
+  mkdir -p $PREFIX/$TARGET/lib64
+  rm -f $PREFIX/mingw/include
+  rm -f $PREFIX/mingw/lib64
+  rm -f $PREFIX/mingw/lib
+  ln -s $PREFIX/$TARGET/include $PREFIX/mingw/include
+  ln -s $PREFIX/$TARGET/lib $PREFIX/mingw/lib
+  ln -s $PREFIX/$TARGET/lib64 $PREFIX/mingw/lib64
+elif [ "$TARGET_ARCH" == "x86_64" ]
+then
+  mkdir -p $PREFIX/$TARGET/lib32
+  rm -f $PREFIX/mingw/include
+  rm -f $PREFIX/mingw/lib32
+  rm -f $PREFIX/mingw/lib
+  ln -s $PREFIX/$TARGET/include $PREFIX/mingw/include
+  ln -s $PREFIX/$TARGET/lib $PREFIX/mingw/lib
+  ln -s $PREFIX/$TARGET/lib32 $PREFIX/mingw/lib32
+else
+  echo "ERROR, unknown target architecture."
+  exit 1
+fi

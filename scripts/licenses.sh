@@ -25,7 +25,7 @@ else
 
   echo "---> Expat"
   mkdir -p expat
-  cp $SRC_DIR/expat-$EXPAT_VERSION/COPYING expat/COPYING
+  cp $SRC_DIR/expat/COPYING expat/COPYING
 
   echo "---> GCC"
   mkdir -p gcc
@@ -37,37 +37,37 @@ else
 
   echo "---> GMP"
   mkdir -p gmp
-  cp $SRC_DIR/gmp-$GMP_VERSION/COPYING gmp/COPYING
-  cp $SRC_DIR/gmp-$GMP_VERSION/COPYING.LIB gmp/COPYING.LIB
+  cp $SRC_DIR/gmp/COPYING gmp/COPYING
+  cp $SRC_DIR/gmp/COPYING.LIB gmp/COPYING.LIB
 
   echo "---> libiconv"
   mkdir -p libiconv
-  cp $SRC_DIR/libiconv-$LIBICONV_VERSION/COPYING libiconv/COPYING
-  cp $SRC_DIR/libiconv-$LIBICONV_VERSION/COPYING.LIB libiconv/COPYING.LIB
+  cp $SRC_DIR/libiconv/COPYING libiconv/COPYING
+  cp $SRC_DIR/libiconv/COPYING.LIB libiconv/COPYING.LIB
 
   echo "---> mingw-w64"
   mkdir -p mingw-w64
-  cp $MINGW_W64_SRC/COPYING.MinGW-w64/COPYING.MinGW-w64.txt mingw-w64/COPYING.MinGW-w64.txt
-  cp $MINGW_W64_SRC/COPYING.MinGW-w64-runtime/COPYING.MinGW-w64-runtime.txt mingw-w64/COPYING.MinGW-w64-runtime.txt
-  cp $MINGW_W64_SRC/COPYING mingw-w64/COPYING
-  cp $MINGW_W64_SRC/DISCLAIMER mingw-w64/DISCLAIMER
-  cp $MINGW_W64_SRC/DISCLAIMER.PD mingw-w64/DISCLAIMER.PD
-  cp $MINGW_W64_SRC/mingw-w64-headers/ddk/readme.txt mingw-w64/ddk-readme.txt
-  cp $MINGW_W64_SRC/mingw-w64-headers/direct-x/COPYING.LIB mingw-w64/direct-x-COPYING.lib
-  cp $MINGW_W64_SRC/mingw-w64-headers/direct-x/readme.txt mingw-w64/direct-x-readme.txt
+  cp $SRC_DIR/mingw-w64/COPYING.MinGW-w64/COPYING.MinGW-w64.txt mingw-w64/COPYING.MinGW-w64.txt
+  cp $SRC_DIR/mingw-w64/COPYING.MinGW-w64-runtime/COPYING.MinGW-w64-runtime.txt mingw-w64/COPYING.MinGW-w64-runtime.txt
+  cp $SRC_DIR/mingw-w64/COPYING mingw-w64/COPYING
+  cp $SRC_DIR/mingw-w64/DISCLAIMER mingw-w64/DISCLAIMER
+  cp $SRC_DIR/mingw-w64/DISCLAIMER.PD mingw-w64/DISCLAIMER.PD
+  cp $SRC_DIR/mingw-w64/mingw-w64-headers/ddk/readme.txt mingw-w64/ddk-readme.txt
+  cp $SRC_DIR/mingw-w64/mingw-w64-headers/direct-x/COPYING.LIB mingw-w64/direct-x-COPYING.lib
+  cp $SRC_DIR/mingw-w64/mingw-w64-headers/direct-x/readme.txt mingw-w64/direct-x-readme.txt
 
   echo "---> MPC"
   mkdir -p mpc
-  cp $SRC_DIR/mpc-$MPC_VERSION/COPYING.LIB mpc/COPYING.LIB
+  cp $SRC_DIR/mpc/COPYING.LIB mpc/COPYING.LIB
 
   echo "---> MPFR"
   mkdir -p mpfr
-  cp $SRC_DIR/mpfr-$MPFR_VERSION/COPYING mpfr/COPYING
-  cp $SRC_DIR/mpfr-$MPFR_VERSION/COPYING.LESSER mpfr/COPYING.LESSER
+  cp $SRC_DIR/mpfr/COPYING mpfr/COPYING
+  cp $SRC_DIR/mpfr/COPYING.LESSER mpfr/COPYING.LESSER
     
   echo "---> PPL"
   mkdir -p ppl
-  cp $SRC_DIR/ppl-$PPL_VERSION/COPYING ppl/COPYING
+  cp $SRC_DIR/ppl/COPYING ppl/COPYING
 
   echo "---> Winpthreads"
   mkdir -p winpthreads
@@ -79,7 +79,7 @@ else
   else
     echo "---> Make"
     mkdir -p make
-    cp $SRC_DIR/make-$MAKE_VERSION/COPYING make/COPYING
+    cp $SRC_DIR/make/COPYING make/COPYING
 
     echo "---> Python"
     mkdir -p python
