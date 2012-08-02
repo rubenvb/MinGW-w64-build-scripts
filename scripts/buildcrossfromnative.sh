@@ -22,6 +22,7 @@ POSTGCC_STEPS="cleanup
                zipping"
 cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS
+mkdir -p gcc
 mkdir -p mingw-w64-crt
 mkdir -p winpthreads32 winpthreads64
 mkdir -p $POSTGCC_STEPS

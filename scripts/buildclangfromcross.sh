@@ -12,12 +12,6 @@ echo "-> Loading version info"
 echo "-> Setting up directories"
 . ./scripts/directories.sh || exit 1
 
-# native compiler options
-if [ "$HOST" == "i686-w64-mingw32" ]
-then
-  export HOST_LDFLAGS="-Wl,--large-address-aware"
-fi
-
 # build directory
 mkdir -p $BUILD_DIR/LLVM-Clang
 
@@ -48,9 +42,12 @@ echo "--> Stripping executables"
 find . -name \*.exe -exec $HOST-strip {} \;
 
 #zipping
-BIN_FILE_CLANG=$PACKAGE_DIR/$HOST/$TARGET-clang-${CLANG_VERSION}${MY_REVISION}-win32_rubenvb.7z
+echo "-> Packaging Clang addon package"
+SRC_COMPRESS="tar -J -hcf"
+BIN_COMPRESS="7za -l -bd -mx9 a"
+BIN_FILE_CLANG=$PACKAGE_DIR/$HOST/$TARGET-clang-${RUBENVB_CLANG_VERSION}-win32_rubenvb.7z
+CLANG_SRC_FILE=$PACKAGE_DIR/clang-${RUBENVB_CLANG_VERSION}_rubenvb.tar.xz
 
-echo "---> Clang addon package"
 cd $BUILD_DIR
 $BIN_COMPRESS $BIN_FILE_CLANG $SHORT_NAME > $LOG_DIR/zipping.log
-  
+$SRC_COMPRESS $CLANG_SRC_FILE buildclang32.sh scripts/buildclangfromcross.sh src/LLVM

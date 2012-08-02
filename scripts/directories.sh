@@ -12,8 +12,7 @@ export LOG_DIR=$BUILD_DIR/logs
 export PREREQ_INSTALL=$BUILD_DIR/prereq
 export SCRIPTS=$TOP_DIR/scripts
 export PREFIX=$BUILD_DIR/$SHORT_NAME
-DIRS_TO_MAKE="$BUILD_DIR $BUILD_DIR/gcc $LOG_DIR
-              $BUILD_DIR/mingw-w64-crt $BUILD_DIR/winpthreads-32 $BUILD_DIR/winpthreads-64
+DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
               $PREFIX $PREFIX/mingw $PREFIX/$TARGET/include $PREFIX/$TARGET/lib
               $PREREQ_INSTALL $PREREQ_INSTALL/lib $PREREQ_INSTALL/include
               $PACKAGE_DIR $PACKAGE_DIR/$HOST"

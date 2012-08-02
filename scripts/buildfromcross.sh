@@ -42,6 +42,7 @@ POSTGCC_STEPS="$POSTGCC_STEPS
                zipping"
 cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS
+mkdir -p gcc
 mkdir -p $POSTGCC_STEPS
 
 #copy GCC environment setup
