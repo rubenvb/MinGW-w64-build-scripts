@@ -54,8 +54,7 @@ then
 else
   echo "--> Zipping sources"
   cd $TOP_DIR
-  TAR_EXCLUDES="--exclude='*.git' --exclude='*.svn'"
-  tar -J -hcf $SRC_FILE $TAR_EXCLUDES --exclude='src/LLVM/' --exclude='buildclang32.sh' --exclude='scripts/buildclangfromcross.sh' src scripts patches *.sh
+  tar -J -hcf $SRC_FILE --exclude='*.git*' --exclude='*.svn*' --exclude='src/LLVM/' --exclude='buildclang32.sh' --exclude='scripts/buildclangfromcross.sh' src scripts patches *.sh
 fi
 
 cd $TOP_DIR
