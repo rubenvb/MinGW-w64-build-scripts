@@ -14,7 +14,7 @@ export TARGET_OS=mingw32
 export TARGET=$TARGET_ARCH-$TARGET_VENDOR-$TARGET_OS
 
 export SHORT_NAME=mingw32-dw2
-export LONG_NAME=clang32mingw32
+export LONG_NAME=mingw32clang32
 
 # call main build script
 . ./scripts/buildclangfromcross.sh
