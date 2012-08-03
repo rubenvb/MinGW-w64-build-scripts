@@ -24,7 +24,7 @@ cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS
 mkdir -p gcc
 mkdir -p mingw-w64-crt
-mkdir -p winpthreads32 winpthreads64
+mkdir -p winpthreads
 mkdir -p $POSTGCC_STEPS
 cd $TOP_DIR
 
@@ -47,12 +47,14 @@ cd $BUILD_DIR/mingw-w64-crt
 . $SCRIPTS/mingw-w64-crt.sh || exit 1
 # build winpthreads
 echo "-> Winpthreads"
-if [ "$TARGET_ARCH" == "x86_64" ]
-then
-  . $SCRIPTS/winpthreads64multi.sh || exit 1
-else
-  . $SCRIPTS/winpthreads32multi.sh || exit 1
-fi
+cd $BUILD_DIR/winpthreads
+. $SCRIPTS/winpthreads.sh || exit 1
+#if [ "$TARGET_ARCH" == "x86_64" ]
+#then
+#  . $SCRIPTS/winpthreads64multi.sh || exit 1
+#else
+#  . $SCRIPTS/winpthreads32multi.sh || exit 1
+#fi
 # build the rest of GCC
 echo "-> GCC: Full compiler suite"
 cd $BUILD_DIR/gcc

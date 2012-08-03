@@ -11,10 +11,10 @@ export TARGET_ARCH=i686
 export TARGET_VENDOR=w64
 export TARGET_OS=mingw32
 export TARGET=$TARGET_ARCH-$TARGET_VENDOR-$TARGET_OS
+export CRT_CONFIG="--enable-lib32 --disable-lib64"
 
 export SHORT_NAME=mingw64
 export LONG_NAME=mingw64mingw32
-
 export GDB_PYTHON_WIN64_WORKAROUND='-DMS_WIN64'
 
 # call main build script

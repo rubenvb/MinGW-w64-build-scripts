@@ -11,6 +11,7 @@ export TARGET_ARCH=i686
 export TARGET_VENDOR=w64
 export TARGET_OS=mingw32
 export TARGET=$TARGET_ARCH-$TARGET_VENDOR-$TARGET_OS
+export CRT_CONFIG="--enable-lib32 --disable-lib64"
 
 export SHORT_NAME=mingw32
 export LONG_NAME=mingw32mingw32

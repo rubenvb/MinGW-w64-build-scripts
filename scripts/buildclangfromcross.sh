@@ -30,10 +30,10 @@ cp $SRC_DIR/LLVM/LICENSE.TXT LLVM/LICENSE.TXT
 mkdir -p clang
 cp $SRC_DIR/LLVM/tools/clang/LICENSE.TXT clang/LICENSE.TXT
 
-#copy environment setup
+# copy environment setup
 cp $TOP_DIR/envsetup/clang32env.cmd $PREFIX/
 
-#cleanup
+# cleanup
 echo "-> Cleanup"
 cd $PREFIX
 echo "--> Removing libtool files"
@@ -41,7 +41,7 @@ find . -name \*.la -exec rm -f {} \;
 echo "--> Stripping executables"
 find . -name \*.exe -exec $HOST-strip {} \;
 
-#zipping
+# zipping
 echo "-> Packaging Clang addon package"
 SRC_COMPRESS="tar -J -hcf"
 BIN_COMPRESS="7za -l -bd -mx9 a"

@@ -7,7 +7,7 @@ then
 else
   echo "--> Configuring"
   sh $SRC_DIR/binutils/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                                 --enable-64-bit-bfd --enable-multilib --enable-targets=x86_64-w64-mingw32,i686-w64-mingw32 \
+                                 --enable-64-bit-bfd --disable-multilib \
                                  $GNU_WIN32_OPTIONS \
                                  CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS_BINUTILS" \
                                  > $LOG_DIR/binutils_configure.log 2>&1 || exit 1

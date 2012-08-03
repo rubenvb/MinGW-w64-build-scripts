@@ -19,11 +19,10 @@ echo "Building Windows 64-bit to Windows 64-bit native compiler"
 sh ./buildmingw64mingw64.sh || exit 1
 echo "Building Windows 32-bit to Windows 32-bit native compiler"
 sh ./buildmingw32mingw32.sh || exit 1
-#these are unnecessary when multilib works
-#echo "Building Windows 32-bit to Windows 64-bit native cross-compiler"
-#sh ./buildmingw32mingw64.sh || exit 1
-#echo "Building Windows 64-bit to Windows 32-bit native cross-compiler"
-#sh ./buildmingw64mingw32.sh || exit 1
+echo "Building Windows 32-bit to Windows 64-bit native cross-compiler"
+sh ./buildmingw32mingw64.sh || exit 1
+echo "Building Windows 64-bit to Windows 32-bit native cross-compiler"
+sh ./buildmingw64mingw32.sh || exit 1
 
 #echo "Building Cygwin 32-bit to Windows 32-bit cross-compiler"
 #sh ./buildcygwin32mingw32.sh || exit 1
