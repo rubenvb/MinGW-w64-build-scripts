@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-if [ "$SHORT_NAME$" == "mingw32-dw2" ]
-then
-  GCC_EXCEPTIONS="--enable-dw2-exceptions --disable-sjlj-exceptions"
-else
-  GCC_EXCEPTIONS="--disable-dw2-exceptions --enable-sjlj-exceptions"
-fi
-
 if [ -f configure.marker ]
 then
   echo "--> Already configured"
@@ -20,7 +13,7 @@ else
                             --enable-shared --enable-static --enable-threads=win32 \
                             --enable-plugins --disable-multilib \
                             --enable-languages=$GCC_LANGUAGES --enable-libgomp \
-                            $GCC_EXCEPTIONS --enable-fully-dynamic-string --enable-libstdcxx-time \
+                            $EXTRA_OPTIONS --enable-fully-dynamic-string --enable-libstdcxx-time \
                             --disable-nls --disable-werror --enable-checking=release \
                             --with-gnu-as --with-gnu-ld \
                             $GNU_WIN32_OPTIONS \
