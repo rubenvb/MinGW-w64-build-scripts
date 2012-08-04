@@ -1,5 +1,7 @@
 
-echo "Setting up environment for MinGW-w64 GCC 64-bit default target..."
+echo Setting up environment for MinGW-w64 GCC 64-bit...
 
 :: Toolchain
-@set PATH=%CD%\bin;%CD%\x86_64-w64-mingw32\lib32;%PATH%
+@set PATH=%CD%\bin;%PATH%
+
+echo Done!

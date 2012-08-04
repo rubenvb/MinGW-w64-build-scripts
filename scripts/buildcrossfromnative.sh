@@ -14,12 +14,14 @@ echo "-> Setting up directories"
 
 # Projects to be built, in the right order
 PREGCC_STEPS="mingw-w64-headers
-              binutils
-              gmp mpfr mpc
-              ppl cloog"
+              binutils"
+GNU_PREREQ="gmp mpfr mpc
+            ppl cloog"
 POSTGCC_STEPS="cleanup
                licenses
                zipping"
+cd $PREREQ_DIR
+mkdir -p $GNU_PREREQ
 cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS
 mkdir -p gcc
@@ -28,7 +30,15 @@ mkdir -p winpthreads
 mkdir -p $POSTGCC_STEPS
 cd $TOP_DIR
 
-# prepare for GCC
+
+# GCC prerequisites
+for step in $GNU_PREREQ
+do
+  echo "-> $step for $HOST"
+  cd $PREREQ_DIR/$step
+  . $SCRIPTS/$step.sh || exit 1
+done
+# headers and binutils
 for step in $PREGCC_STEPS
 do
     echo "-> $step"

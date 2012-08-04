@@ -23,16 +23,16 @@ export GNU_WIN32_OPTIONS="--disable-win32-registry --disable-rpath --disable-wer
 
 # Projects to be built, in the right order
 PREGCC_STEPS="mingw-w64-headers
-              libiconv
               binutils
               mingw-w64-crt
-              winpthreads
-              gmp mpfr mpc
-              ppl cloog"
+              winpthreads"
+GNU_PREREQ="libiconv
+            gmp mpfr mpc
+            ppl cloog"
 if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "x86_64-w64-mingw32" ]
 then
-  POSTGCC_STEPS="expat
-                 python
+  GNU_PREREQ="expat $GNU_PREREQ"
+  POSTGCC_STEPS="python
                  gdb
                  make"
 fi
@@ -40,12 +40,14 @@ POSTGCC_STEPS="$POSTGCC_STEPS
                cleanup
                licenses
                zipping"
+cd $PREREQ_DIR
+mkdir -p $GNU_PREREQ
 cd $BUILD_DIR
 mkdir -p $PREGCC_STEPS
 mkdir -p gcc
 mkdir -p $POSTGCC_STEPS
 
-#copy GCC environment setup
+#copy GCC environment setup script
 if [ "$TARGET_ARCH" == "i686" ]
 then
   cp $TOP_DIR/envsetup/mingw32env.cmd $PREFIX/
@@ -55,6 +57,11 @@ then
 fi
 
 # Build
+for step in $GNU_PREREQ
+  cd $PREREQ_DIR/step
+  echo "-> $step for $HOST"
+  . $SCRIPTS/$step.sh || exit 1
+done
 for step in $PREGCC_STEPS
 do
   cd $BUILD_DIR/$step
