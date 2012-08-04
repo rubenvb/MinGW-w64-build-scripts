@@ -58,7 +58,8 @@ fi
 
 # Build
 for step in $GNU_PREREQ
-  cd $PREREQ_DIR/step
+do
+  cd $PREREQ_DIR/$step
   echo "-> $step for $HOST"
   . $SCRIPTS/$step.sh || exit 1
 done
