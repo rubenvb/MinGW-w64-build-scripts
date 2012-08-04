@@ -10,8 +10,8 @@ export BUILD_DIR=$TOP_DIR/$LONG_NAME
 export PACKAGE_DIR=$TOP_DIR/packages
 export LOG_DIR=$BUILD_DIR/logs
 
-export PREREQ_BUILD=$TOP_DIR/prereq/$SHORT_NAME
-export PREREQ_INSTALL=$PREREQ_BUILD/install
+export PREREQ_DIR=$TOP_DIR/prereq/$SHORT_NAME
+export PREREQ_INSTALL=$PREREQ_DIR/install
 
 export SCRIPTS=$TOP_DIR/scripts
 
