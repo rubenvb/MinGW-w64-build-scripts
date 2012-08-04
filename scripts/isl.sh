@@ -6,7 +6,7 @@ then
   echo "--> Already configured"
 else
   echo "--> Configuring"
-  sh $SRC_DIR/ppl/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
+  sh $SRC_DIR/isl/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
                             --disable-shared --enable-static \
                             CPPFLAGS="$HOST_CPPFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                             > $LOG_DIR/isl_configure.log 2>&1 || exit 1
@@ -19,7 +19,7 @@ then
   echo "--> Already built"
 else
   echo "--> Building"
-  make $MAKE_OPTS > $LOG_DIR/ppl_build.log 2>&1 || exit 1
+  make $MAKE_OPTS > $LOG_DIR/isl_build.log 2>&1 || exit 1
 fi
 touch build.marker
 
@@ -28,6 +28,6 @@ then
   echo "--> Already installed"
 else
   echo "--> Installing"
-  make $MAKE_OPTS install > $LOG_DIR/ppl_install.log 2>&1 || exit 1
+  make $MAKE_OPTS install > $LOG_DIR/isl_install.log 2>&1 || exit 1
 fi
 touch install.marker
