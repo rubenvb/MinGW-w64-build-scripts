@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-SRC_FILE=$PACKAGE_DIR/gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}_rubenvb.tar.xz
+SRC_FILE=$PACKAGE_DIR/gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}_rubenvb.tar.bz2
 
 case $HOST in
   "i686-w64-mingw32")
@@ -35,12 +35,12 @@ then
   BIN_COMPRESS="7za -l -bd -mx9 a"
   BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.7z
 else
-  BIN_COMPRESS="tar -J -cf"
+  BIN_COMPRESS="tar -jhcf"
   if [ "$SHORT_NAME" == "mingw32-dw2" ]
   then
-    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-dw2-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.xz
+    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-dw2-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.bz2
   else
-    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.xz
+    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.bz2
   fi
 fi
 
@@ -59,7 +59,7 @@ then
 else
   echo "--> Zipping sources"
   cd $TOP_DIR
-  tar -J -hcf $SRC_FILE --exclude='*.git*' --exclude='*.svn*' --exclude='src/LLVM/' --exclude='buildclang32.sh' --exclude='scripts/buildclangfromcross.sh' src scripts patches *.sh
+  $BIN_COMPRESS $SRC_FILE --exclude='*.git*' --exclude='*.svn*' --exclude='src/LLVM/' --exclude='build*clang??.sh' --exclude='scripts/buildclangfromcross.sh' src scripts patches *.sh
 fi
 
 cd $TOP_DIR

@@ -18,7 +18,7 @@ else
                             --with-ppl=$PREREQ_INSTALL --with-cloog=$PREREQ_INSTALL \
                             --enable-cloog-backend=isl --with-host-libstdcxx='-static -lstdc++ -lm' \
                             --enable-shared --enable-static --enable-threads=win32 \
-                            --enable-plugins --disable-multilib \
+                            --enable-plugins --disable-multilib --enable-libstdcxx-time \
                             --enable-languages=$GCC_LANGUAGES --enable-libgomp --enable-libstdcxx-debug \
                             $GCC_EXCEPTIONS --enable-fully-dynamic-string \
                             --disable-nls --disable-werror --enable-checking=release \

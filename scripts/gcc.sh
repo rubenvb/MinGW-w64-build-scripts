@@ -20,7 +20,7 @@ else
                             --enable-shared --enable-static --enable-threads=win32 \
                             --enable-plugins --disable-multilib \
                             --enable-languages=$GCC_LANGUAGES --enable-libgomp --enable-libstdcxx-debug \
-                            $GCC_EXCEPTIONS --enable-fully-dynamic-string \
+                            $GCC_EXCEPTIONS --enable-fully-dynamic-string --enable-libstdcxx-time \
                             --disable-nls --disable-werror --enable-checking=release \
                             --with-gnu-as --with-gnu-ld \
                             $GNU_WIN32_OPTIONS \

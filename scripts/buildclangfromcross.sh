@@ -43,12 +43,12 @@ find . -name \*.exe -exec $HOST-strip {} \;
 
 # zipping
 echo "-> Packaging Clang addon package"
-SRC_COMPRESS="tar -J -hcf"
+SRC_COMPRESS="tar -jhcf"
 BIN_COMPRESS="7za -l -bd -mx9 a"
 BIN_FILE_CLANG=$PACKAGE_DIR/$HOST/$TARGET-clang-${RUBENVB_CLANG_VERSION}-win32_rubenvb.7z
-CLANG_SRC_FILE=$PACKAGE_DIR/clang-${RUBENVB_CLANG_VERSION}_rubenvb.tar.xz
+CLANG_SRC_FILE=$PACKAGE_DIR/clang-${RUBENVB_CLANG_VERSION}_rubenvb.tar.bz2
 
 cd $BUILD_DIR
 $BIN_COMPRESS $BIN_FILE_CLANG $SHORT_NAME > $LOG_DIR/zipping.log
 cd $TOP_DIR
-$SRC_COMPRESS $CLANG_SRC_FILE --exclude='*.git*' --exclude='*.svn*' build*clang32.sh scripts/buildclangfromcross.sh src/LLVM
+$SRC_COMPRESS $CLANG_SRC_FILE --exclude='*.git*' --exclude='*.svn*' build*clang??.sh scripts/buildclangfromcross.sh src/LLVM/
