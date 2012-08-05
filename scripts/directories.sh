@@ -23,7 +23,7 @@ export SCRIPTS=$TOP_DIR/scripts
 export PREFIX=$BUILD_DIR/$SHORT_NAME
 
 DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
-              $PREFIX $PREFIX/mingw $PREFIX/$TARGET/include $PREFIX/$TARGET/lib
+              $PREFIX $PREFIX/mingw $PREFIX/mingw/include $PREFIX/$TARGET/include $PREFIX/$TARGET/lib
               $PREREQ_INSTALL $PREREQ_INSTALL/lib $PREREQ_INSTALL/include
               $PACKAGE_DIR $PACKAGE_DIR/$HOST"
 mkdir -p $DIRS_TO_MAKE
