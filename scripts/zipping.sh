@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-SRC_FILE=$PACKAGE_DIR/gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}_rubenvb.tar.bz2
+SRC_FILE=$PACKAGE_DIR/gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}_rubenvb.tar.xz
 
 case $HOST in
   "i686-w64-mingw32")
