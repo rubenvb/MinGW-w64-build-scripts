@@ -17,4 +17,4 @@ export SHORT_NAME=mingw32-dw2
 export LONG_NAME=linux64mingw32-dw2
 
 # call main build script
-. ./scripts/buildfromcross.sh
+. ./scripts/buildcrossfromnative.sh
