@@ -60,10 +60,10 @@ touch cleanup.marker
 
 # zipping
 echo "-> Packaging Clang addon package"
-SRC_COMPRESS="tar -jhcf"
+SRC_COMPRESS="tar -Jhcf"
 BIN_COMPRESS="7za -l -bd -mx9 a"
 BIN_FILE_CLANG=$PACKAGE_DIR/$HOST/$TARGET-clang-${RUBENVB_CLANG_VERSION}-win32_rubenvb.7z
-CLANG_SRC_FILE=$PACKAGE_DIR/clang-${RUBENVB_CLANG_VERSION}_rubenvb.tar.bz2
+CLANG_SRC_FILE=$PACKAGE_DIR/clang-${RUBENVB_CLANG_VERSION}_rubenvb.tar.xz
 
 cd $BUILD_DIR
 $BIN_COMPRESS $BIN_FILE_CLANG $SHORT_NAME > $LOG_DIR/zipping.log

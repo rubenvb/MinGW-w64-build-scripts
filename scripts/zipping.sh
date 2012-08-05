@@ -30,7 +30,7 @@ case $HOST in
     ;;
 esac
 
-SRC_COMPRESS="tar -jhcf"
+SRC_COMPRESS="tar -Jhcf"
 if [ "$HOST_OS" == "mingw32" ]
 then
   BIN_COMPRESS="7za -l -bd -mx9 a"
@@ -39,9 +39,9 @@ else
   BIN_COMPRESS=$SRC_COMPRESS
   if [ "$SHORT_NAME" == "mingw32-dw2" ]
   then
-    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-dw2-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.bz2
+    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-dw2-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.xz
   else
-    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.bz2
+    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.xz
   fi
 fi
 
