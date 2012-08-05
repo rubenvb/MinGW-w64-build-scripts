@@ -30,6 +30,7 @@ case $HOST in
     ;;
 esac
 
+export XZ_OPT="-9"
 SRC_COMPRESS="tar -Jhcf"
 if [ "$HOST_OS" == "mingw32" ]
 then
