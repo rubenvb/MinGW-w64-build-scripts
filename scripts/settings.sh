@@ -16,13 +16,12 @@ if [ "$TARGET_ARCH" == "i686" ]
 then
   EXTRA_OPTIONS="$EXTRA_OPTIONS --enable-libgcj"
 fi
-EXTRA_OPTIONS=
 if [ "$SHORT_NAME" == "mingw32-dw2" ]
 then
   EXTRA_OPTIONS="$EXTRA_OPTIONS --enable-dw2-exceptions --disable-sjlj-exceptions"
 elif [ "$SHORT_NAME" == "mingw64" ]
 then
-  EXTRA_OPTIONS=
+  EXTRA_OPTIONS=$EXTRA_OPTIONS
 else
   EXTRA_OPTIONS="$EXTRA_OPTIONS --disable-dw2-exceptions --enable-sjlj-exceptions"
 fi
