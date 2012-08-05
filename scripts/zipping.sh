@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-SRC_FILE=$PACKAGE_DIR/gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}_rubenvb.tar.xz
+SRC_FILE=$PACKAGE_DIR/gcc-${RUBENVB_GCC_VERSION}_rubenvb.tar.xz
 
 case $HOST in
   "i686-w64-mingw32")
@@ -35,7 +35,12 @@ SRC_COMPRESS="tar -Jhcf"
 if [ "$HOST_OS" == "mingw32" ]
 then
   BIN_COMPRESS="7za -l -bd -mx9 a"
-  BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.7z
+  if [ "$SHORT_NAME" == "mingw32-dw2" ]
+  then
+    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-dw2-${RUBENVB_GCC_VERSION}-${PLATFORM_SUFFIX}_rubenvb.7z
+  else
+    BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${RUBENVB_GCC_VERSION}-${PLATFORM_SUFFIX}_rubenvb.7z
+  fi
 else
   BIN_COMPRESS=$SRC_COMPRESS
   if [ "$SHORT_NAME" == "mingw32-dw2" ]
