@@ -68,4 +68,4 @@ CLANG_SRC_FILE=$PACKAGE_DIR/clang-${RUBENVB_CLANG_VERSION}_rubenvb.tar.bz2
 cd $BUILD_DIR
 $BIN_COMPRESS $BIN_FILE_CLANG $SHORT_NAME > $LOG_DIR/zipping.log
 cd $TOP_DIR
-$SRC_COMPRESS $CLANG_SRC_FILE --exclude='*.git*' --exclude='*.svn*' build*clang??.sh scripts/buildclangfromcross.sh src/LLVM/
+$SRC_COMPRESS $CLANG_SRC_FILE --exclude='*.git*' --exclude='*.svn*' build*clang??.sh scripts/buildclangfromcross.sh scripts/LLVM-Clang.sh src/LLVM/
