@@ -63,7 +63,12 @@ echo "-> Packaging Clang addon package"
 export XZ_OPT="-9"
 SRC_COMPRESS="tar -Jhcf"
 BIN_COMPRESS="7za -l -bd -mx9 a"
-BIN_FILE_CLANG=$PACKAGE_DIR/$HOST/$TARGET-clang-${RUBENVB_CLANG_VERSION}-win32_rubenvb.7z
+if [ "$HOST_ARCH" == "i686" ]
+then
+  BIN_FILE_CLANG=$PACKAGE_DIR/$HOST/$TARGET-clang-${RUBENVB_CLANG_VERSION}-win32_rubenvb.7z
+else
+  BIN_FILE_CLANG=$PACKAGE_DIR/$HOST/$TARGET-clang-${RUBENVB_CLANG_VERSION}-win64_rubenvb.7z
+fi
 CLANG_SRC_FILE=$PACKAGE_DIR/clang-${RUBENVB_CLANG_VERSION}_rubenvb.tar.xz
 
 cd $BUILD_DIR
