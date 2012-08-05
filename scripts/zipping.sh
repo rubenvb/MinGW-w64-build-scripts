@@ -30,12 +30,13 @@ case $HOST in
     ;;
 esac
 
+SRC_COMPRESS="tar -jhcf"
 if [ "$HOST_OS" == "mingw32" ]
 then
   BIN_COMPRESS="7za -l -bd -mx9 a"
   BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.7z
 else
-  BIN_COMPRESS="tar -jhcf"
+  BIN_COMPRESS=$SRC_COMPRESS
   if [ "$SHORT_NAME" == "mingw32-dw2" ]
   then
     BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-dw2-${RUBENVB_GCC_VERSION}${MY_REVISION}-${PLATFORM_SUFFIX}_rubenvb.tar.bz2
@@ -59,7 +60,7 @@ then
 else
   echo "--> Zipping sources"
   cd $TOP_DIR
-  $BIN_COMPRESS $SRC_FILE --exclude='*.git*' --exclude='*.svn*' --exclude='src/LLVM/' \
+  $BIN_COMPRESS $SRC_FILE --exclude='*.git*' --exclude='*.svn*' --exclude='src/LLVM' \
                           --exclude='build*clang??.sh' --exclude='scripts/buildclangfromcross.sh' --exclude='scripts/LLVM-Clang.sh' \
                           src scripts patches *.sh
 fi
