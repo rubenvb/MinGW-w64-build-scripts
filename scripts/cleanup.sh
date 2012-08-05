@@ -7,7 +7,7 @@ then
 else
   echo "--> Cleaning up"
   cd $PREFIX
-  rm -rf mingw || exit 1
+  rm -rf $PREFIX/mingw || exit 1
   find . -name \*.la -exec rm -f {} \;
 
   # move libgcc dll to $PREFIX/bin instead of

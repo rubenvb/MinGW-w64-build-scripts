@@ -28,25 +28,25 @@ DIRS_TO_MAKE="$BUILD_DIR $LOG_DIR
               $PACKAGE_DIR $PACKAGE_DIR/$HOST"
 mkdir -p $DIRS_TO_MAKE
 
-if [ "$TARGET_ARCH" == "i686" ]
-then
-  mkdir -p $PREFIX/$TARGET/lib64
-  rm -f $PREFIX/mingw/include
-  rm -f $PREFIX/mingw/lib64
-  rm -f $PREFIX/mingw/lib
-  ln -s $PREFIX/$TARGET/include $PREFIX/mingw/include
-  ln -s $PREFIX/$TARGET/lib $PREFIX/mingw/lib
-  ln -s $PREFIX/$TARGET/lib64 $PREFIX/mingw/lib64
-elif [ "$TARGET_ARCH" == "x86_64" ]
-then
-  mkdir -p $PREFIX/$TARGET/lib32
-  rm -f $PREFIX/mingw/include
-  rm -f $PREFIX/mingw/lib32
-  rm -f $PREFIX/mingw/lib
-  ln -s $PREFIX/$TARGET/include $PREFIX/mingw/include
-  ln -s $PREFIX/$TARGET/lib $PREFIX/mingw/lib
-  ln -s $PREFIX/$TARGET/lib32 $PREFIX/mingw/lib32
-else
-  echo "ERROR, unknown target architecture."
-  exit 1
-fi
+# if [ "$TARGET_ARCH" == "i686" ]
+# then
+#   mkdir -p $PREFIX/$TARGET/lib64
+#   rm -f $PREFIX/mingw/include
+#   rm -f $PREFIX/mingw/lib64
+#   rm -f $PREFIX/mingw/lib
+#   ln -s $PREFIX/$TARGET/include $PREFIX/mingw/include
+#   ln -s $PREFIX/$TARGET/lib $PREFIX/mingw/lib
+#   ln -s $PREFIX/$TARGET/lib64 $PREFIX/mingw/lib64
+# elif [ "$TARGET_ARCH" == "x86_64" ]
+# then
+#   mkdir -p $PREFIX/$TARGET/lib32
+#   rm -f $PREFIX/mingw/include
+#   rm -f $PREFIX/mingw/lib32
+#   rm -f $PREFIX/mingw/lib
+#   ln -s $PREFIX/$TARGET/include $PREFIX/mingw/include
+#   ln -s $PREFIX/$TARGET/lib $PREFIX/mingw/lib
+#   ln -s $PREFIX/$TARGET/lib32 $PREFIX/mingw/lib32
+# else
+#   echo "ERROR, unknown target architecture."
+#   exit 1
+# fi
