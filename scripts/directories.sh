@@ -10,7 +10,12 @@ export BUILD_DIR=$TOP_DIR/$LONG_NAME
 export PACKAGE_DIR=$TOP_DIR/packages
 export LOG_DIR=$BUILD_DIR/logs
 
-export PREREQ_DIR=$TOP_DIR/prereq/$HOST
+if [ [ "$HOST" == "i686-w64-mingw32" ] && [ "$SHORT_NAME" == "mingw32-dw2" ] ]
+then
+  export PREREQ_DIR=$TOP_DIR/prereq/$HOST-dw2
+else
+  export PREREQ_DIR=$TOP_DIR/prereq/$HOST
+fi
 export PREREQ_INSTALL=$PREREQ_DIR/install
 
 export SCRIPTS=$TOP_DIR/scripts
