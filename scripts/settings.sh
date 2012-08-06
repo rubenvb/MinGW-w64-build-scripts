@@ -12,10 +12,10 @@ export HOST_CFLAGS="$HOST_CFLAGS -fomit-frame-pointer -momit-leaf-frame-pointer 
 # GCC languages to be built
 export GCC_LANGUAGES='c,lto,c++,objc,obj-c++,fortran,java' #go,ada
 # extra options to GCC
-if [ "$TARGET_ARCH" == "i686" ]
-then
-  EXTRA_OPTIONS="$EXTRA_OPTIONS --enable-libgcj"
-fi
+#if [ "$TARGET_ARCH" == "i686" ]
+#then
+#  EXTRA_OPTIONS="$EXTRA_OPTIONS --enable-libgcj"
+#fi
 if [ "$SHORT_NAME" == "mingw32-dw2" ]
 then
   EXTRA_OPTIONS="$EXTRA_OPTIONS --enable-dw2-exceptions --disable-sjlj-exceptions"
