@@ -14,8 +14,8 @@ echo "-> Setting up directories"
 
 # build directory
 mkdir -p $BUILD_DIR/LLVM-Clang
-mkdir -p $PREFIX/licenses
-mkdir -p $PREFIX/cleanup
+mkdir -p $BUILD_DIR/licenses
+mkdir -p $BUILD_DIR/cleanup
 
 # build LLVM-Clang
 echo "-> Building LLVM/Clang"
@@ -24,7 +24,7 @@ cd $BUILD_DIR/LLVM-Clang
 
 # copy licenses
 echo "-> Copying LLVM/Clang licenses"
-cd $PREFIX/licenses
+cd $BUILD_DIR/licenses
 if [ -f licenses.marker ]
 then
   echo "--> Licenses already installed."
@@ -33,18 +33,27 @@ else
   mkdir -p LLVM
   cp $SRC_DIR/LLVM/CREDITS.TXT LLVM/CREDITS.TXT
   cp $SRC_DIR/LLVM/LICENSE.TXT LLVM/LICENSE.TXT
+
   mkdir -p clang
   cp $SRC_DIR/LLVM/tools/clang/LICENSE.TXT clang/LICENSE.TXT
+
+  mkdir -p $PREFIX/licenses
+  cp -r . $PREFIX/licenses
+
   echo "--> Done!"
 fi
 touch licenses.marker
 
 # copy environment setup
-cp $TOP_DIR/envsetup/clang32env.cmd $PREFIX/
-
+if [ "$TARGET_ARCH" == "i686" ]
+then
+  cp $TOP_DIR/envsetup/clang32env.cmd $PREFIX/
+else
+  cp $TOP_DIR/envsetup/clang64env.cmd $PREFIX/
+fi
 # cleanup
 echo "-> Cleanup"
-cd $PREFIX/cleanup
+cd $BUILD_DIR/cleanup
 if [ -f cleanup.marker ]
 then
   echo "Already cleaned up."
@@ -54,6 +63,7 @@ else
   find . -name \*.la -exec rm -f {} \;
   echo "--> Stripping executables"
   find . -name \*.exe -exec $HOST-strip {} \;
+  cd $BUILD_DIR/cleanup
   echo "--> Done!"
 fi
 touch cleanup.marker
