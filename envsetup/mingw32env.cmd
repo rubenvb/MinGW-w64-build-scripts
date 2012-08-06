@@ -1,4 +1,4 @@
-@title MinGW-w64 32-bit build environment
+@title MinGW-w64 32-bit GCC build environment
 
 @echo Setting up environment for MinGW-w64 GCC 32-bit...
 

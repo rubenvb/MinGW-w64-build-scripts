@@ -13,7 +13,7 @@ export TARGET_OS=mingw32
 export TARGET=$TARGET_ARCH-$TARGET_VENDOR-$TARGET_OS
 export CRT_CONFIG="--disable-lib32 --enable-lib64"
 
-export SHORT_NAME=mingw32
+export SHORT_NAME=mingw64
 export LONG_NAME=mingw32mingw64
 
 # call main build script
