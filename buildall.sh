@@ -50,7 +50,6 @@ sh ./buildmingw32mingw32-dw2.sh || exit 1
 #echo "Building Windows 64-bit to Windows 32-bit dw2 native compiler"
 #sh ./buildmingw64mingw32-dw2.sh || exit 1
 
-
 echo "Building Windows 32-bit to Windows 32-bit native LLVM/Clang"
 sh ./buildmingw32clang32.sh
 echo "Building Windows 64-bit to Windows 64-bit native LLVM/Clang"
