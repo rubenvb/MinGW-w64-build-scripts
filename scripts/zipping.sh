@@ -66,7 +66,7 @@ then
 else
   echo "--> Zipping sources"
   cd $TOP_DIR
-  $BIN_COMPRESS $SRC_FILE --exclude='*.git*' --exclude='*.svn*' --exclude='src/LLVM' \
+  $SRC_COMPRESS $SRC_FILE --exclude='*.git*' --exclude='*.svn*' --exclude='src/LLVM' \
                           --exclude='build*clang??.sh' --exclude='scripts/buildclangfromcross.sh' --exclude='scripts/LLVM-Clang.sh' \
                           src scripts patches *.sh
 fi
