@@ -9,7 +9,7 @@ else
   sh $SRC_DIR/mpfr/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
                              --disable-shared --enable-static \
                              --with-gmp=$PREREQ_INSTALL \
-                             CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
+                             CC="$HOST_CC" CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                              > $LOG_DIR/mpfr_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi

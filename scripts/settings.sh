@@ -9,8 +9,12 @@ export HOST_CFLAGS="-O2 -march=nocona -mtune=core2"
 #export HOST_LDFLAGS="$HOST_LDFLAGS -flto"
 if [ "$HOST" == "i686-apple-darwin11" ]
 then
-  HOST_CFLAGS="$HOST_CFLAGS --sysroot /home/ruben/darwin/MacOSX10.7.sdk"
+  HOST_CC="$HOST-gcc --sysroot /home/ruben/darwin/MacOSX10.7.sdk"
+  HOST_CXX="$HOST-g++ --sysroot /home/ruben/darwin/MacOSX10.7.sdk"
   HOST_LDFLAGS="$HOST_LDFLAGS --sysroot /home/ruben/darwin/MacOSX10.7.sdk"
+elif [ "$HOST" == "i686-pc-cygwin" ]
+then
+  export HOST_CFLAGS="$HOST_CFLAGS -fomit-frame-pointer -momit-leaf-frame-pointer"
 else
   export HOST_CFLAGS="$HOST_CFLAGS -fomit-frame-pointer -momit-leaf-frame-pointer -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all"
 fi

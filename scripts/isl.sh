@@ -9,7 +9,7 @@ else
   sh $SRC_DIR/isl/configure --host=$HOST --build=$BUILD --prefix=$PREREQ_INSTALL \
                             --disable-shared --enable-static \
                             --with-gmp-prefix=$PREREQ_INSTALL \
-                            CPPFLAGS="$HOST_CPPFLAGS" LDFLAGS="$HOST_LDFLAGS" \
+                            CC="$HOST_CC" CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS" \
                             > $LOG_DIR/isl_configure.log 2>&1 || exit 1
   echo "--> Configured"
 fi
