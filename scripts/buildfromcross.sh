@@ -13,7 +13,7 @@ echo "-> Setting up directories"
 . ./scripts/directories.sh || exit 1
 
 # native compiler options
-#export MAKE_AR="AR=$HOST-ar" # necessary for libiconv+x86_64-apple-darwin10
+export MAKE_AR="AR=$HOST-ar" # necessary for libiconv+x86_64-apple-darwin10
 if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "i686-pc-cygwin" ]
 then
   export HOST_LDFLAGS_BINUTILS="$HOST_LDFLAGS -Wl,--large-address-aware"

@@ -4,7 +4,7 @@ set -e
 # platform information
 export HOST_ARCH=i686
 export HOST_VENDOR=apple
-export HOST_OS=darwin10
+export HOST_OS=darwin11
 export HOST=$HOST_ARCH-$HOST_VENDOR-$HOST_OS
 
 export TARGET_ARCH=i686
