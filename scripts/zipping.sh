@@ -16,10 +16,10 @@ case $HOST in
   "i686-linux-gnu")
     PLATFORM_SUFFIX="linux32"
     ;;
-  "x86_64-apple-darwin10")
+  "x86_64-apple-darwin11")
     PLATFORM_SUFFIX="mac64"
     ;;
-  "i686-apple-darwin10")
+  "i686-apple-darwin11")
     PLATFORM_SUFFIX="mac32"
     ;;
   "i686-pc-cygwin")
