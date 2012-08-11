@@ -7,6 +7,10 @@ export MAKE_OPTS="-j4"
 export HOST_CFLAGS="-O2 -march=nocona -mtune=core2"
 #export HOST_CFLAGS="$HOST_CFLAGS -flto"
 #export HOST_LDFLAGS="$HOST_LDFLAGS -flto"
+if [ "$HOST" == "i686-w64-mingw32" || "$HOST" == "i686-pc-cygwin" ]
+then
+  HOST_LDFLAGS="$HOST_LDFLAGS -Wl,--large-adress-aware"
+fi
 if [ "$HOST" == "i686-apple-darwin11" ]
 then
   HOST_CC="$HOST-gcc --sysroot /home/ruben/darwin/MacOSX10.7.sdk"
