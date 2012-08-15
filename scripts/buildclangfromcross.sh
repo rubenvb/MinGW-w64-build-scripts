@@ -45,7 +45,7 @@ fi
 touch licenses.marker
 
 # copy environment setup
-if [ "$TARGET_ARCH" == "i686" ]
+if [ "$TARGET_ARCH" = "i686" ]
 then
   cp $TOP_DIR/envsetup/clang32env.cmd $PREFIX/
 else

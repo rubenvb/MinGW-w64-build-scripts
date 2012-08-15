@@ -14,7 +14,7 @@ echo "-> Setting up directories"
 
 # native compiler options
 export MAKE_AR="AR=$HOST-ar" # necessary for libiconv+x86_64-apple-darwin10
-if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "i686-pc-cygwin" ]
+if [ "$HOST" = "i686-w64-mingw32" ] || [ "$HOST" = "i686-pc-cygwin" ]
 then
   export HOST_LDFLAGS_BINUTILS="$HOST_LDFLAGS -Wl,--large-address-aware"
 fi
@@ -29,7 +29,7 @@ PREGCC_STEPS="mingw-w64-headers
 GNU_PREREQ="libiconv
             gmp mpfr mpc
             isl ppl cloog"
-if [ "$HOST" == "i686-w64-mingw32" ] || [ "$HOST" == "x86_64-w64-mingw32" ]
+if [ "$HOST" = "i686-w64-mingw32" ] || [ "$HOST" = "x86_64-w64-mingw32" ]
 then
   GNU_PREREQ="expat $GNU_PREREQ"
   POSTGCC_STEPS="python
@@ -48,10 +48,10 @@ mkdir -p gcc
 mkdir -p $POSTGCC_STEPS
 
 #copy GCC environment setup script
-if [ "$TARGET_ARCH" == "i686" ]
+if [ "$TARGET_ARCH" = "i686" ]
 then
   cp $TOP_DIR/envsetup/mingw32env.cmd $PREFIX/
-elif [ "$TARGET_ARCH" == "x86_64" ]
+elif [ "$TARGET_ARCH" = "x86_64" ]
 then
   cp $TOP_DIR/envsetup/mingw64env.cmd $PREFIX/
 fi

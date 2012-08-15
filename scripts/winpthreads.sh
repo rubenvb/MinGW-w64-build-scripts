@@ -29,7 +29,7 @@ else
   echo "--> Installing"
   make $MAKE_OPTS install > $LOG_DIR/winpthreads_install.log 2>&1 || exit 1
   # mimic GCC runtime library behavior
-  if [ "$HOST" == "x86_64-w64-mingw32" ] || [ "$HOST" == "i686-w64-mingw32" ]
+  if [ "$HOST_OS" = "mingw32" ]
   then
     mv $PREFIX/$TARGET/bin/libwinpthread-1.dll $PREFIX/bin/libwinpthread-1.dll
   else
