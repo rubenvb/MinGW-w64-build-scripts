@@ -23,7 +23,7 @@ else
   find . -name \*.exe -exec strip {} \;
 
 
-  if [[ "$TARGET" == "$HOST" ]]
+  if [ "$TARGET" = "$HOST" ]
   then
     echo "---> Copying and stripping DLL's"
     $HOST-strip $PREFIX/bin/*.dll || exit 1

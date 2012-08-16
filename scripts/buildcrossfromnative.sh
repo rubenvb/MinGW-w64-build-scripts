@@ -41,9 +41,9 @@ done
 # headers and binutils
 for step in $PREGCC_STEPS
 do
-    echo "-> $step"
-    cd $BUILD_DIR/$step
-    . $SCRIPTS/$step.sh || exit 1
+  echo "-> $step"
+  cd $BUILD_DIR/$step
+  . $SCRIPTS/$step.sh || exit 1
 done
 # point PATH to new tools
 export PATH=$PREFIX/bin:$PATH
@@ -59,7 +59,7 @@ cd $BUILD_DIR/mingw-w64-crt
 echo "-> Winpthreads"
 cd $BUILD_DIR/winpthreads
 . $SCRIPTS/winpthreads.sh || exit 1
-#if [ "$TARGET_ARCH" == "x86_64" ]
+#if [ "$TARGET_ARCH" = "x86_64" ]
 #then
 #  . $SCRIPTS/winpthreads64multi.sh || exit 1
 #else

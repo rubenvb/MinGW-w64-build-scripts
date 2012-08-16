@@ -32,10 +32,10 @@ esac
 
 export XZ_OPT="-9"
 SRC_COMPRESS="tar -Jhcf"
-if [ "$HOST_OS" == "mingw32" ]
+if [ "$HOST_OS" = "mingw32" ]
 then
   BIN_COMPRESS="7za -l -bd -mx9 a"
-  if [ "$SHORT_NAME" == "mingw32-dw2" ]
+  if [ "$SHORT_NAME" = "mingw32-dw2" ]
   then
     BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-dw2-${RUBENVB_GCC_VERSION}-${PLATFORM_SUFFIX}_rubenvb.7z
   else
@@ -43,7 +43,7 @@ then
   fi
 else
   BIN_COMPRESS=$SRC_COMPRESS
-  if [ "$SHORT_NAME" == "mingw32-dw2" ]
+  if [ "$SHORT_NAME" = "mingw32-dw2" ]
   then
     BIN_FILE=$PACKAGE_DIR/$HOST/$TARGET-gcc-dw2-${RUBENVB_GCC_VERSION}-${PLATFORM_SUFFIX}_rubenvb.tar.xz
   else
