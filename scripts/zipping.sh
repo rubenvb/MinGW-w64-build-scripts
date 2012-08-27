@@ -68,7 +68,7 @@ else
   cd $TOP_DIR
   $SRC_COMPRESS $SRC_FILE --exclude='*.git*' --exclude='*.svn*' --exclude='src/LLVM' \
                           --exclude='build*clang??.sh' --exclude='scripts/buildclangfromcross.sh' --exclude='scripts/LLVM-Clang.sh' \
-                          src scripts patches *.sh
+                          src scripts patches envsetup *.sh
 fi
 
 cd $TOP_DIR
