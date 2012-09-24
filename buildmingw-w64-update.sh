@@ -49,17 +49,17 @@ make install > $LOG_DIR/mingw-w64-32-bit_install.log 2>&1  || exit 1
 
 echo "-> Building 64-bit winpthreads"
 cd $BUILD_DIR/winpthreads64
-sh $SRC_DIR/mingw-w64/configure --host=x86_64-w64-mingw32 --prefix=$BUILD_DIR/mingw64/x86_64-w64-mingw32 \
-                               --enable-shared --enable-static \
-                               > $LOG_DIR/winpthreads-64-bit_configure.log 2>&1 || exit 1
+sh $SRC_DIR/winpthreads/configure --host=x86_64-w64-mingw32 --prefix=$BUILD_DIR/mingw64/x86_64-w64-mingw32 \
+                                  --enable-shared --enable-static \
+                                  > $LOG_DIR/winpthreads-64-bit_configure.log 2>&1 || exit 1
 make ${MAKE_OPTS} > $LOG_DIR/winpthreads-32-bit_build.log 2>&1 || exit 1
 make install > $LOG_DIR/winpthreads-32-bit_install.log 2>&1 || exit 1
 
 echo "-> Building 32-bit winpthreads"
 cd $BUILD_DIR/winpthreads64
-sh $SRC_DIR/mingw-w64/configure --host=i686-w64-mingw32 --prefix=$BUILD_DIR/mingw32/i686-w64-mingw32 \
-                               --enable-shared --enable-static \
-                               > $LOG_DIR/winpthreads-32-bit_configure.log 2>&1 || exit 1
+sh $SRC_DIR/winpthreads/configure --host=i686-w64-mingw32 --prefix=$BUILD_DIR/mingw32/i686-w64-mingw32 \
+                                  --enable-shared --enable-static \
+                                  > $LOG_DIR/winpthreads-32-bit_configure.log 2>&1 || exit 1
 make ${MAKE_OPTS} > $LOG_DIR/winpthreads-64-bit_build.log 2>&1 || exit 1
 make install > $LOG_DIR/winpthreads-64-bit_install.log 2>&1 || exit 1
 
