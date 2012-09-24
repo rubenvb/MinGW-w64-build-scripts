@@ -37,7 +37,7 @@ case `$HOST-gcc -dumpversion` in
     export HOST_CFLAGS="$HOST_CFLAGS -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all"
     ;;
   "4.8.?")
-    export HOST_CFLAGS="$HOST_CFLAGS -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all"
+    #export HOST_CFLAGS="$HOST_CFLAGS -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all"
     ;;
 esac
 
