@@ -21,11 +21,12 @@ dirs_to_make="$BUILD_DIR
               $BUILD_DIR/mingw32-build
               $BUILD_DIR/winpthreads64
               $BUILD_DIR/winpthreads32
-              $LOG_DIR"
+              $LOG_DIR
+              $PACKAGE_DIR"
 
 mkdir -p $dirs_to_make
 
-export PATH=$TOP_DIR/linux64mingw64/mingw64/bin:$TOP_DIR/linux64mingw32/mingw32/bin:$PATH
+#export PATH=$TOP_DIR/linux64mingw64/mingw64/bin:$TOP_DIR/linux64mingw32/mingw32/bin:$PATH
 
 echo "-> Building 64-bit MinGW-w64"
 cd $BUILD_DIR/mingw64-build
@@ -72,6 +73,6 @@ $TAR_COMPRESS $PACKAGE_DIR/x86_64-w64-mingw32-$PACKAGE_NAME.tar.xz mingw64 > $LO
 $BIN_COMPRESS $PACKAGE_DIR/x86_64-w64-mingw32-$PACKAGE_NAME.7z mingw64 > $LOG_DIR/package-64-bit-7z.log 2>&1 || exit 1
 
 echo "-> Creating 32-bit packages"
-$TAR_COMPRESS $PACKAGE_DIR/i686-w64-mingw32-$PACKAGE_NAME.tar.xz mingw64 > $LOG_DIR/package-32-bit-tar.log 2>&1 || exit 1
-$BIN_COMPRESS $PACKAGE_DIR/i686_64-w64-mingw32-$PACKAGE_NAME.7z mingw64 > $LOG_DIR/package-32-bit-7z.log 2>&1 || exit 1
+$TAR_COMPRESS $PACKAGE_DIR/i686-w64-mingw32-$PACKAGE_NAME.tar.xz mingw32 > $LOG_DIR/package-32-bit-tar.log 2>&1 || exit 1
+$BIN_COMPRESS $PACKAGE_DIR/i686_64-w64-mingw32-$PACKAGE_NAME.7z mingw32 > $LOG_DIR/package-32-bit-7z.log 2>&1 || exit 1
                              
