@@ -1,0 +1,80 @@
+https://savannah.gnu.org/bugs/?34832
+
+Index: w32/include/w32err.h
+===================================================================
+RCS file: /sources/make/make/w32/include/w32err.h,v
+retrieving revision 1.9
+diff -u -p -r1.9 w32err.h
+--- w32/include/w32err.h	13 Jul 2010 01:20:43 -0000	1.9
++++ w32/include/w32err.h	15 Nov 2011 12:51:01 -0000
+@@ -22,6 +22,6 @@ this program.  If not, see <http://www.g
+ #define EXTERN_DECL(entry, args) entry args
+ #endif
+ 
+-EXTERN_DECL(char * map_windows32_error_to_string, (DWORD error));
++EXTERN_DECL(const char *map_windows32_error_to_string, (DWORD error));
+ 
+ #endif /* !_W32ERR_H */
+Index: w32/subproc/w32err.c
+===================================================================
+RCS file: /sources/make/make/w32/subproc/w32err.c,v
+retrieving revision 1.11
+diff -u -p -r1.11 w32err.c
+--- w32/subproc/w32err.c	13 Jul 2010 01:20:43 -0000	1.11
++++ w32/subproc/w32err.c	15 Nov 2011 12:51:01 -0000
+@@ -26,18 +26,25 @@ this program.  If not, see <http://www.g
+  * Notes/Dependencies:  I got this from
+  *      comp.os.ms-windows.programmer.win32
+  */
+-char *
+-map_windows32_error_to_string (DWORD ercode) {
+-/* __declspec (thread) necessary if you will use multiple threads on MSVC */
+-#ifdef _MSC_VER
+-__declspec (thread) static char szMessageBuffer[128];
++
++#if defined(_MSC_VER) /* MS Visual Studio */
++#define __TLS_VAR __declspec(thread)
++#elif defined(__GNUC__) && ((__GNUC__ > 4) \
++  || (__GNUC__ == 4 && __GNUC_MINOR__ >= 3))
++/* gcc >= 4.3, also needs binutils >= 2.19 */
++#define __TLS_VAR __thread
+ #else
+-static char szMessageBuffer[128];
++#define __TLS_VAR	/* default to none */
+ #endif
++
++const char *
++map_windows32_error_to_string (DWORD ercode) {
++/* __declspec(thread) necessary if you will use multiple threads */
++	static __TLS_VAR char szMessageBuffer[128];
+ 	/* Fill message buffer with a default message in
+ 	 * case FormatMessage fails
+ 	 */
+-    wsprintf (szMessageBuffer, "Error %ld\n", ercode);
++	wsprintf (szMessageBuffer, "Error %ld\n", ercode);
+ 
+ 	/*
+ 	 *  Special code for winsock error handling.
+@@ -58,13 +65,14 @@ static char szMessageBuffer[128];
+ 		/*
+ 		 *  Default system message handling
+ 		 */
+-    	FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
+-                  NULL,
+-                  ercode,
+-                  LANG_NEUTRAL,
+-                  szMessageBuffer,
+-                  sizeof(szMessageBuffer),
+-                  NULL);
++		FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
++				NULL,
++				ercode,
++				LANG_NEUTRAL,
++				szMessageBuffer,
++				sizeof(szMessageBuffer),
++				NULL);
+ 	}
+-    return szMessageBuffer;
++
++	return szMessageBuffer;
+ }

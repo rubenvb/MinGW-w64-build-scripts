@@ -1,0 +1,115 @@
+https://savannah.gnu.org/bugs/?34830
+
+Index: main.c
+===================================================================
+RCS file: /sources/make/make/main.c,v
+retrieving revision 1.249
+diff -u -p -r1.249 main.c
+--- main.c	14 Nov 2011 00:42:50 -0000	1.249
++++ main.c	14 Nov 2011 10:37:41 -0000
+@@ -36,6 +36,7 @@ this program.  If not, see <http://www.g
+ # include <io.h>
+ # include "pathstuff.h"
+ # include "sub_proc.h"
++# include "w32err.h"
+ #endif
+ #ifdef __EMX__
+ # include <sys/types.h>
+@@ -988,7 +989,7 @@ main (int argc, char **argv, char **envp
+   fatal_signal_mask = 0;
+ #define	ADD_SIG(sig)	fatal_signal_mask |= sigmask (sig)
+ #else
+-#define	ADD_SIG(sig)    (void)sig      /* Needed to avoid warnings in MSVC.  */
++#define	ADD_SIG(sig)	(void)sig
+ #endif
+ #endif
+ 
+@@ -1728,7 +1729,7 @@ main (int argc, char **argv, char **envp
+       if (! open_jobserver_semaphore(cp))
+         {
+           DWORD err = GetLastError();
+-          fatal (NILF,_("internal error: unable to open jobserver semaphore `%s': (Error %d: %s)"), 
++          fatal (NILF,_("internal error: unable to open jobserver semaphore `%s': (Error %ld: %s)"),
+                  cp, err, map_windows32_error_to_string(err));
+         }
+       DB (DB_JOBS, (_("Jobserver client (semaphore %s)\n"), cp));
+@@ -1804,7 +1805,7 @@ main (int argc, char **argv, char **envp
+       if (! create_jobserver_semaphore(job_slots - 1))
+         {
+           DWORD err = GetLastError();
+-          fatal (NILF,_("creating jobserver semaphore: (Error %d: %s)"),
++          fatal (NILF,_("creating jobserver semaphore: (Error %ld: %s)"),
+                  err, map_windows32_error_to_string(err));
+         }
+ #else
+Index: job.c
+===================================================================
+RCS file: /sources/make/make/job.c,v
+retrieving revision 1.214
+diff -u -p -r1.214 job.c
+--- job.c	14 Nov 2011 00:58:49 -0000	1.214
++++ job.c	14 Nov 2011 10:37:41 -0000
+@@ -946,7 +946,7 @@ free_child (struct child *child)
+       if (! release_jobserver_semaphore())
+         {
+           DWORD err = GetLastError();
+-          fatal (NILF,_("release jobserver semaphore: (Error %d: %s)"),
++          fatal (NILF,_("release jobserver semaphore: (Error %ld: %s)"),
+                  err, map_windows32_error_to_string(err));
+         }
+ 
+@@ -1775,9 +1775,11 @@ new_job (struct file *file)
+ #endif
+     while (1)
+       {
+-        char token;
+ 	int got_token;
++#ifndef WINDOWS32
++	char token;
+ 	int saved_errno;
++#endif
+ 
+         DB (DB_JOBS, ("Need a job token; we %shave children\n",
+                       children ? "" : "don't "));
+@@ -1842,7 +1844,7 @@ new_job (struct file *file)
+         if (got_token < 0)
+           {
+             DWORD err = GetLastError();
+-            fatal (NILF,_("semaphore or child process wait: (Error %d: %s)"),
++            fatal (NILF,_("semaphore or child process wait: (Error %ld: %s)"),
+                    err, map_windows32_error_to_string(err));
+           }
+ #else
+Index: w32/include/sub_proc.h
+===================================================================
+RCS file: /sources/make/make/w32/include/sub_proc.h,v
+retrieving revision 1.13
+diff -u -p -r1.13 sub_proc.h
+--- w32/include/sub_proc.h	14 Nov 2011 00:42:50 -0000	1.13
++++ w32/include/sub_proc.h	14 Nov 2011 10:37:41 -0000
+@@ -58,7 +58,7 @@ EXTERN_DECL(int process_errcnt, (HANDLE 
+ EXTERN_DECL(void process_pipes, (HANDLE proc, int pipes[3]));
+ 
+ /* jobserver routines */
+-EXTERN_DECL(int open_jobserver_semaphore, (char* name));
++EXTERN_DECL(int open_jobserver_semaphore, (const char* name));
+ EXTERN_DECL(int create_jobserver_semaphore, (int tokens));
+ EXTERN_DECL(void free_jobserver_semaphore, (VOID_DECL));
+ EXTERN_DECL(int acquire_jobserver_semaphore, (VOID_DECL));
+Index: w32/subproc/sub_proc.c
+===================================================================
+RCS file: /sources/make/make/w32/subproc/sub_proc.c,v
+retrieving revision 1.25
+diff -u -p -r1.25 sub_proc.c
+--- w32/subproc/sub_proc.c	14 Nov 2011 00:42:50 -0000	1.25
++++ w32/subproc/sub_proc.c	14 Nov 2011 10:37:41 -0000
+@@ -63,7 +63,7 @@ static char jobserver_semaphore_name[MAX
+ static HANDLE jobserver_semaphore = NULL;
+ 
+ /* Open existing jobserver semaphore */
+-int open_jobserver_semaphore(char* name)
++int open_jobserver_semaphore(const char* name)
+ {
+     jobserver_semaphore = OpenSemaphore(
+         SEMAPHORE_ALL_ACCESS,	// Semaphore access setting
+
