@@ -7,7 +7,7 @@ then
 else
   echo "--> Configuring"
   sh $SRC_DIR/binutils/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
-                                 --enable-64-bit-bfd --disable-multilib \
+                                 --enable-64-bit-bfd --disable-multilib --disable-nls \
                                  $GNU_WIN32_OPTIONS \
                                  $RUBENVB_PACKAGE_OPTIONS \
                                  CC="$HOST_CC" CFLAGS="$HOST_CFLAGS" LDFLAGS="$HOST_LDFLAGS_BINUTILS" \
