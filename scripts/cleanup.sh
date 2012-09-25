@@ -17,6 +17,9 @@ else
   elif [ -f "$PREFIX/lib/libgcc_s_dw2-1.dll" ]
   then
     mv $PREFIX/lib/libgcc_s_dw2-1.dll $PREFIX/bin/ || exit 1
+  elif [ -f "$PREFIX/lib/libgcc_s_seh-1.dll" ]
+  then
+    mv $PREFIX/lib/libgcc_s_seh-1.dll $PREFIX/bin/ || exit 1
   fi
 
   echo "---> Stripping Executables"
