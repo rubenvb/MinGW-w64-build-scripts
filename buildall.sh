@@ -52,5 +52,5 @@ export PATH=$PWD/linux64mingw32-dw2/mingw32-dw2/bin:$PATH
 
 #echo "Building Windows 32-bit to Windows 32-bit native LLVM/Clang"
 #sh ./buildmingw32clang32.sh
-echo "Building Windows 64-bit to Windows 64-bit native LLVM/Clang"
-sh ./buildmingw64clang64.sh
+#echo "Building Windows 64-bit to Windows 64-bit native LLVM/Clang"
+#sh ./buildmingw64clang64.sh
