@@ -8,10 +8,9 @@ else
   echo "--> Configuring"
   sh $SRC_DIR/gcc/configure --host=$HOST --build=$BUILD --target=$TARGET --with-sysroot=$PREFIX --prefix=$PREFIX \
                             --with-gmp=$PREREQ_INSTALL --with-mpfr=$PREREQ_INSTALL --with-mpc=$PREREQ_INSTALL \
-                            --with-ppl=$PREREQ_INSTALL --with-cloog=$PREREQ_INSTALL \
-                             --disable-ppl-version-check --disable-cloog-version-check \
+                            --with-cloog=$PREREQ_INSTALL --disable-cloog-version-check \
                             --enable-cloog-backend=isl --with-host-libstdcxx='-static -lstdc++ -lm' \
-                            --enable-shared --enable-static --enable-threads=win32 \
+                            --enable-shared --enable-static --enable-threads=posix \
                             --enable-plugins --disable-multilib \
                             --enable-languages=$GCC_LANGUAGES --enable-libgomp \
                             $EXTRA_OPTIONS --enable-fully-dynamic-string --enable-libstdcxx-time \
