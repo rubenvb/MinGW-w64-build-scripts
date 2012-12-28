@@ -7,7 +7,7 @@ then
 else
   echo "--> Configuring"
   sh $SRC_DIR/mingw-w64/mingw-w64-crt/configure --host=$TARGET --build=$BUILD --target=$TARGET \
-                                                --with-sysroot=$PREFIX --prefix=$PREFIX \
+                                                --prefix=$PREFIX/$TARGET \
                                                 $CRT_CONFIG \
                                                 --enable-wildcard \
                                                 > $LOG_DIR/mingw-w64-crt_configure.log 2>&1 || exit 1
