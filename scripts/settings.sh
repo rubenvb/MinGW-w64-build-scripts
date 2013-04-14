@@ -5,8 +5,6 @@ set -e
 export BUILD="x86_64-linux-gnu"
 export MAKE_OPTS="-j4"
 export HOST_CFLAGS="-O2 -march=nocona -mtune=core2"
-#export HOST_CFLAGS="$HOST_CFLAGS -flto"
-#export HOST_LDFLAGS="$HOST_LDFLAGS -flto"
 if [ "$HOST" = "i686-w64-mingw32" ] || [ "$HOST" = "i686-pc-cygwin" ]
 then
   HOST_LDFLAGS="$HOST_LDFLAGS -Wl,--large-address-aware"
@@ -37,12 +35,17 @@ case `$HOST-gcc -dumpversion` in
     export HOST_CFLAGS="$HOST_CFLAGS -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all"
     ;;
   "4.8.?")
-    export HOST_CFLAGS="$HOST_CFLAGS -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all"
+    export HOST_CFLAGS="$HOST_CFLAGS -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all" #-flto
+    export HOST_LDFLAGS="$HOST_LDFLAGS" #-flto
     ;;
 esac
+export HOST_CXXFLAGS="$HOST_CFLAGS"
+export TARGET_CFLAGS="$TARGET_CFLAGS -O2 -march=nocona -mtune=core2 -fgraphite-identity -floop-interchange -floop-block -floop-parallelize-all" #-flto
+export TARGET_CXXFLAGS="$TARGET_CFLAGS"
+export TARGET_LDFLAGS="$TARGET_LDFLAGS" #-flto
 
 # GCC languages to be built
-export GCC_LANGUAGES='c,lto,c++,objc,obj-c++,fortran,java' #go,ada
+export GCC_LANGUAGES='c,lto,c++,objc,obj-c++,fortran,java' #go, ada
 # extra options to GCC
 #if [ "$TARGET_ARCH" = "i686" ]
 #then

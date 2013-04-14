@@ -7,7 +7,7 @@ then
 else
   echo "--> Configuring"
   sh $SRC_DIR/gdb/configure --host=$HOST --build=$BUILD --target=$TARGET --prefix=$PREFIX \
-                            --with-libexpat-prefix=$PREREQ_INSTALL \
+                            --with-libexpat-prefix=$PREREQ_INSTALL --disable-nls \
                             --with-python --disable-multilib --enable-64-bit-bfd \
                             $GNU_WIN32_OPTIONS \
                             $RUBENVB_PACKAGE_OPTIONS \

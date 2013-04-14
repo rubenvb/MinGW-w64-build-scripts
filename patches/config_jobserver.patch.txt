@@ -1,0 +1,9 @@
+--- config.h~
++++ config.h
+@@ -328,5 +328,5 @@
+ 
+ /* Define to 1 to enable job server support in GNU make. */
+-/* #undef MAKE_JOBSERVER */
++#define MAKE_JOBSERVER 1
+ 
+ /* Define to 1 to enable symbolic link timestamp checking. */

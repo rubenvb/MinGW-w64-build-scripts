@@ -1,0 +1,28 @@
+https://savannah.gnu.org/bugs/?34818
+
+Index: make.h
+===================================================================
+RCS file: /sources/make/make/make.h,v
+retrieving revision 1.149
+diff -u -p -r1.149 make.h
+--- make.h	14 Nov 2011 02:26:00 -0000	1.149
++++ make.h	14 Nov 2011 10:37:41 -0000
+@@ -316,10 +316,14 @@ char *strsignal (int signum);
+ #define S_(msg1,msg2,num)   ngettext (msg1,msg2,num)
+ 
+ /* Handle other OSs.  */
+-#ifndef PATH_SEPARATOR_CHAR
+-# if defined(HAVE_DOS_PATHS)
+-#  define PATH_SEPARATOR_CHAR ';'
+-# elif defined(VMS)
++/* To overcome an issue parsing paths in a DOS/Windows environment when
++   built in a unix based environment, override the PATH_SEPARATOR_CHAR
++   definition unless being built for Cygwin. */
++#if defined(HAVE_DOS_PATHS) && !defined(__CYGWIN__)
++# undef PATH_SEPARATOR_CHAR
++# define PATH_SEPARATOR_CHAR ';'
++#elif !defined(PATH_SEPARATOR_CHAR)
++# if defined (VMS)
+ #  define PATH_SEPARATOR_CHAR ','
+ # else
+ #  define PATH_SEPARATOR_CHAR ':'
