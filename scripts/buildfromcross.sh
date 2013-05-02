@@ -28,7 +28,7 @@ PREGCC_STEPS="mingw-w64-headers
               winpthreads"
 GNU_PREREQ="libiconv
             gmp mpfr mpc
-            isl cloog"
+            ppl isl cloog"
 if [ "$HOST" = "i686-w64-mingw32" ] || [ "$HOST" = "x86_64-w64-mingw32" ]
 then
   GNU_PREREQ="expat $GNU_PREREQ"

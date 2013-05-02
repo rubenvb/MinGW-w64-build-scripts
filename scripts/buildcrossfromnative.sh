@@ -16,7 +16,7 @@ echo "-> Setting up directories"
 PREGCC_STEPS="mingw-w64-headers
               binutils"
 GNU_PREREQ="gmp mpfr mpc
-            isl cloog"
+            ppl isl cloog"
 POSTGCC_STEPS="cleanup
                licenses
                zipping"

@@ -9,7 +9,7 @@ else
   echo "---> Binutils/GDB"
   mkdir -p binutils
   mkdir -p gdb
-  LICENSES="COPYING COPYING.LIB COPYING.LIBGLOSS COPYING.NEWLIB COPYING3 COPYING3.LIB"
+  LICENSES="COPYING COPYING.LIB COPYING3 COPYING3.LIB"
   for file in $LICENSES
   do
     cp $SRC_DIR/binutils/$file binutils/$file

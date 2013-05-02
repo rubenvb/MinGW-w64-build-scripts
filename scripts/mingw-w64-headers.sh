@@ -7,7 +7,7 @@ then
 else
   echo "--> Configuring"
   sh $SRC_DIR/mingw-w64/mingw-w64-headers/configure --host=$TARGET --build=$BUILD --target=$TARGET \
-                                                    --prefix=$PREFIX/$TARGET \
+                                                    --prefix=$PREFIX \
                                                     --enable-sdk=all --enable-secure-api \
                                                     > $LOG_DIR/mingw-w64-headers_configure.log 2>&1 || exit 1
   echo "--> Configured"
